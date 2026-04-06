@@ -8,56 +8,58 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --ink:#1a1a18;--paper:#f5f2eb;--clay:#c4875a;--sage:#7a8c6e;
-  --sky:#6b8fa3;--cream:#ede9de;--muted:#8a8880;--warn:#d4704a;
-  --border:rgba(26,26,24,0.12);
+  --ink:#1a1a18;
+  --paper:#f5f2eb;
+  --clay:#c4875a;
+  --sage:#7a8c6e;
+  --sky:#6b8fa3;
+  --cream:#ede9de;
+  --muted:#6a6866;
+  --warn:#d4704a;
+  --border:rgba(26,26,24,0.15);
 }
+
 html,body{height:100%;min-height:100vh;}
-body{font-family:'DM Sans',sans-serif;background:var(--ink);min-height:100vh;position:relative;overflow-x:hidden;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--paper);
+  min-height:100vh;
+  position:relative;
+  overflow-x:hidden;
+}
 
 /* ═══════════════════════════════════════
-   BACKGROUND — full bleed infographic
+   BACKGROUND — light paper with subtle grid
 ═══════════════════════════════════════ */
 .bg-layer{position:fixed;inset:0;pointer-events:none;overflow:hidden;}
 
 .bg-grid{
   position:absolute;inset:0;
   background-image:
-    linear-gradient(rgba(196,135,90,0.05) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(196,135,90,0.05) 1px,transparent 1px);
+    linear-gradient(rgba(196,135,90,0.1) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(196,135,90,0.1) 1px,transparent 1px);
   background-size:52px 52px;
 }
-.bg-glow-1{position:absolute;top:-10%;right:30%;width:55vw;height:55vw;border-radius:50%;background:radial-gradient(circle,rgba(196,135,90,0.08) 0%,transparent 65%);}
-.bg-glow-2{position:absolute;bottom:-15%;left:-8%;width:45vw;height:45vw;border-radius:50%;background:radial-gradient(circle,rgba(107,143,163,0.07) 0%,transparent 65%);}
-.bg-glow-3{position:absolute;top:35%;left:20%;width:30vw;height:30vw;border-radius:50%;background:radial-gradient(circle,rgba(122,140,110,0.05) 0%,transparent 65%);}
 
-/* ghosted large stat numbers */
-.bg-stat{position:absolute;font-family:'Playfair Display',serif;line-height:1;color:rgba(245,242,235,0.055);pointer-events:none;user-select:none;}
-.bg-stat-lbl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(196,135,90,0.12);margin-top:4px;}
-
-/* background rings */
-.bg-rings{position:absolute;display:flex;gap:10px;flex-wrap:wrap;opacity:0.22;}
-
-/* background materials pills */
-.bg-mats{position:absolute;display:flex;flex-direction:column;gap:5px;opacity:0.14;}
-.bg-mat{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.06em;text-transform:uppercase;color:var(--paper);padding:3px 8px;border:1px solid rgba(196,135,90,0.4);border-radius:20px;white-space:nowrap;width:fit-content;}
-
-/* annotation text */
-.bg-anno{position:absolute;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,242,235,0.07);}
-
-/* vignette — lighter on left so info is readable, stronger on right near card */
-.bg-vignette{
-  position:absolute;inset:0;
-  background:radial-gradient(ellipse 55% 65% at 72% 50%,
-    rgba(26,26,24,0.6) 0%,
-    rgba(26,26,24,0.05) 40%,
-    rgba(26,26,24,0.35) 100%);
+/* soft warm glows */
+.bg-glow-1{
+  position:absolute;top:-15%;right:25%;
+  width:60vw;height:60vw;border-radius:50%;
+  background:radial-gradient(circle,rgba(196,135,90,0.08) 0%,transparent 65%);
+}
+.bg-glow-2{
+  position:absolute;bottom:-20%;left:-10%;
+  width:50vw;height:50vw;border-radius:50%;
+  background:radial-gradient(circle,rgba(107,143,163,0.09) 0%,transparent 65%);
+}
+.bg-glow-3{
+  position:absolute;top:30%;left:15%;
+  width:35vw;height:35vw;border-radius:50%;
+  background:radial-gradient(circle,rgba(122,140,110,0.07) 0%,transparent 65%);
 }
 
 /* ═══════════════════════════════════════
-   LANDSCAPE LAYOUT
-   On laptop/desktop: card on RIGHT, data left
-   On mobile: centred card
+   PAGE LAYOUT — two columns on laptop
 ═══════════════════════════════════════ */
 .page-layout{
   min-height:100vh;
@@ -67,160 +69,372 @@ body{font-family:'DM Sans',sans-serif;background:var(--ink);min-height:100vh;pos
   z-index:10;
 }
 
-/* LEFT SIDE — infographic data labels (laptop only) */
+/* ── LEFT SIDE — infographic data ── */
 .info-side{
   flex:1;
   display:flex;
   flex-direction:column;
   justify-content:center;
-  padding:48px 48px 48px 56px;
+  padding:48px 48px 48px 60px;
   position:relative;
 }
 
-.info-project-label{
+.info-kicker{
   font-family:'DM Mono',monospace;font-size:10px;
   letter-spacing:0.18em;text-transform:uppercase;
-  color:var(--clay);margin-bottom:10px;opacity:1;
+  color:var(--clay);margin-bottom:10px;
 }
-.info-project-name{
-  font-family:'Playfair Display',serif;font-size:clamp(42px,5vw,72px);
-  color:rgba(245,242,235,0.55);line-height:1;margin-bottom:6px;
+.info-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(48px,6vw,88px);
+  color:var(--ink);
+  line-height:0.95;margin-bottom:8px;
 }
-.info-project-addr{
+.info-addr{
   font-family:'DM Mono',monospace;font-size:11px;
-  color:rgba(245,242,235,0.5);letter-spacing:0.06em;
-  margin-bottom:40px;
+  color:var(--muted);letter-spacing:0.06em;
+  margin-bottom:44px;
+  padding-bottom:24px;
+  border-bottom:1px solid var(--border);
 }
 
-/* big data stats on left */
-.info-stats{display:flex;flex-direction:column;gap:24px;margin-bottom:36px;}
+/* big stat numbers */
+.info-stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px 32px;
+  margin-bottom:36px;
+}
 .info-stat{}
 .info-stat-num{
   font-family:'Playfair Display',serif;
-  font-size:clamp(32px,4vw,52px);
-  color:rgba(245,242,235,0.82);
+  font-size:clamp(28px,3.5vw,46px);
+  color:var(--ink);
   line-height:1;margin-bottom:4px;
 }
 .info-stat-lbl{
   font-family:'DM Mono',monospace;font-size:10px;
-  letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--clay);opacity:0.75;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--clay);
 }
 
-/* phase rings on left */
-.info-rings{display:flex;gap:14px;flex-wrap:wrap;opacity:0.85;margin-bottom:32px;}
-.info-ring-item{display:flex;flex-direction:column;align-items:center;gap:5px;}
-.info-ring-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.04em;text-transform:uppercase;color:rgba(245,242,235,0.65);text-align:center;max-width:56px;}
+/* divider */
+.info-divider{
+  height:1px;background:var(--border);
+  margin-bottom:28px;
+}
 
-/* timeline on left */
-.info-timeline{opacity:0.8;margin-bottom:28px;}
-.info-tl-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,242,235,0.55);margin-bottom:8px;}
+/* phase rings */
+.info-rings{
+  display:flex;gap:14px;flex-wrap:wrap;
+  margin-bottom:32px;
+}
+.info-ring-item{
+  display:flex;flex-direction:column;
+  align-items:center;gap:5px;
+}
+.info-ring-lbl{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.04em;text-transform:uppercase;
+  color:var(--muted);text-align:center;max-width:56px;
+}
 
-/* materials on left */
-.info-mats{display:flex;flex-direction:column;gap:6px;opacity:0.85;}
-.info-mat{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.05em;text-transform:uppercase;color:rgba(245,242,235,0.88);padding:5px 12px;border:1px solid rgba(196,135,90,0.55);border-radius:20px;width:fit-content;}
+/* timeline */
+.info-timeline{margin-bottom:28px;}
+.info-tl-label{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:8px;
+}
 
-/* RIGHT SIDE — login card */
+/* materials pills */
+.info-mats{
+  display:flex;flex-direction:column;gap:7px;
+}
+.info-mat{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.05em;
+  color:var(--ink);
+  padding:5px 12px;
+  border:1px solid rgba(196,135,90,0.4);
+  border-radius:20px;
+  width:fit-content;
+  background:rgba(196,135,90,0.06);
+}
+
+.info-ref{
+  margin-top:24px;
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--muted);
+  padding-top:16px;
+  border-top:1px solid var(--border);
+}
+
+/* ── RIGHT SIDE — login card ── */
 .login-side{
   width:460px;
   flex-shrink:0;
   display:flex;
   flex-direction:column;
   justify-content:center;
-  padding:32px 32px 32px 0;
+  padding:40px 40px 40px 24px;
 }
 
 .login-card{
-  background:rgba(245,242,235,0.97);
+  background:white;
   border-radius:8px;
   overflow:hidden;
+  border:1px solid var(--border);
   box-shadow:
-    0 0 0 1px rgba(196,135,90,0.25),
-    0 32px 80px rgba(0,0,0,0.6),
-    0 4px 20px rgba(0,0,0,0.35);
-  animation:fadeUp 0.7s cubic-bezier(.22,.68,0,1.2) both;
+    0 2px 4px rgba(26,26,24,0.06),
+    0 12px 40px rgba(26,26,24,0.1),
+    0 32px 80px rgba(26,26,24,0.08);
+  animation:fadeUp 0.6s cubic-bezier(.22,.68,0,1.2) both;
 }
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
 
-/* ── CARD HEADER ── */
-.card-header{background:var(--ink);padding:26px 32px 22px;border-bottom:3px solid var(--clay);}
-.project-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--clay);margin-bottom:8px;}
-.project-name{font-family:'Playfair Display',serif;font-size:28px;color:#f5f2eb;line-height:1;margin-bottom:4px;}
-.project-sub{font-family:'DM Mono',monospace;font-size:10px;color:rgba(245,242,235,0.3);letter-spacing:0.06em;}
+/* card header — clay accent */
+.card-header{
+  background:var(--ink);
+  padding:24px 28px 20px;
+  border-bottom:3px solid var(--clay);
+}
+.project-label{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--clay);margin-bottom:7px;
+}
+.project-name{
+  font-family:'Playfair Display',serif;font-size:26px;
+  color:#f5f2eb;line-height:1;margin-bottom:4px;
+}
+.project-sub{
+  font-family:'DM Mono',monospace;font-size:10px;
+  color:rgba(245,242,235,0.45);letter-spacing:0.06em;
+}
 
-.header-stats{display:flex;gap:0;margin-top:16px;padding-top:14px;border-top:1px solid rgba(196,135,90,0.15);}
+/* mini stats inside card header */
+.header-stats{
+  display:flex;margin-top:14px;padding-top:13px;
+  border-top:1px solid rgba(196,135,90,0.2);
+}
 .hstat{flex:1;padding-right:12px;}
-.hstat+.hstat{padding-left:12px;padding-right:0;border-left:1px solid rgba(255,255,255,0.07);}
-.hstat-num{font-family:'Playfair Display',serif;font-size:18px;color:var(--paper);line-height:1;margin-bottom:2px;}
-.hstat-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(245,242,235,0.28);}
+.hstat+.hstat{
+  padding-left:12px;padding-right:0;
+  border-left:1px solid rgba(255,255,255,0.1);
+}
+.hstat-num{
+  font-family:'Playfair Display',serif;font-size:17px;
+  color:#f5f2eb;line-height:1;margin-bottom:2px;
+}
+.hstat-lbl{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.08em;text-transform:uppercase;
+  color:rgba(245,242,235,0.4);
+}
 
-.phase-dots{display:flex;gap:3px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid rgba(196,135,90,0.1);}
+/* phase dots row inside header */
+.phase-dots{
+  display:flex;gap:3px;flex-wrap:wrap;
+  margin-top:12px;padding-top:11px;
+  border-top:1px solid rgba(196,135,90,0.15);
+}
 .pdot{display:flex;align-items:center;gap:4px;}
-.pdot-lbl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:0.04em;text-transform:uppercase;color:rgba(245,242,235,0.22);}
+.pdot-lbl{
+  font-family:'DM Mono',monospace;font-size:7px;
+  letter-spacing:0.04em;text-transform:uppercase;
+  color:rgba(245,242,235,0.35);
+}
 
-.mini-timeline{margin-top:12px;padding-top:12px;border-top:1px solid rgba(196,135,90,0.1);}
-.mt-label{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,242,235,0.2);margin-bottom:6px;}
-.mt-track{position:relative;height:30px;background:rgba(255,255,255,0.04);border-radius:3px;overflow:visible;}
-.mt-bar{position:absolute;height:8px;border-radius:2px;display:flex;align-items:center;padding:0 4px;}
-.mt-bar-lbl{font-family:'DM Mono',monospace;font-size:6px;color:rgba(245,242,235,0.7);white-space:nowrap;}
-.mt-today{position:absolute;top:-2px;bottom:-2px;width:1.5px;background:#d4704a;}
-.mt-today-lbl{position:absolute;top:-12px;font-family:'DM Mono',monospace;font-size:6px;color:#d4704a;transform:translateX(-50%);white-space:nowrap;}
+/* mini timeline inside header */
+.mini-timeline{
+  margin-top:11px;padding-top:11px;
+  border-top:1px solid rgba(196,135,90,0.12);
+}
+.mt-label{
+  font-family:'DM Mono',monospace;font-size:7px;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(245,242,235,0.35);margin-bottom:6px;
+}
+.mt-track{
+  position:relative;height:28px;
+  background:rgba(255,255,255,0.06);
+  border-radius:3px;overflow:visible;
+}
+.mt-bar{
+  position:absolute;height:8px;border-radius:2px;
+  display:flex;align-items:center;padding:0 4px;
+}
+.mt-bar-lbl{
+  font-family:'DM Mono',monospace;font-size:6px;
+  color:rgba(245,242,235,0.8);white-space:nowrap;
+}
+.mt-today{
+  position:absolute;top:-2px;bottom:-2px;
+  width:2px;background:var(--warn);border-radius:1px;
+}
+.mt-today-lbl{
+  position:absolute;top:-13px;
+  font-family:'DM Mono',monospace;font-size:6px;
+  color:var(--warn);transform:translateX(-50%);
+  white-space:nowrap;
+}
 
-/* ── WARN STRIP ── */
-.warn-strip{padding:9px 28px;background:rgba(212,112,74,0.07);border-bottom:1px solid rgba(212,112,74,0.15);display:flex;gap:8px;align-items:flex-start;}
-.warn-dot{width:5px;height:5px;border-radius:50%;background:var(--warn);flex-shrink:0;margin-top:4px;}
-.warn-text{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.04em;color:#b05030;line-height:1.6;}
+/* warn strip */
+.warn-strip{
+  padding:9px 28px;
+  background:#fff8f5;
+  border-bottom:1px solid rgba(212,112,74,0.2);
+  display:flex;gap:8px;align-items:flex-start;
+}
+.warn-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--warn);flex-shrink:0;margin-top:4px;
+}
+.warn-text{
+  font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:0.04em;color:#c05a2a;line-height:1.6;
+}
 
-/* ── CARD BODY ── */
-.card-body{padding:24px 28px;}
-.select-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:block;}
-.user-list{display:flex;flex-direction:column;gap:7px;}
-.user-btn{display:flex;align-items:center;gap:12px;padding:11px 13px;background:white;border:1px solid var(--border);border-radius:4px;cursor:pointer;transition:all 0.18s;text-align:left;width:100%;}
-.user-btn:hover{border-color:var(--clay);background:#fffcf9;transform:translateX(3px);box-shadow:0 2px 12px rgba(196,135,90,0.1);}
-.user-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:13px;font-weight:700;flex-shrink:0;}
+/* card body */
+.card-body{padding:22px 28px;}
+
+.select-label{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:12px;display:block;
+}
+
+.user-list{display:flex;flex-direction:column;gap:8px;}
+
+.user-btn{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 14px;
+  background:var(--paper);
+  border:1px solid var(--border);
+  border-radius:6px;cursor:pointer;
+  transition:all 0.18s;text-align:left;width:100%;
+}
+.user-btn:hover{
+  border-color:var(--clay);
+  background:#fffaf6;
+  transform:translateX(3px);
+  box-shadow:0 2px 12px rgba(196,135,90,0.15);
+}
+.user-avatar{
+  width:38px;height:38px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:14px;font-weight:700;flex-shrink:0;
+}
 .user-info{flex:1;}
-.user-name{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:1px;}
-.user-role{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);}
-.user-arrow{color:var(--muted);font-size:12px;transition:all 0.18s;}
+.user-name{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:2px;}
+.user-role{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);
+}
+.user-arrow{color:var(--muted);font-size:14px;transition:all 0.18s;}
 .user-btn:hover .user-arrow{transform:translateX(4px);color:var(--clay);}
 
-.pass-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:block;}
+/* password step */
+.pass-label{
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:8px;display:block;
+}
 .pass-input-wrap{position:relative;}
-.pass-input{width:100%;padding:12px 42px 12px 14px;font-family:'DM Mono',monospace;font-size:14px;border:1px solid var(--border);border-radius:4px;background:white;color:var(--ink);outline:none;transition:border-color 0.2s;letter-spacing:0.1em;}
+.pass-input{
+  width:100%;padding:12px 42px 12px 14px;
+  font-family:'DM Mono',monospace;font-size:14px;
+  border:1.5px solid var(--border);border-radius:5px;
+  background:var(--paper);color:var(--ink);outline:none;
+  transition:border-color 0.2s;letter-spacing:0.1em;
+}
 .pass-input:focus{border-color:var(--clay);}
 .pass-input.error{border-color:var(--warn);animation:shake 0.3s ease;}
-@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-5px);}75%{transform:translateX(5px);}}}
-.pass-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--muted);font-size:15px;padding:4px;}
-.error-msg{font-family:'DM Mono',monospace;font-size:9px;color:var(--warn);margin-top:5px;display:none;}
+@keyframes shake{
+  0%,100%{transform:translateX(0);}
+  25%{transform:translateX(-5px);}
+  75%{transform:translateX(5px);}
+}
+.pass-toggle{
+  position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  background:none;border:none;cursor:pointer;
+  color:var(--muted);font-size:15px;padding:4px;
+}
+.error-msg{
+  font-family:'DM Mono',monospace;font-size:10px;
+  color:var(--warn);margin-top:6px;display:none;
+}
 .error-msg.show{display:block;}
-.login-btn{width:100%;margin-top:12px;padding:13px;background:var(--ink);color:var(--paper);border:none;border-radius:4px;cursor:pointer;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;}
+
+.login-btn{
+  width:100%;margin-top:12px;padding:13px;
+  background:var(--ink);color:var(--paper);
+  border:none;border-radius:5px;cursor:pointer;
+  font-family:'DM Mono',monospace;font-size:11px;
+  letter-spacing:0.12em;text-transform:uppercase;
+  transition:all 0.2s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
 .login-btn:hover{background:var(--clay);}
 .login-btn:active{transform:scale(0.98);}
-.login-btn .spinner{display:none;width:13px;height:13px;border:2px solid rgba(245,242,235,0.3);border-top-color:var(--paper);border-radius:50%;animation:spin 0.6s linear infinite;}
+.login-btn .spinner{
+  display:none;width:13px;height:13px;
+  border:2px solid rgba(245,242,235,0.3);
+  border-top-color:var(--paper);border-radius:50%;
+  animation:spin 0.6s linear infinite;
+}
 @keyframes spin{to{transform:rotate(360deg);}}
 .login-btn.loading .spinner{display:block;}
 .login-btn.loading .btn-text{display:none;}
-.back-btn{background:none;border:none;cursor:pointer;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);display:inline-flex;align-items:center;gap:4px;margin-bottom:14px;padding:0;transition:color 0.2s;}
+
+.back-btn{
+  background:none;border:none;cursor:pointer;
+  font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--muted);display:inline-flex;align-items:center;gap:4px;
+  margin-bottom:14px;padding:0;transition:color 0.2s;
+}
 .back-btn:hover{color:var(--clay);}
 
-/* ── CARD FOOTER ── */
-.card-footer{padding:12px 28px;border-top:1px solid var(--border);background:var(--cream);display:flex;align-items:center;justify-content:space-between;}
-.footer-ref{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.05em;}
+/* card footer */
+.card-footer{
+  padding:11px 28px;
+  border-top:1px solid var(--border);
+  background:var(--cream);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.footer-ref{
+  font-family:'DM Mono',monospace;font-size:9px;
+  color:var(--muted);letter-spacing:0.05em;
+}
 
 /* ═══════════════════════════════════════
-   RESPONSIVE — mobile gets centred card
+   BUDGET BUBBLES — dark on light
+═══════════════════════════════════════ */
+.bubble-canvas{
+  position:absolute;inset:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE — mobile: centred card
 ═══════════════════════════════════════ */
 @media(max-width:900px){
-  .page-layout{align-items:center;justify-content:center;padding:20px;}
+  .page-layout{
+    align-items:center;justify-content:center;
+    padding:24px;
+  }
   .info-side{display:none;}
-  .login-side{width:100%;max-width:420px;padding:0;}
-  /* restore full-page background atmosphere on mobile */
-  .bg-stat,.bg-rings,.bg-mats,.bg-anno{display:block;}
-}
-@media(min-width:901px){
-  /* on laptop hide the background floating elements — info-side handles them */
-  .bg-stat,.bg-mats,.bg-anno{display:none;}
-  .bg-rings{display:none;}
+  .login-side{
+    width:100%;max-width:420px;padding:0;
+  }
 }
 </style>
 </head>
@@ -233,97 +447,149 @@ body{font-family:'DM Sans',sans-serif;background:var(--ink);min-height:100vh;pos
   <div class="bg-glow-2"></div>
   <div class="bg-glow-3"></div>
 
-  <!-- background budget bubbles — always visible -->
-  <svg style="position:absolute;inset:0;width:100%;height:100%;"
-       viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <!-- left cluster -->
-    <circle cx="180" cy="200" r="70" fill="#6b8fa3" opacity="0.18"/>
-    <circle cx="310" cy="160" r="55" fill="#c4875a" opacity="0.18"/>
-    <circle cx="160" cy="360" r="42" fill="#8a7a6e" opacity="0.16"/>
-    <circle cx="300" cy="340" r="40" fill="#8a8880" opacity="0.14"/>
-    <circle cx="100" cy="470" r="36" fill="#8a6e7a" opacity="0.14"/>
-    <circle cx="240" cy="460" r="35" fill="#7a8c6e" opacity="0.14"/>
-    <circle cx="380" cy="220" r="32" fill="#c4875a" opacity="0.14"/>
-    <circle cx="360" cy="400" r="28" fill="#6b8fa3" opacity="0.14"/>
-    <circle cx="130" cy="560" r="23" fill="#8a6e7a" opacity="0.12"/>
-    <circle cx="260" cy="550" r="20" fill="#6e7a8a" opacity="0.12"/>
-    <!-- top -->
-    <circle cx="600" cy="55" fill="#c4875a" r="28" opacity="0.12"/>
-    <circle cx="750" cy="40" fill="#7a8c6e" r="22" opacity="0.12"/>
-    <circle cx="920" cy="65" fill="#6b8fa3" r="36" opacity="0.12"/>
-    <!-- bottom -->
-    <circle cx="500" cy="830" r="42" fill="#7a8c6e" opacity="0.14"/>
-    <circle cx="680" cy="850" r="30" fill="#c4875a" opacity="0.14"/>
-    <circle cx="860" cy="820" r="46" fill="#6b8fa3" opacity="0.14"/>
-    <!-- right -->
-    <circle cx="1300" cy="180" r="55" fill="#c4875a" opacity="0.14"/>
-    <circle cx="1170" cy="150" r="46" fill="#6b8fa3" opacity="0.14"/>
-    <circle cx="1330" cy="360" r="40" fill="#8a7a6e" opacity="0.14"/>
-    <circle cx="1160" cy="340" r="34" fill="#7a8c6e" opacity="0.14"/>
-    <circle cx="1290" cy="520" r="28" fill="#c4875a" opacity="0.12"/>
+  <!-- Budget bubbles — dark on light, left side only -->
+  <svg class="bubble-canvas"
+       viewBox="0 0 1400 900"
+       preserveAspectRatio="xMidYMid slice"
+       xmlns="http://www.w3.org/2000/svg">
+    <defs><style>
+      .bbt{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;text-anchor:middle;fill:#1a1a18;}
+      .bbts{font-family:'DM Mono',monospace;font-size:9px;text-anchor:middle;fill:#6a6866;}
+    </style></defs>
+
+    <!-- LEFT cluster — clearly readable dark circles on light bg -->
+    <circle cx="130" cy="190" r="65" fill="#6b8fa3" opacity="0.18"/>
+    <text class="bbt" x="130" y="185">Walls</text>
+    <text class="bbts" x="130" y="199">£130k</text>
+
+    <circle cx="265" cy="148" r="52" fill="#c4875a" opacity="0.18"/>
+    <text class="bbt" x="265" y="143">Fit-out</text>
+    <text class="bbts" x="265" y="157">£90k</text>
+
+    <circle cx="120" cy="335" r="40" fill="#8a7a6e" opacity="0.18"/>
+    <text class="bbts" x="120" y="331">Windows</text>
+    <text class="bbts" x="120" y="343">£63k</text>
+
+    <circle cx="260" cy="310" r="40" fill="#8a8880" opacity="0.15"/>
+    <text class="bbts" x="260" y="307">Conting.</text>
+    <text class="bbts" x="260" y="319">£62k</text>
+
+    <circle cx="70"  cy="455" r="35" fill="#8a6e7a" opacity="0.16"/>
+    <text class="bbts" x="70"  y="451">Roof</text>
+    <text class="bbts" x="70"  y="463">£47k</text>
+
+    <circle cx="200" cy="440" r="34" fill="#7a8c6e" opacity="0.18"/>
+    <text class="bbts" x="200" y="436">Gndwks</text>
+    <text class="bbts" x="200" y="448">£55k</text>
+
+    <circle cx="340" cy="210" r="31" fill="#c4875a" opacity="0.15"/>
+    <text class="bbts" x="340" y="207">Fees</text>
+    <text class="bbts" x="340" y="219">£45k</text>
+
+    <circle cx="320" cy="390" r="28" fill="#6b8fa3" opacity="0.15"/>
+    <text class="bbts" x="320" y="393">1st fix £48k</text>
+
+    <circle cx="95"  cy="560" r="23" fill="#8a6e7a" opacity="0.14"/>
+    <text class="bbts" x="95"  y="564">£40k</text>
+
+    <circle cx="215" cy="545" r="20" fill="#6e7a8a" opacity="0.13"/>
+    <text class="bbts" x="215" y="549">£33k</text>
+
+    <circle cx="330" cy="520" r="17" fill="#8a8880" opacity="0.13"/>
+    <text class="bbts" x="330" y="524">£22k</text>
+
+    <!-- Scaffold -->
+    <circle cx="380" cy="470" r="24" fill="#6b8fa3" opacity="0.13"/>
+    <text class="bbts" x="380" y="474">Scaffold</text>
+
+    <!-- Roof structure -->
+    <circle cx="250" cy="60" r="32" fill="#8a7a6e" opacity="0.15"/>
+    <text class="bbts" x="250" y="56">Roof struct</text>
+    <text class="bbts" x="250" y="68">£58k</text>
+
+    <!-- Decor -->
+    <circle cx="110" cy="66" r="25" fill="#c4875a" opacity="0.14"/>
+    <text class="bbts" x="110" y="70">£21k</text>
+
+    <!-- Foundations -->
+    <circle cx="370" cy="80" r="29" fill="#6e8a7a" opacity="0.15"/>
+    <text class="bbts" x="370" y="76">Found.</text>
+    <text class="bbts" x="370" y="88">£40k</text>
+
+    <!-- Faint leader lines connecting some bubbles -->
+    <line x1="130" y1="255" x2="130" y2="295" stroke="rgba(196,135,90,0.2)" stroke-width="0.8" stroke-dasharray="2,3"/>
+    <line x1="265" y1="200" x2="265" y2="258" stroke="rgba(196,135,90,0.2)" stroke-width="0.8" stroke-dasharray="2,3"/>
+    <line x1="120" y1="375" x2="120" y2="420" stroke="rgba(196,135,90,0.15)" stroke-width="0.8" stroke-dasharray="2,3"/>
   </svg>
 
-  <!-- timeline river — bottom -->
-  <div style="position:absolute;bottom:6%;left:4%;right:4%;opacity:0.45;">
-    <svg width="100%" viewBox="0 0 1200 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <line x1="0" y1="0" x2="0" y2="65" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
-      <line x1="240" y1="0" x2="240" y2="65" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
-      <line x1="480" y1="0" x2="480" y2="65" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
-      <line x1="720" y1="0" x2="720" y2="65" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
-      <line x1="960" y1="0" x2="960" y2="65" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
-      <line x1="1200" y1="0" x2="1200" y2="65" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
-      <line x1="480" y1="0" x2="480" y2="68" stroke="rgba(212,112,74,0.5)" stroke-width="1.5"/>
-      <rect x="0" y="4" width="400" height="11" rx="2" fill="#c4875a" opacity="0.2"/>
-      <rect x="480" y="4" width="53" height="11" rx="2" fill="#d4704a" opacity="0.3"/>
-      <rect x="533" y="18" width="133" height="11" rx="2" fill="#6b8fa3" opacity="0.2"/>
-      <rect x="666" y="32" width="134" height="11" rx="2" fill="#7a8c6e" opacity="0.2"/>
-      <rect x="733" y="4" width="133" height="11" rx="2" fill="#6b8fa3" opacity="0.15"/>
-      <rect x="933" y="18" width="133" height="11" rx="2" fill="#8a6e7a" opacity="0.15"/>
-      <rect x="1000" y="32" width="133" height="11" rx="2" fill="#c4875a" opacity="0.15"/>
-      <line x1="1133" y1="0" x2="1133" y2="65" stroke="rgba(122,140,110,0.35)" stroke-width="0.8" stroke-dasharray="3,3"/>
+  <!-- Timeline river — bottom of page -->
+  <div style="position:absolute;bottom:5%;left:3%;right:3%;opacity:0.5;">
+    <svg width="100%" viewBox="0 0 1200 75" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs><style>
+        .trt{font-family:'DM Mono',monospace;font-size:7px;fill:#1a1a18;font-weight:500;}
+        .trm{font-family:'DM Mono',monospace;font-size:7px;fill:#6a6866;text-anchor:middle;}
+      </style></defs>
+      <line x1="0"    y1="0" x2="0"    y2="65" stroke="rgba(26,26,24,0.1)" stroke-width="0.5"/>
+      <line x1="200"  y1="0" x2="200"  y2="65" stroke="rgba(26,26,24,0.1)" stroke-width="0.5"/>
+      <line x1="400"  y1="0" x2="400"  y2="65" stroke="rgba(26,26,24,0.1)" stroke-width="0.5"/>
+      <line x1="600"  y1="0" x2="600"  y2="65" stroke="rgba(26,26,24,0.1)" stroke-width="0.5"/>
+      <line x1="800"  y1="0" x2="800"  y2="65" stroke="rgba(26,26,24,0.1)" stroke-width="0.5"/>
+      <line x1="1000" y1="0" x2="1000" y2="65" stroke="rgba(26,26,24,0.1)" stroke-width="0.5"/>
+      <line x1="1200" y1="0" x2="1200" y2="65" stroke="rgba(26,26,24,0.1)" stroke-width="0.5"/>
+      <text class="trm" x="100"  y="73">Apr '25</text>
+      <text class="trm" x="400"  y="73">Jan '26</text>
+      <text class="trm" x="700"  y="73">Oct '26</text>
+      <text class="trm" x="1000" y="73">Jul '27</text>
+      <!-- Today line: Apr 2026 = 40% -->
+      <line x1="480" y1="0" x2="480" y2="68" stroke="#d4704a" stroke-width="2"/>
+      <text class="trt" x="486" y="12">Today</text>
+      <!-- Bars -->
+      <rect x="0"   y="4"  width="400" height="12" rx="3" fill="#c4875a" opacity="0.5"/>
+      <text class="trt" x="6" y="14">Planning &amp; surveys</text>
+      <rect x="480" y="4"  width="50"  height="12" rx="3" fill="#d4704a" opacity="0.65"/>
+      <text class="trt" x="486" y="14">ACM</text>
+      <rect x="80"  y="20" width="50"  height="12" rx="3" fill="#7a8c6e" opacity="0.45"/>
+      <text class="trt" x="86" y="30">Trees</text>
+      <rect x="530" y="20" width="120" height="12" rx="3" fill="#6b8fa3" opacity="0.45"/>
+      <text class="trt" x="536" y="30">Tender</text>
+      <rect x="650" y="36" width="120" height="12" rx="3" fill="#7a8c6e" opacity="0.45"/>
+      <text class="trt" x="656" y="46">Groundworks</text>
+      <rect x="700" y="4"  width="120" height="12" rx="3" fill="#6b8fa3" opacity="0.38"/>
+      <text class="trt" x="706" y="14">Structure</text>
+      <rect x="820" y="4"  width="60"  height="12" rx="3" fill="#8a7a6e" opacity="0.45"/>
+      <text class="trt" x="826" y="14">Roof</text>
+      <rect x="880" y="20" width="120" height="12" rx="3" fill="#8a6e7a" opacity="0.38"/>
+      <text class="trt" x="886" y="30">First fix M&amp;E</text>
+      <rect x="960" y="36" width="120" height="12" rx="3" fill="#c4875a" opacity="0.38"/>
+      <text class="trt" x="966" y="46">2nd fix</text>
+      <line x1="1080" y1="4" x2="1080" y2="68" stroke="#7a8c6e" stroke-width="1.2" stroke-dasharray="4,3"/>
+      <text class="trm" x="1082" y="62" font-size="7" fill="#7a8c6e" text-anchor="start">PC Sep '27</text>
     </svg>
   </div>
-
-  <!-- mobile-only: floating stats + rings + materials -->
-  <div class="bg-stat" style="font-size:clamp(50px,8vw,110px);top:8%;left:3%;">£619k<div class="bg-stat-lbl">Full build estimate</div></div>
-  <div class="bg-stat" style="font-size:clamp(44px,7vw,100px);top:8%;right:3%;text-align:right;">394m²<div class="bg-stat-lbl">Floor area</div></div>
-  <div class="bg-stat" style="font-size:clamp(36px,5vw,80px);bottom:22%;left:3%;">68<div class="bg-stat-lbl">Weeks</div></div>
-  <div class="bg-stat" style="font-size:clamp(32px,4.5vw,72px);bottom:22%;right:3%;text-align:right;">£1,572<div class="bg-stat-lbl">Cost per m²</div></div>
-  <div class="bg-rings" style="top:8%;left:3%;max-width:300px;" id="bgRings"></div>
-  <div class="bg-mats" style="bottom:18%;right:3%;align-items:flex-end;">
-    <div class="bg-mat">Greencoat PLX steel roof</div>
-    <div class="bg-mat">K-Rend Causeway render</div>
-    <div class="bg-mat">Knapped flint plinth</div>
-    <div class="bg-mat">Portland stone SE elevation</div>
-    <div class="bg-mat">Siberian larch soffit</div>
-    <div class="bg-mat">Anthracite aluminium windows</div>
-    <div class="bg-mat">12kW Samsung GEN7 R290 ASHP</div>
-  </div>
-  <div class="bg-anno" style="top:5%;left:50%;transform:translateX(-50%);">P-FUL-2025-05327 · Dorset Council · NA Williams Building Consultancy Ltd</div>
-  <div class="bg-vignette"></div>
 </div>
 
-<!-- ═══ PAGE LAYOUT ═══ -->
+<!-- ═══ PAGE ═══ -->
 <div class="page-layout">
 
-  <!-- LEFT — infographic data (laptop only) -->
+  <!-- LEFT — info panel -->
   <div class="info-side">
-    <div class="info-project-label">Self Build · Dorset · 2025–2027</div>
-    <div class="info-project-name">Corydon</div>
-    <div class="info-project-addr">Roman Road · Winterbourne Steepleton · DT2 9DX</div>
+
+    <div class="info-kicker">Self Build · Dorset · 2025–2027</div>
+    <div class="info-title">Corydon</div>
+    <div class="info-addr">Roman Road · Winterbourne Steepleton · DT2 9DX</div>
 
     <div class="info-stats">
       <div class="info-stat">
         <div class="info-stat-num">£619,611</div>
-        <div class="info-stat-lbl">Full build estimate ex-VAT</div>
+        <div class="info-stat-lbl">Full build ex-VAT</div>
       </div>
       <div class="info-stat">
         <div class="info-stat-num">394 m²</div>
-        <div class="info-stat-lbl">Total floor area · 2 storey</div>
+        <div class="info-stat-lbl">Total floor area</div>
       </div>
       <div class="info-stat">
-        <div class="info-stat-num">68</div>
-        <div class="info-stat-lbl">Weeks to practical completion</div>
+        <div class="info-stat-num">68 weeks</div>
+        <div class="info-stat-lbl">To completion</div>
       </div>
       <div class="info-stat">
         <div class="info-stat-num">£1,572</div>
@@ -331,43 +597,58 @@ body{font-family:'DM Sans',sans-serif;background:var(--ink);min-height:100vh;pos
       </div>
     </div>
 
+    <div class="info-divider"></div>
+
+    <!-- Phase rings -->
+    <div class="info-tl-label" style="margin-bottom:12px;">Build phases</div>
     <div class="info-rings" id="infoRings"></div>
 
+    <div class="info-divider"></div>
+
+    <!-- Mini timeline -->
     <div class="info-timeline">
       <div class="info-tl-label">Build programme · Apr 2025 → Sep 2027</div>
-      <svg width="100%" viewBox="0 0 500 55" xmlns="http://www.w3.org/2000/svg">
-        <line x1="0" y1="0" x2="0" y2="50" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
-        <line x1="166" y1="0" x2="166" y2="50" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
-        <line x1="333" y1="0" x2="333" y2="50" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
-        <line x1="500" y1="0" x2="500" y2="50" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
-        <line x1="200" y1="0" x2="200" y2="52" stroke="rgba(212,112,74,0.7)" stroke-width="1.5"/>
-        <rect x="0" y="4" width="167" height="10" rx="2" fill="#c4875a" opacity="0.35"/>
-        <rect x="200" y="4" width="22" height="10" rx="2" fill="#d4704a" opacity="0.5"/>
-        <rect x="222" y="16" width="55" height="10" rx="2" fill="#6b8fa3" opacity="0.3"/>
-        <rect x="277" y="28" width="55" height="10" rx="2" fill="#7a8c6e" opacity="0.3"/>
-        <rect x="305" y="16" width="55" height="10" rx="2" fill="#6b8fa3" opacity="0.25"/>
-        <rect x="388" y="28" width="55" height="10" rx="2" fill="#8a6e7a" opacity="0.25"/>
-        <rect x="416" y="4" width="55" height="10" rx="2" fill="#c4875a" opacity="0.25"/>
-        <line x1="471" y1="0" x2="471" y2="50" stroke="rgba(122,140,110,0.4)" stroke-width="0.8" stroke-dasharray="3,3"/>
-        <text font-family="'DM Mono',monospace" x="2" y="50" font-size="7" fill="rgba(245,242,235,0.6)">Apr '25</text>
-        <text font-family="'DM Mono',monospace" x="168" y="50" font-size="7" fill="rgba(245,242,235,0.6)">Jan '26</text>
-        <text font-family="'DM Mono',monospace" x="334" y="50" font-size="7" fill="rgba(245,242,235,0.6)">Oct '26</text>
-        <text font-family="'DM Mono',monospace" x="196" y="12" font-size="7" fill="rgba(212,112,74,0.95)">Today</text>
+      <svg width="100%" viewBox="0 0 500 58" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="500" height="58" fill="none"/>
+        <!-- grid lines -->
+        <line x1="0"   y1="0" x2="0"   y2="52" stroke="rgba(26,26,24,0.1)" stroke-width="0.5"/>
+        <line x1="167" y1="0" x2="167" y2="52" stroke="rgba(26,26,24,0.1)" stroke-width="0.5"/>
+        <line x1="333" y1="0" x2="333" y2="52" stroke="rgba(26,26,24,0.1)" stroke-width="0.5"/>
+        <line x1="500" y1="0" x2="500" y2="52" stroke="rgba(26,26,24,0.1)" stroke-width="0.5"/>
+        <!-- today = 40% of 500 = 200 -->
+        <line x1="200" y1="0" x2="200" y2="54" stroke="#d4704a" stroke-width="2"/>
+        <!-- bars -->
+        <rect x="0"   y="4"  width="167" height="11" rx="2" fill="#c4875a" opacity="0.6"/>
+        <rect x="200" y="4"  width="22"  height="11" rx="2" fill="#d4704a" opacity="0.8"/>
+        <rect x="222" y="18" width="56"  height="11" rx="2" fill="#6b8fa3" opacity="0.55"/>
+        <rect x="278" y="30" width="56"  height="11" rx="2" fill="#7a8c6e" opacity="0.55"/>
+        <rect x="306" y="18" width="56"  height="11" rx="2" fill="#6b8fa3" opacity="0.45"/>
+        <rect x="390" y="30" width="56"  height="11" rx="2" fill="#8a6e7a" opacity="0.45"/>
+        <rect x="418" y="4"  width="56"  height="11" rx="2" fill="#c4875a" opacity="0.45"/>
+        <line x1="474" y1="0" x2="474" y2="54" stroke="#7a8c6e" stroke-width="1" stroke-dasharray="3,3"/>
+        <!-- labels -->
+        <text font-family="'DM Mono',monospace" x="2"   y="50" font-size="7" fill="#6a6866">Apr '25</text>
+        <text font-family="'DM Mono',monospace" x="169" y="50" font-size="7" fill="#6a6866">Jan '26</text>
+        <text font-family="'DM Mono',monospace" x="335" y="50" font-size="7" fill="#6a6866">Oct '26</text>
+        <text font-family="'DM Mono',monospace" x="197" y="14" font-size="7" fill="#d4704a">Today</text>
+        <text font-family="'DM Mono',monospace" x="3"   y="13" font-size="7" fill="#1a1a18">Planning</text>
+        <text font-family="'DM Mono',monospace" x="200" y="14" font-size="0" fill="none"/>
       </svg>
     </div>
 
+    <!-- Materials -->
+    <div class="info-tl-label" style="margin-bottom:10px;">Specified materials · CROY 2025 07B</div>
     <div class="info-mats">
       <div class="info-mat">Greencoat PLX standing seam steel roof · grey</div>
-      <div class="info-mat">K-Rend Causeway render · ground floor</div>
+      <div class="info-mat">K-Rend Causeway render · ground floor walls</div>
       <div class="info-mat">Knapped flint plinth · Portland stone SE elevation</div>
-      <div class="info-mat">Anthracite aluminium windows · Garador garage door</div>
+      <div class="info-mat">Anthracite aluminium windows &amp; Garador garage door</div>
       <div class="info-mat">12kW Samsung GEN7 R290 ASHP · east elevation</div>
       <div class="info-mat">Canadian cedar balconies · Siberian larch soffit</div>
     </div>
 
-    <div style="margin-top:20px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(196,135,90,0.6);">
-      Ref: P-FUL-2025-05327 · NA Williams Building Consultancy Ltd
-    </div>
+    <div class="info-ref">Ref: P-FUL-2025-05327 · NA Williams Building Consultancy Ltd</div>
+
   </div>
 
   <!-- RIGHT — login card -->
@@ -379,9 +660,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--ink);min-height:100vh;pos
         <div class="project-name">Corydon</div>
         <div class="project-sub">Roman Road · Winterbourne Steepleton · DT2 9DX</div>
         <div class="header-stats">
-          <div class="hstat"><div class="hstat-num">£619k</div><div class="hstat-lbl">Build cost ex-VAT</div></div>
-          <div class="hstat"><div class="hstat-num">394m²</div><div class="hstat-lbl">Floor area</div></div>
-          <div class="hstat"><div class="hstat-num">68 wks</div><div class="hstat-lbl">To completion</div></div>
+          <div class="hstat">
+            <div class="hstat-num">£619k</div>
+            <div class="hstat-lbl">Build cost ex-VAT</div>
+          </div>
+          <div class="hstat">
+            <div class="hstat-num">394m²</div>
+            <div class="hstat-lbl">Floor area</div>
+          </div>
+          <div class="hstat">
+            <div class="hstat-num">68 wks</div>
+            <div class="hstat-lbl">To completion</div>
+          </div>
         </div>
         <div class="phase-dots" id="phaseDots"></div>
         <div class="mini-timeline">
@@ -392,33 +682,51 @@ body{font-family:'DM Sans',sans-serif;background:var(--ink);min-height:100vh;pos
 
       <div class="warn-strip">
         <div class="warn-dot"></div>
-        <div class="warn-text">Action required — asbestos removal (CAS 3044) before demolition · 01202 099 906</div>
+        <div class="warn-text">⚠ Action required — asbestos removal (CAS 3044) before demolition · Call 01202 099 906</div>
       </div>
 
       <div class="card-body">
+
         <div id="stepUsers">
           <span class="select-label">Select your profile to continue</span>
           <div class="user-list">
+
             <button class="user-btn" onclick="selectUser('richard')">
               <div class="user-avatar" style="background:#f5ece0;color:#c4875a;">RB</div>
-              <div class="user-info"><div class="user-name">Richard Budd</div><div class="user-role">Owner · Full access</div></div>
+              <div class="user-info">
+                <div class="user-name">Richard Budd</div>
+                <div class="user-role">Owner · Full access</div>
+              </div>
               <span class="user-arrow">→</span>
             </button>
+
             <button class="user-btn" onclick="selectUser('laura')">
               <div class="user-avatar" style="background:#e8f0e8;color:#7a8c6e;">LB</div>
-              <div class="user-info"><div class="user-name">Laura</div><div class="user-role">Owner · Full access</div></div>
+              <div class="user-info">
+                <div class="user-name">Laura</div>
+                <div class="user-role">Owner · Full access</div>
+              </div>
               <span class="user-arrow">→</span>
             </button>
+
             <button class="user-btn" onclick="selectUser('builder')">
               <div class="user-avatar" style="background:#e8eef5;color:#6b8fa3;">MC</div>
-              <div class="user-info"><div class="user-name">Builder / Contractor</div><div class="user-role">Contractor · View only</div></div>
+              <div class="user-info">
+                <div class="user-name">Builder / Contractor</div>
+                <div class="user-role">Contractor · View only</div>
+              </div>
               <span class="user-arrow">→</span>
             </button>
+
             <button class="user-btn" onclick="selectUser('consultant')">
               <div class="user-avatar" style="background:#f0ebe8;color:#8a7a6e;">CO</div>
-              <div class="user-info"><div class="user-name">Consultant</div><div class="user-role">Professional · View only</div></div>
+              <div class="user-info">
+                <div class="user-name">Consultant</div>
+                <div class="user-role">Professional · View only</div>
+              </div>
               <span class="user-arrow">→</span>
             </button>
+
           </div>
         </div>
 
@@ -426,7 +734,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--ink);min-height:100vh;pos
           <button class="back-btn" onclick="goBack()">← Back</button>
           <span class="pass-label">Password for <span id="userNameDisplay" style="color:var(--clay)"></span></span>
           <div class="pass-input-wrap">
-            <input class="pass-input" type="password" id="passInput" placeholder="Enter password" onkeydown="if(event.key==='Enter')tryLogin()">
+            <input class="pass-input" type="password" id="passInput"
+              placeholder="Enter password"
+              onkeydown="if(event.key==='Enter')tryLogin()">
             <button class="pass-toggle" onclick="togglePass()" id="passToggle">👁</button>
           </div>
           <div class="error-msg" id="errorMsg">Incorrect password — please try again</div>
@@ -435,6 +745,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--ink);min-height:100vh;pos
             <span class="spinner"></span>
           </button>
         </div>
+
       </div>
 
       <div class="card-footer">
@@ -448,143 +759,146 @@ body{font-family:'DM Sans',sans-serif;background:var(--ink);min-height:100vh;pos
 </div>
 
 <script>
-const USERS={
-  richard:{name:'Richard',pass:'corydon2025',access:'full'},
-  laura:  {name:'Laura',  pass:'corydon2025',access:'full'},
-  builder:{name:'Builder',pass:'buildcorydon',access:'readonly'},
-  consultant:{name:'Consultant',pass:'buildcorydon',access:'readonly'},
+// ── USER CONFIG ──────────────────────────────
+const USERS = {
+  richard:    { name:'Richard',    pass:'corydon2025',  access:'full'     },
+  laura:      { name:'Laura',      pass:'corydon2025',  access:'full'     },
+  builder:    { name:'Builder',    pass:'buildcorydon', access:'readonly' },
+  consultant: { name:'Consultant', pass:'buildcorydon', access:'readonly' },
 };
+// ────────────────────────────────────────────
 
-let selectedUser=null;
+let selectedUser = null;
 
-function selectUser(key){
-  selectedUser=key;
-  document.getElementById('stepUsers').style.display='none';
-  document.getElementById('stepPassword').style.display='block';
-  document.getElementById('userNameDisplay').textContent=USERS[key].name;
-  document.getElementById('passInput').value='';
+function selectUser(key) {
+  selectedUser = key;
+  document.getElementById('stepUsers').style.display = 'none';
+  document.getElementById('stepPassword').style.display = 'block';
+  document.getElementById('userNameDisplay').textContent = USERS[key].name;
+  document.getElementById('passInput').value = '';
   document.getElementById('errorMsg').classList.remove('show');
   document.getElementById('passInput').classList.remove('error');
-  setTimeout(()=>document.getElementById('passInput').focus(),100);
+  setTimeout(() => document.getElementById('passInput').focus(), 100);
 }
-function goBack(){
-  selectedUser=null;
-  document.getElementById('stepPassword').style.display='none';
-  document.getElementById('stepUsers').style.display='block';
+
+function goBack() {
+  selectedUser = null;
+  document.getElementById('stepPassword').style.display = 'none';
+  document.getElementById('stepUsers').style.display = 'block';
 }
-function togglePass(){
-  const i=document.getElementById('passInput'),t=document.getElementById('passToggle');
-  i.type=i.type==='password'?'text':'password';
-  t.textContent=i.type==='password'?'👁':'🙈';
+
+function togglePass() {
+  const i = document.getElementById('passInput');
+  const t = document.getElementById('passToggle');
+  i.type = i.type === 'password' ? 'text' : 'password';
+  t.textContent = i.type === 'password' ? '👁' : '🙈';
 }
-function tryLogin(){
-  if(!selectedUser)return;
-  const input=document.getElementById('passInput');
-  const btn=document.getElementById('loginBtn');
-  const err=document.getElementById('errorMsg');
-  const user=USERS[selectedUser];
+
+function tryLogin() {
+  if (!selectedUser) return;
+  const input = document.getElementById('passInput');
+  const btn   = document.getElementById('loginBtn');
+  const err   = document.getElementById('errorMsg');
+  const user  = USERS[selectedUser];
   btn.classList.add('loading');
   err.classList.remove('show');
   input.classList.remove('error');
-  setTimeout(()=>{
+  setTimeout(() => {
     btn.classList.remove('loading');
-    if(input.value===user.pass){
-      sessionStorage.setItem('corydon_user',user.name);
-      sessionStorage.setItem('corydon_access',user.access);
-      window.location.href='app.html';
+    if (input.value === user.pass) {
+      sessionStorage.setItem('corydon_user',   user.name);
+      sessionStorage.setItem('corydon_access', user.access);
+      window.location.href = 'app.html';
     } else {
       input.classList.add('error');
       err.classList.add('show');
-      input.value='';
+      input.value = '';
       input.focus();
-      setTimeout(()=>input.classList.remove('error'),400);
+      setTimeout(() => input.classList.remove('error'), 400);
     }
-  },600);
+  }, 600);
 }
 
-// Phase rings
-const phases=[
-  {name:'Planning', pct:85,color:'#c4875a'},
-  {name:'Arboric.', pct:20,color:'#7a8c6e'},
-  {name:'Asbestos', pct:0, color:'#d4704a'},
-  {name:'Demo',     pct:0, color:'#7a6e8a'},
-  {name:'Gndwks',   pct:0, color:'#6e8a7a'},
-  {name:'Found.',   pct:0, color:'#6b8fa3'},
-  {name:'Structure',pct:0, color:'#6e7a8a'},
-  {name:'Roof',     pct:0, color:'#8a7a6e'},
-  {name:'M&E',      pct:0, color:'#8a6e7a'},
-  {name:'Fit-out',  pct:0, color:'#c4875a'},
+// ── PHASE RINGS ─────────────────────────────
+const phases = [
+  { name:'Planning',  pct:85, color:'#c4875a' },
+  { name:'Arboric.',  pct:20, color:'#7a8c6e' },
+  { name:'Asbestos',  pct:0,  color:'#d4704a' },
+  { name:'Demo',      pct:0,  color:'#7a6e8a' },
+  { name:'Gndwks',    pct:0,  color:'#6e8a7a' },
+  { name:'Found.',    pct:0,  color:'#6b8fa3' },
+  { name:'Structure', pct:0,  color:'#6e7a8a' },
+  { name:'Roof',      pct:0,  color:'#8a7a6e' },
+  { name:'M&E',       pct:0,  color:'#8a6e7a' },
+  { name:'Fit-out',   pct:0,  color:'#c4875a' },
 ];
 
-function makeRing(p,size,trackOpacity){
-  const R=size*0.37,sw=size*0.13,circ=2*Math.PI*R;
-  const filled=circ*(p.pct/100),gap=circ-filled;
-  return`<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
-    <circle cx="${size/2}" cy="${size/2}" r="${R}" fill="none" stroke="rgba(255,255,255,${trackOpacity})" stroke-width="${sw}"/>
-    <circle cx="${size/2}" cy="${size/2}" r="${R}" fill="none" stroke="${p.color}" stroke-width="${sw}"
+function makeRing(p, size, trackColor) {
+  const R   = size * 0.37;
+  const sw  = size * 0.13;
+  const circ = 2 * Math.PI * R;
+  const filled = circ * (p.pct / 100);
+  const gap    = circ - filled;
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+    <circle cx="${size/2}" cy="${size/2}" r="${R}" fill="none"
+      stroke="${trackColor}" stroke-width="${sw}"/>
+    <circle cx="${size/2}" cy="${size/2}" r="${R}" fill="none"
+      stroke="${p.color}" stroke-width="${sw}"
       stroke-dasharray="${filled.toFixed(2)} ${gap.toFixed(2)}"
       stroke-dashoffset="${(circ*0.25).toFixed(2)}"
-      stroke-linecap="round" opacity="${p.pct>0?0.9:0.35}"/>
+      stroke-linecap="round" opacity="${p.pct > 0 ? 0.9 : 0.3}"/>
     <text x="${size/2}" y="${size/2+4}" text-anchor="middle"
-      font-family="'DM Mono',monospace" font-size="${Math.round(size*0.22)}" font-weight="500"
-      fill="${p.pct>0?p.color:'rgba(245,242,235,0.2)'}">${p.pct}%</text>
+      font-family="'DM Mono',monospace"
+      font-size="${Math.round(size * 0.22)}"
+      font-weight="500"
+      fill="${p.pct > 0 ? p.color : '#ccc'}">${p.pct}%</text>
   </svg>`;
 }
 
-// Card header: small rings
-const dotsEl=document.getElementById('phaseDots');
-phases.forEach(p=>{
-  const div=document.createElement('div');
-  div.className='pdot';
-  div.innerHTML=makeRing(p,20,'0.08')+`<span class="pdot-lbl">${p.name}</span>`;
+// Left side: larger rings — dark track on light bg
+const infoRings = document.getElementById('infoRings');
+phases.forEach(p => {
+  const div = document.createElement('div');
+  div.className = 'info-ring-item';
+  div.innerHTML = makeRing(p, 56, 'rgba(26,26,24,0.1)') +
+    `<div class="info-ring-lbl">${p.name}</div>`;
+  infoRings.appendChild(div);
+});
+
+// Card header: small rings — light track on dark bg
+const dotsEl = document.getElementById('phaseDots');
+phases.forEach(p => {
+  const div = document.createElement('div');
+  div.className = 'pdot';
+  div.innerHTML = makeRing(p, 20, 'rgba(255,255,255,0.1)') +
+    `<span class="pdot-lbl">${p.name}</span>`;
   dotsEl.appendChild(div);
 });
 
-// Left side: larger rings
-const infoRings=document.getElementById('infoRings');
-if(infoRings){
-  phases.forEach(p=>{
-    const div=document.createElement('div');
-    div.className='info-ring-item';
-    div.innerHTML=makeRing(p,52,'0.2')+`<div class="info-ring-lbl">${p.name}</div>`;
-    infoRings.appendChild(div);
-  });
-}
-
-// Background rings (mobile)
-const bgRings=document.getElementById('bgRings');
-if(bgRings){
-  phases.forEach(p=>{
-    const div=document.createElement('div');
-    div.style.cssText='display:flex;flex-direction:column;align-items:center;gap:4px;';
-    div.innerHTML=makeRing(p,50,'0.05')+`<div style="font-family:'DM Mono',monospace;font-size:7px;letter-spacing:0.05em;text-transform:uppercase;color:rgba(245,242,235,0.3);text-align:center;max-width:50px;">${p.name}</div>`;
-    bgRings.appendChild(div);
-  });
-}
-
-// Mini timeline in card
-const tl=[
-  {label:'Planning',start:0,  end:33, color:'#c4875a',row:0},
-  {label:'Trees',   start:6.6,end:11, color:'#7a8c6e',row:1},
-  {label:'ACM',     start:40, end:44, color:'#d4704a',row:0},
-  {label:'Tender',  start:44, end:55, color:'#6b8fa3',row:1},
-  {label:'Gndwks',  start:55, end:66, color:'#7a8c6e',row:0},
-  {label:'Structure',start:61,end:72, color:'#6b8fa3',row:1},
-  {label:'Roof',    start:72, end:77, color:'#8a7a6e',row:0},
-  {label:'1st fix', start:77, end:88, color:'#8a6e7a',row:1},
-  {label:'2nd fix', start:83, end:94, color:'#c4875a',row:0},
+// Mini timeline bars inside card header
+const tl = [
+  { label:'Planning', start:0,   end:33, color:'#c4875a', row:0 },
+  { label:'Trees',    start:6.6, end:11, color:'#7a8c6e', row:1 },
+  { label:'ACM',      start:40,  end:44, color:'#d4704a', row:0 },
+  { label:'Tender',   start:44,  end:55, color:'#6b8fa3', row:1 },
+  { label:'Gndwks',   start:55,  end:66, color:'#7a8c6e', row:0 },
+  { label:'Structure',start:61,  end:72, color:'#6b8fa3', row:1 },
+  { label:'Roof',     start:72,  end:77, color:'#8a7a6e', row:0 },
+  { label:'1st fix',  start:77,  end:88, color:'#8a6e7a', row:1 },
+  { label:'2nd fix',  start:83,  end:94, color:'#c4875a', row:0 },
 ];
-const track=document.getElementById('mtTrack');
-tl.forEach(b=>{
-  const el=document.createElement('div');
-  el.className='mt-bar';
-  el.style.cssText=`left:${b.start}%;width:${b.end-b.start}%;top:${b.row===0?3:15}px;background:${b.color};opacity:0.75;`;
-  if(b.end-b.start>8)el.innerHTML=`<span class="mt-bar-lbl">${b.label}</span>`;
+const track = document.getElementById('mtTrack');
+tl.forEach(b => {
+  const el = document.createElement('div');
+  el.className = 'mt-bar';
+  el.style.cssText = `left:${b.start}%;width:${b.end - b.start}%;top:${b.row === 0 ? 3 : 14}px;background:${b.color};opacity:0.8;`;
+  if (b.end - b.start > 8) el.innerHTML = `<span class="mt-bar-lbl">${b.label}</span>`;
   track.appendChild(el);
 });
-const todayEl=document.createElement('div');
-todayEl.className='mt-today';todayEl.style.left='40%';
-todayEl.innerHTML='<span class="mt-today-lbl">Today</span>';
+const todayEl = document.createElement('div');
+todayEl.className = 'mt-today';
+todayEl.style.left = '40%';
+todayEl.innerHTML = '<span class="mt-today-lbl">Today</span>';
 track.appendChild(todayEl);
 </script>
 </body>
