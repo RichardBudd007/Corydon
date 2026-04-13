@@ -311,19 +311,39 @@ main{padding:20px 24px;max-width:1400px;margin:0 auto;}
 .material-spec{font-size:13px;color:var(--muted);line-height:1.5;}
 
 /* ── GANTT ── */
-.gantt-wrap{overflow-x:auto;padding-bottom:8px;}
-.gantt-container{min-width:860px;}
-.gantt-header-row{display:flex;margin-bottom:4px;margin-left:180px;}
-.gantt-month{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);text-align:center;letter-spacing:0.04em;border-left:1px solid var(--border);padding:4px 0;}
-.gantt-row{display:flex;align-items:center;margin-bottom:7px;}
-.gantt-label{width:180px;flex-shrink:0;font-size:13px;padding-right:12px;line-height:1.3;}
+/* ── GANTT ── */
+.gantt-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:16px;}
+.gantt-zoom-btn{padding:6px 14px;border-radius:4px;border:1px solid var(--border);background:white;font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;transition:all 0.15s;letter-spacing:0.04em;}
+.gantt-zoom-btn:hover{background:var(--cream);}
+.gantt-zoom-btn.active{background:var(--ink);color:white;border-color:var(--ink);}
+.gantt-date-range{display:flex;gap:6px;align-items:center;margin-left:8px;}
+.gantt-date-range input{font-family:'DM Mono',monospace;font-size:11px;border:1px solid var(--border);border-radius:4px;padding:5px 8px;background:var(--paper);outline:none;}
+.gantt-date-range input:focus{border-color:var(--clay);}
+.gantt-date-range span{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);}
+.gantt-scroll-outer{overflow-x:auto;overflow-y:visible;cursor:grab;user-select:none;padding-bottom:8px;}
+.gantt-scroll-outer:active{cursor:grabbing;}
+.gantt-scroll-outer::-webkit-scrollbar{height:6px;}
+.gantt-scroll-outer::-webkit-scrollbar-thumb{background:rgba(196,135,90,0.3);border-radius:3px;}
+.gantt-inner{position:relative;}
+.gantt-header-row{display:flex;margin-left:200px;margin-bottom:4px;border-bottom:1px solid var(--border);padding-bottom:4px;}
+.gantt-header-cell{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);text-align:center;letter-spacing:0.04em;border-left:1px solid var(--border);padding:3px 0;flex-shrink:0;overflow:hidden;}
+.gantt-row{display:flex;align-items:center;margin-bottom:6px;}
+.gantt-label{width:200px;flex-shrink:0;font-size:13px;padding-right:14px;line-height:1.3;}
 .gantt-label small{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);display:block;}
-.gantt-track{flex:1;position:relative;height:28px;background:var(--cream);border-radius:3px;}
-.gantt-bar{position:absolute;height:22px;top:3px;border-radius:3px;cursor:pointer;display:flex;align-items:center;padding:0 8px;font-size:10px;color:white;font-family:'DM Mono',monospace;white-space:nowrap;overflow:hidden;}
+.gantt-track{position:relative;height:30px;background:var(--cream);border-radius:3px;flex-shrink:0;}
+.gantt-bar{position:absolute;height:24px;top:3px;border-radius:3px;cursor:pointer;display:flex;align-items:center;padding:0 8px;font-size:10px;color:white;font-family:'DM Mono',monospace;white-space:nowrap;overflow:hidden;transition:opacity 0.15s;}
 .gantt-bar:hover{opacity:0.82;}
 .gantt-today-line{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--warn);z-index:10;pointer-events:none;}
-.gantt-today-tip{position:absolute;top:-18px;font-family:'DM Mono',monospace;font-size:9px;color:var(--warn);transform:translateX(-50%);}
-.gantt-grid-line{position:absolute;top:0;bottom:0;width:1px;background:rgba(0,0,0,0.05);}
+.gantt-today-tip{position:absolute;top:-16px;font-family:'DM Mono',monospace;font-size:8px;color:var(--warn);transform:translateX(-50%);white-space:nowrap;}
+.gantt-grid-line{position:absolute;top:0;bottom:0;width:1px;background:rgba(0,0,0,0.06);}
+.gantt-grid-line.major{background:rgba(0,0,0,0.1);}
+.gantt-actions{display:flex;gap:4px;margin-left:10px;flex-shrink:0;}
+.gm-swatch{
+  width:28px;height:28px;border-radius:4px;cursor:pointer;
+  border:2px solid transparent;transition:all 0.15s;flex-shrink:0;
+}
+.gm-swatch:hover{transform:scale(1.15);border-color:rgba(26,26,24,0.3);}
+.gm-swatch.selected{border-color:var(--ink);transform:scale(1.15);box-shadow:0 0 0 2px white,0 0 0 3px var(--ink);}
 
 /* ── 3D ── */
 #plotCanvas{width:100%;border-radius:6px;cursor:grab;display:block;touch-action:none;}
@@ -538,22 +558,40 @@ body.readonly .task-check{pointer-events:none;opacity:0.6;}
 </div>
 
 <!-- ════════════ GANTT ════════════ -->
-<<div id="gantt" class="panel">
+<div id="gantt" class="panel">
   <div class="tab-header">
     <span class="tab-icon">📅</span>
     <div>
       <div class="tab-title">Build Programme</div>
-      <div class="tab-sub">Your actual programme — add bars with real dates as you confirm them</div>
+      <div class="tab-sub">Add bars with real dates · zoom · scroll · edit</div>
       <div class="tab-accent" style="background:var(--t-gantt);"></div>
     </div>
   </div>
   <div class="card">
     <div class="card-head">
-      <div class="card-head-left"><span class="card-head-icon">📅</span><h3>Programme bars</h3></div>
+      <div class="card-head-left"><span class="card-head-icon">📅</span><h3>Programme</h3></div>
       <button class="btn btn-primary" onclick="openAddGantt()">＋ Add bar</button>
     </div>
     <div class="card-body">
-      <div class="gantt-wrap"><div class="gantt-container" id="ganttContainer"></div></div>
+      <!-- Controls row -->
+      <div class="gantt-controls">
+        <button class="gantt-zoom-btn" onclick="ganttZoom('week',this)">Week</button>
+        <button class="gantt-zoom-btn active" onclick="ganttZoom('month',this)">Month</button>
+        <button class="gantt-zoom-btn" onclick="ganttZoom('quarter',this)">Quarter</button>
+        <button class="gantt-zoom-btn" onclick="ganttZoom('year',this)">Year</button>
+        <button class="gantt-zoom-btn" onclick="ganttZoom('all',this)">All</button>
+        <div class="gantt-date-range">
+          <span>From</span>
+          <input type="date" id="ganttFrom" onchange="ganttCustomRange()">
+          <span>to</span>
+          <input type="date" id="ganttTo" onchange="ganttCustomRange()">
+        </div>
+        <button class="gantt-zoom-btn" onclick="ganttScrollToday()" style="margin-left:auto">📍 Today</button>
+      </div>
+      <!-- Scrollable chart -->
+      <div class="gantt-scroll-outer" id="ganttScroll">
+        <div class="gantt-inner" id="ganttContainer"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -970,7 +1008,7 @@ body.readonly .task-check{pointer-events:none;opacity:0.6;}
 // ══════════════════════════════════════════════
 // STATE & DEFAULTS
 // ══════════════════════════════════════════════
-const STORE='corydon_v6';
+const STORE='corydon_v8';
 const today=new Date(); today.setHours(0,0,0,0);
 let currentMonth=today.getMonth(), currentYear=today.getFullYear();
 let activeTaskFilter='all';
@@ -1603,53 +1641,181 @@ function renderCalendar(){
 function changeMonth(dir){currentMonth+=dir;if(currentMonth>11){currentMonth=0;currentYear++;}if(currentMonth<0){currentMonth=11;currentYear--;}renderCalendar();}
 
 // ── GANTT ────────────────────────────────────
+// ── GANTT STATE ─────────────────────────────────
+let ganttViewMode='month';
+let ganttViewStart=null;
+let ganttViewEnd=null;
+const GANTT_PX_PER_DAY={week:40,month:8,quarter:3.5,year:1.4,all:null,custom:null};
+
+function ganttZoom(mode, btn){
+  ganttViewMode=mode;
+  ganttViewStart=null;ganttViewEnd=null;
+  document.querySelectorAll('.gantt-zoom-btn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  renderGantt();
+}
+function ganttCustomRange(){
+  const f=document.getElementById('ganttFrom').value;
+  const t=document.getElementById('ganttTo').value;
+  if(f&&t){
+    ganttViewStart=new Date(f);
+    ganttViewEnd=new Date(t);
+    ganttViewMode='custom';
+    document.querySelectorAll('.gantt-zoom-btn').forEach(b=>b.classList.remove('active'));
+    renderGantt();
+  }
+}
+function ganttScrollToday(){
+  const scroll=document.getElementById('ganttScroll');
+  if(!scroll)return;
+  const inner=document.getElementById('ganttContainer');
+  const todayLine=inner.querySelector('.gantt-today-line');
+  if(todayLine){
+    const lineLeft=parseFloat(todayLine.style.left);
+    const trackWidth=inner.querySelector('.gantt-track')?.offsetWidth||0;
+    const scrollTo=(lineLeft/100*trackWidth)-scroll.offsetWidth/2+200;
+    scroll.scrollTo({left:Math.max(0,scrollTo),behavior:'smooth'});
+  }
+}
+
 function renderGantt(){
   const container=document.getElementById('ganttContainer');
+  if(!container)return;
+
   if(!state.gantt||!state.gantt.length){
     container.innerHTML=`<div style="text-align:center;padding:48px;color:var(--muted);font-size:16px">
       <div style="font-size:32px;margin-bottom:12px">📅</div>
       <div style="font-weight:500;margin-bottom:8px">No programme bars yet</div>
-      <div style="font-size:14px">Click <strong>+ Add bar</strong> to build your Gantt chart</div>
+      <div style="font-size:14px">Click <strong>＋ Add bar</strong> to start building your programme</div>
     </div>`;
     return;
   }
-  // Work out date range from actual data
+
+  // Work out full data range
   const allStarts=state.gantt.map(g=>new Date(g.startDate));
   const allEnds=state.gantt.map(g=>new Date(g.endDate));
-  let sd=new Date(Math.min(...allStarts));
-  let ed=new Date(Math.max(...allEnds));
-  // Snap to month boundaries
-  sd=new Date(sd.getFullYear(),sd.getMonth(),1);
-  ed=new Date(ed.getFullYear(),ed.getMonth()+1,0);
-  const totalMs=ed-sd;
-  const months=[];let d=new Date(sd);
-  while(d<=ed){months.push({y:d.getFullYear(),m:d.getMonth(),label:d.toLocaleString('en-GB',{month:'short',year:'2-digit'})});d=new Date(d.getFullYear(),d.getMonth()+1,1);}
-  let hdr='<div class="gantt-header-row">';
-  months.forEach(mo=>{
-    const ms=new Date(mo.y,mo.m,1),me=new Date(mo.y,mo.m+1,0);
-    const span=Math.min(me,ed)-Math.max(ms,sd);
-    hdr+=`<div class="gantt-month" style="width:${span/totalMs*100}%">${mo.label}</div>`;
-  });
-  hdr+='</div>';
-  const todayPct=Math.min(100,Math.max(0,(today-sd)/totalMs*100));
-  const rows=state.gantt.map(item=>{
-    const s=new Date(item.startDate),e=new Date(item.endDate);
-    const left=Math.max(0,(s-sd)/totalMs*100);
-    const width=Math.min(100-left,(e-s)/totalMs*100);
-    const glines=months.map(mo=>`<div class="gantt-grid-line" style="left:${(new Date(mo.y,mo.m,1)-sd)/totalMs*100}%"></div>`).join('');
+  const dataStart=new Date(Math.min(...allStarts));
+  const dataEnd=new Date(Math.max(...allEnds));
+
+  // Work out view window
+  let vStart,vEnd;
+  if(ganttViewMode==='custom'&&ganttViewStart&&ganttViewEnd){
+    vStart=new Date(ganttViewStart);vEnd=new Date(ganttViewEnd);
+  } else if(ganttViewMode==='week'){
+    // centre on today ±3.5 days
+    vStart=new Date(today); vStart.setDate(today.getDate()-7);
+    vEnd=new Date(today); vEnd.setDate(today.getDate()+21);
+  } else if(ganttViewMode==='month'){
+    vStart=new Date(today.getFullYear(),today.getMonth()-1,1);
+    vEnd=new Date(today.getFullYear(),today.getMonth()+3,0);
+  } else if(ganttViewMode==='quarter'){
+    vStart=new Date(today.getFullYear(),today.getMonth()-2,1);
+    vEnd=new Date(today.getFullYear(),today.getMonth()+7,0);
+  } else if(ganttViewMode==='year'){
+    vStart=new Date(today.getFullYear()-0,0,1);
+    vEnd=new Date(today.getFullYear()+1,11,31);
+  } else {
+    // all — fit entire data range
+    vStart=new Date(dataStart.getFullYear(),dataStart.getMonth(),1);
+    vEnd=new Date(dataEnd.getFullYear(),dataEnd.getMonth()+1,0);
+  }
+
+  // Snap to day boundaries
+  vStart.setHours(0,0,0,0); vEnd.setHours(23,59,59,999);
+
+  // Pixel width per day
+  let pxDay;
+  const modeMap={week:38,month:9,quarter:4,year:1.8,all:null,custom:5};
+  if(ganttViewMode==='all'){
+    const days=(vEnd-vStart)/864e5;
+    const scrollW=document.getElementById('ganttScroll')?.offsetWidth||800;
+    pxDay=Math.max(1,(scrollW-200)/days);
+  } else {
+    pxDay=modeMap[ganttViewMode]||5;
+  }
+
+  const totalDays=(vEnd-vStart)/864e5;
+  const trackW=Math.round(totalDays*pxDay);
+
+  // Build header — week labels for week view, month for others
+  let headerHTML='<div class="gantt-header-row" style="width:'+(trackW+200)+'px">';
+  if(ganttViewMode==='week'){
+    // Day labels
+    let d=new Date(vStart);
+    while(d<=vEnd){
+      const dayW=pxDay;
+      const isToday=d.toDateString()===today.toDateString();
+      headerHTML+=`<div class="gantt-header-cell" style="width:${dayW}px;${isToday?'color:var(--warn);font-weight:600':''}">${d.getDate()}<br><span style="font-size:8px">${d.toLocaleString('en-GB',{weekday:'short'})}</span></div>`;
+      d=new Date(d); d.setDate(d.getDate()+1);
+    }
+  } else {
+    // Month labels
+    let d=new Date(vStart.getFullYear(),vStart.getMonth(),1);
+    while(d<=vEnd){
+      const mStart=new Date(Math.max(d,vStart));
+      const mEnd=new Date(Math.min(new Date(d.getFullYear(),d.getMonth()+1,0),vEnd));
+      const mDays=(mEnd-mStart)/864e5+1;
+      const mW=Math.round(mDays*pxDay);
+      const isThisMonth=d.getMonth()===today.getMonth()&&d.getFullYear()===today.getFullYear();
+      headerHTML+=`<div class="gantt-header-cell" style="width:${mW}px;${isThisMonth?'color:var(--clay);font-weight:600':''}">${d.toLocaleString('en-GB',{month:'short',year:'2-digit'})}</div>`;
+      d=new Date(d.getFullYear(),d.getMonth()+1,1);
+    }
+  }
+  headerHTML+='</div>';
+
+  // Today position
+  const todayLeft=200+Math.max(0,Math.min(trackW,(today-vStart)/864e5*pxDay));
+
+  // Build rows
+  const rowsHTML=state.gantt.map(item=>{
+    const s=new Date(item.startDate);
+    const e=new Date(item.endDate);
+    const barLeft=Math.round((s-vStart)/864e5*pxDay);
+    const barW=Math.round((e-s)/864e5*pxDay);
+    const clampedLeft=Math.max(0,barLeft);
+    const clampedW=Math.max(4,barW-(clampedLeft-barLeft));
+    const visible=barLeft+barW>0&&barLeft<trackW;
+
+    // Grid lines — months
+    let gridLines='';
+    let gd=new Date(vStart.getFullYear(),vStart.getMonth(),1);
+    while(gd<=vEnd){
+      const gl=Math.round((gd-vStart)/864e5*pxDay);
+      gridLines+=`<div class="gantt-grid-line${gd.getDate()===1?'':''}" style="left:${gl}px"></div>`;
+      if(ganttViewMode==='week') gd=new Date(gd); gd.setDate(gd.getDate()+(ganttViewMode==='week'?1:0));
+      if(ganttViewMode!=='week') gd=new Date(gd.getFullYear(),gd.getMonth()+1,1);
+    }
+
     return`<div class="gantt-row">
-      <div class="gantt-label">${item.label}<small>${item.sub||''}</small></div>
-      <div class="gantt-track">${glines}
-        <div class="gantt-today-line" style="left:${todayPct}%"><span class="gantt-today-tip">Today</span></div>
-        <div class="gantt-bar" style="left:${left}%;width:${width}%;background:${item.color||'#c4875a'}" title="${item.label}">${width>8?item.label:''}</div>
+      <div class="gantt-label" style="width:200px">${item.label}<small>${item.sub||''}</small></div>
+      <div class="gantt-track" style="width:${trackW}px;flex-shrink:0;">
+        ${gridLines}
+        <div class="gantt-today-line" style="left:${todayLeft-200}px"><span class="gantt-today-tip">Today</span></div>
+        ${visible?`<div class="gantt-bar" style="left:${clampedLeft}px;width:${clampedW}px;background:${item.color||'#c4875a'}" title="${item.label}: ${item.startDate} – ${item.endDate}">${clampedW>60?item.label:''}</div>`:''}
       </div>
-      <div style="display:flex;gap:4px;margin-left:8px;flex-shrink:0;">
+      <div class="gantt-actions">
         <button class="btn btn-edit btn-sm" onclick="openEditGantt(${item.id})">Edit</button>
         <button class="btn btn-delete btn-sm" onclick="deleteGantt(${item.id})">Del</button>
       </div>
     </div>`;
   }).join('');
-  container.innerHTML=hdr+rows;
+
+  container.style.minWidth=(trackW+200+120)+'px';
+  container.innerHTML=headerHTML+rowsHTML;
+
+  // Update date range inputs to reflect current view
+  const fEl=document.getElementById('ganttFrom');
+  const tEl=document.getElementById('ganttTo');
+  if(fEl&&!fEl.value) fEl.value=vStart.toISOString().split('T')[0];
+  if(tEl&&!tEl.value) tEl.value=vEnd.toISOString().split('T')[0];
+
+  // Scroll to today on first render
+  setTimeout(()=>{
+    const scroll=document.getElementById('ganttScroll');
+    if(scroll&&todayLeft>scroll.offsetWidth){
+      scroll.scrollLeft=todayLeft-scroll.offsetWidth/2;
+    }
+  },50);
 }
 
 function openAddGantt(){
@@ -1659,8 +1825,8 @@ function openAddGantt(){
   document.getElementById('gmSub').value='';
   document.getElementById('gmStart').value='';
   document.getElementById('gmEnd').value='';
-  document.getElementById('gmColor').value='#c4875a';
   openModal('ganttModal');
+  setTimeout(()=>{initGanttSwatches();ganttSetColor('#c4875a');},50);
 }
 function openEditGantt(id){
   const g=state.gantt.find(x=>x.id===id);if(!g)return;
@@ -1670,8 +1836,29 @@ function openEditGantt(id){
   document.getElementById('gmSub').value=g.sub||'';
   document.getElementById('gmStart').value=g.startDate;
   document.getElementById('gmEnd').value=g.endDate;
-  document.getElementById('gmColor').value=g.color||'#c4875a';
   openModal('ganttModal');
+  setTimeout(()=>{initGanttSwatches();ganttSetColor(g.color||'#c4875a');},50);
+}
+function ganttSetColor(hex){
+  document.getElementById('gmColor').value=hex;
+  document.getElementById('gmColorPreview').style.background=hex;
+  document.getElementById('gmColorPicker').value=hex;
+  document.getElementById('gmColorHex').value=hex;
+  document.querySelectorAll('.gm-swatch').forEach(s=>{
+    s.classList.toggle('selected', s.dataset.color===hex);
+  });
+}
+function ganttColorFromPicker(hex){
+  ganttSetColor(hex);
+}
+function ganttColorFromHex(val){
+  if(/^#[0-9a-fA-F]{6}$/.test(val)) ganttSetColor(val);
+}
+function initGanttSwatches(){
+  document.querySelectorAll('.gm-swatch').forEach(s=>{
+    s.addEventListener('click',()=>ganttSetColor(s.dataset.color));
+    s.setAttribute('title',s.getAttribute('title'));
+  });
 }
 function saveGantt(){
   const label=document.getElementById('gmLabel').value.trim();
@@ -1828,18 +2015,42 @@ setTimeout(()=>renderBudget(),100);
         <div class="form-row"><label>Start date *</label><input type="date" id="gmStart"></div>
         <div class="form-row"><label>End date *</label><input type="date" id="gmEnd"></div>
       </div>
+
       <div class="form-row">
-        <label>Bar colour</label>
-        <select id="gmColor">
-          <option value="#c4875a">Clay — planning / design</option>
-          <option value="#d4704a">Amber — urgent / asbestos</option>
-          <option value="#6b8fa3">Blue — contractor works</option>
-          <option value="#7a8c6e">Sage — site / groundworks</option>
-          <option value="#8a7a6e">Stone — structure / roof</option>
-          <option value="#8a6e7a">Plum — M&E / services</option>
-          <option value="#5a8c6e">Green — milestone / completion</option>
-        </select>
+        <label>Bar colour — pick from palette or choose custom</label>
+
+        <!-- Colour swatches -->
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;" id="gmSwatches">
+          <div class="gm-swatch" data-color="#c4875a" title="Clay — planning" style="background:#c4875a"></div>
+          <div class="gm-swatch" data-color="#d4704a" title="Amber — urgent" style="background:#d4704a"></div>
+          <div class="gm-swatch" data-color="#6b8fa3" title="Blue — contractor" style="background:#6b8fa3"></div>
+          <div class="gm-swatch" data-color="#7a8c6e" title="Sage — groundworks" style="background:#7a8c6e"></div>
+          <div class="gm-swatch" data-color="#8a7a6e" title="Stone — structure" style="background:#8a7a6e"></div>
+          <div class="gm-swatch" data-color="#8a6e7a" title="Plum — M&E" style="background:#8a6e7a"></div>
+          <div class="gm-swatch" data-color="#5a8c6e" title="Green — milestone" style="background:#5a8c6e"></div>
+          <div class="gm-swatch" data-color="#6e7a8a" title="Steel — utilities" style="background:#6e7a8a"></div>
+          <div class="gm-swatch" data-color="#a07848" title="Tan — materials" style="background:#a07848"></div>
+          <div class="gm-swatch" data-color="#8a4a4a" title="Red — risk" style="background:#8a4a4a"></div>
+          <div class="gm-swatch" data-color="#4a6e8a" title="Navy — design" style="background:#4a6e8a"></div>
+          <div class="gm-swatch" data-color="#6a8a5a" title="Moss — ecology" style="background:#6a8a5a"></div>
+        </div>
+
+        <!-- Selected colour preview + custom picker -->
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div id="gmColorPreview" style="width:36px;height:36px;border-radius:5px;border:2px solid rgba(26,26,24,0.2);background:#c4875a;flex-shrink:0;"></div>
+          <div style="flex:1;">
+            <div style="font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:4px;">Custom colour</div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <input type="color" id="gmColorPicker" value="#c4875a" oninput="ganttColorFromPicker(this.value)" style="width:44px;height:32px;border:1px solid var(--border);border-radius:4px;cursor:pointer;padding:2px;">
+              <input type="text" id="gmColorHex" value="#c4875a" placeholder="#rrggbb" maxlength="7" oninput="ganttColorFromHex(this.value)" style="width:90px;font-family:'DM Mono',monospace;font-size:13px;border:1px solid var(--border);border-radius:4px;padding:6px 8px;background:var(--paper);">
+            </div>
+          </div>
+        </div>
+
+        <!-- Hidden actual value field -->
+        <input type="hidden" id="gmColor" value="#c4875a">
       </div>
+
       <div class="form-actions">
         <button class="btn btn-save" onclick="saveGantt()">Save bar</button>
         <button class="btn btn-cancel" onclick="closeModal('ganttModal')">Cancel</button>
