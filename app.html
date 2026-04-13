@@ -538,49 +538,22 @@ body.readonly .task-check{pointer-events:none;opacity:0.6;}
 </div>
 
 <!-- ════════════ GANTT ════════════ -->
-<div id="gantt" class="panel">
+<<div id="gantt" class="panel">
   <div class="tab-header">
     <span class="tab-icon">📅</span>
     <div>
       <div class="tab-title">Build Programme</div>
-      <div class="tab-sub">Gantt chart · Apr 2025 to Sep 2027</div>
+      <div class="tab-sub">Your actual programme — add bars with real dates as you confirm them</div>
       <div class="tab-accent" style="background:var(--t-gantt);"></div>
     </div>
   </div>
   <div class="card">
+    <div class="card-head">
+      <div class="card-head-left"><span class="card-head-icon">📅</span><h3>Programme bars</h3></div>
+      <button class="btn btn-primary" onclick="openAddGantt()">＋ Add bar</button>
+    </div>
     <div class="card-body">
       <div class="gantt-wrap"><div class="gantt-container" id="ganttContainer"></div></div>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════ SITE 3D ════════════ -->
-<div id="plot3d" class="panel">
-  <div class="tab-header">
-    <span class="tab-icon">🏗</span>
-    <div>
-      <div class="tab-title">Site Plan — 3D View</div>
-      <div class="tab-sub">Drag to rotate · Scroll to zoom · Roman Road, Winterbourne Steepleton</div>
-      <div class="tab-accent" style="background:var(--t-plot);"></div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <div class="plot-controls">
-        <button class="plot-btn active" id="btnPersp" onclick="setView('perspective',this)">Perspective</button>
-        <button class="plot-btn" onclick="setView('top',this)">Plan View</button>
-        <button class="plot-btn" onclick="setView('south',this)">South Elevation</button>
-        <button class="plot-btn" onclick="resetView()">Reset</button>
-      </div>
-      <canvas id="plotCanvas" height="500"></canvas>
-      <div class="plot-legend">
-        <div class="plot-legend-item"><div class="plot-legend-dot" style="background:#7a8c6e"></div>Trees retained</div>
-        <div class="plot-legend-item"><div class="plot-legend-dot" style="background:#d4704a"></div>Trees removed (T1–T3, T10)</div>
-        <div class="plot-legend-item"><div class="plot-legend-dot" style="background:#c4875a"></div>Proposed Dwelling (394m²)</div>
-        <div class="plot-legend-item"><div class="plot-legend-dot" style="background:rgba(107,143,163,0.4);border:1px solid #6b8fa3"></div>Existing Footprint</div>
-        <div class="plot-legend-item"><div class="plot-legend-dot" style="background:#6b8fa3"></div>12kW Samsung ASHP</div>
-        <div class="plot-legend-item"><div class="plot-legend-dot" style="background:#8a8880"></div>Outbuildings</div>
-      </div>
     </div>
   </div>
 </div>
@@ -997,13 +970,13 @@ body.readonly .task-check{pointer-events:none;opacity:0.6;}
 // ══════════════════════════════════════════════
 // STATE & DEFAULTS
 // ══════════════════════════════════════════════
-const STORE='corydon_v5';
+const STORE='corydon_v6';
 const today=new Date(); today.setHours(0,0,0,0);
 let currentMonth=today.getMonth(), currentYear=today.getFullYear();
 let activeTaskFilter='all';
 let plotRotX=-0.4, plotRotY=0.5, plotZoom=1;
 let plotDragging=false, plotLastX, plotLastY, plotHandlersInit=false;
-let editPhaseId=null, editEventId=null, editTaskId=null;
+let editPhaseId=null, editEventId=null, editTaskId=null, editGanttId=null;
 let editScheduleId=null, editContactId=null, editBudgetId=null, editVatId=null;
 
 const DEFAULTS={
@@ -1102,6 +1075,10 @@ const DEFAULTS={
     {id:7,date:'Apr–May 2026',title:'Asbestos Removal',status:'active',desc:'3 ACM items to be removed by licensed contractor before demolition. Obtain completion certificate.',cat:'builder'},
     {id:8,date:'2026',title:'Planning Decision Awaited',status:'',desc:'Awaiting Dorset Council decision on P-FUL-2025-05327.',cat:'planning'},
   ],
+  gantt:[
+    {id:1,label:'Planning & Surveys',sub:'Application, estimates, surveys',startDate:'2025-04-01',endDate:'2026-02-28',color:'#c4875a'},
+    {id:2,label:'Asbestos Removal',sub:'CAS 3044 — 3 ACM items to remove',startDate:'2026-04-01',endDate:'2026-04-30',color:'#d4704a'},
+  ],
   contacts:[
     {id:1,initials:'RB',name:'Richard Budd',role:'Client / Self Builder',firm:'',phone:'07767895205',mobile:'07767895205',email:'richard@richardbudd.co.uk',web:''},
     {id:2,initials:'LB',name:'Laura Budd',role:'Client / Owner',firm:'',phone:'',mobile:'',email:'',web:''},
@@ -1137,21 +1114,7 @@ const materials=[
   {element:'Air Source Heat Pump',spec:'12kW Samsung GEN7 R290 — east side of dwelling',color:'#6b8fa3'},
 ];
 
-const ganttItems=[
-  {label:'Planning & Surveys',sub:'Application, estimates, surveys',start:[2025,3,1],end:[2026,1,28],color:'#c4875a'},
-  {label:'Asbestos Removal',sub:'CAS 3044 — 3 ACM items',start:[2026,3,1],end:[2026,4,30],color:'#d4704a'},
-  {label:'Tender & Appoint',sub:'Contractor procurement',start:[2026,4,1],end:[2026,7,31],color:'#6b8fa3'},
-  {label:'Pre-Construction',sub:'Tree works, services, setup',start:[2026,7,1],end:[2026,8,31],color:'#8a7a6e'},
-  {label:'Demolition',sub:'Existing dwelling',start:[2026,8,15],end:[2026,9,30],color:'#7a6e8a'},
-  {label:'Groundworks',sub:'Excavation, drainage',start:[2026,9,1],end:[2026,10,31],color:'#7a8c6e'},
-  {label:'Foundations',sub:'Concrete & ground slab',start:[2026,9,15],end:[2026,11,15],color:'#6e8a7a'},
-  {label:'Structure & Walls',sub:'Plinth to wall plate',start:[2026,11,1],end:[2027,1,31],color:'#6b8fa3'},
-  {label:'Roof',sub:'Greencoat PLX standing seam',start:[2027,1,1],end:[2027,2,28],color:'#8a7a6e'},
-  {label:'First Fix M&E',sub:'MVHR, ASHP, plumbing, electrics',start:[2027,2,1],end:[2027,5,31],color:'#8a6e7a'},
-  {label:'Second Fix & Fit-out',sub:'Windows, kitchens, bathrooms',start:[2027,4,1],end:[2027,7,31],color:'#c4875a'},
-  {label:'External Works',sub:'Decking, balconies, landscape',start:[2027,4,15],end:[2027,8,31],color:'#7a8c6e'},
-  {label:'Practical Completion',sub:'Snagging & handover',start:[2027,7,1],end:[2027,8,31],color:'#5a8c6e'},
-];
+
 
 // ── LOAD STATE ────────────────────────────────
 let state;
@@ -1642,8 +1605,24 @@ function changeMonth(dir){currentMonth+=dir;if(currentMonth>11){currentMonth=0;c
 // ── GANTT ────────────────────────────────────
 function renderGantt(){
   const container=document.getElementById('ganttContainer');
-  const sd=new Date(2025,3,1),ed=new Date(2027,8,30),totalMs=ed-sd;
-  const months=[];let d=new Date(2025,3,1);
+  if(!state.gantt||!state.gantt.length){
+    container.innerHTML=`<div style="text-align:center;padding:48px;color:var(--muted);font-size:16px">
+      <div style="font-size:32px;margin-bottom:12px">📅</div>
+      <div style="font-weight:500;margin-bottom:8px">No programme bars yet</div>
+      <div style="font-size:14px">Click <strong>+ Add bar</strong> to build your Gantt chart</div>
+    </div>`;
+    return;
+  }
+  // Work out date range from actual data
+  const allStarts=state.gantt.map(g=>new Date(g.startDate));
+  const allEnds=state.gantt.map(g=>new Date(g.endDate));
+  let sd=new Date(Math.min(...allStarts));
+  let ed=new Date(Math.max(...allEnds));
+  // Snap to month boundaries
+  sd=new Date(sd.getFullYear(),sd.getMonth(),1);
+  ed=new Date(ed.getFullYear(),ed.getMonth()+1,0);
+  const totalMs=ed-sd;
+  const months=[];let d=new Date(sd);
   while(d<=ed){months.push({y:d.getFullYear(),m:d.getMonth(),label:d.toLocaleString('en-GB',{month:'short',year:'2-digit'})});d=new Date(d.getFullYear(),d.getMonth()+1,1);}
   let hdr='<div class="gantt-header-row">';
   months.forEach(mo=>{
@@ -1653,21 +1632,58 @@ function renderGantt(){
   });
   hdr+='</div>';
   const todayPct=Math.min(100,Math.max(0,(today-sd)/totalMs*100));
-  const rows=ganttItems.map(item=>{
-    const s=new Date(...item.start),e=new Date(...item.end);
+  const rows=state.gantt.map(item=>{
+    const s=new Date(item.startDate),e=new Date(item.endDate);
     const left=Math.max(0,(s-sd)/totalMs*100);
     const width=Math.min(100-left,(e-s)/totalMs*100);
     const glines=months.map(mo=>`<div class="gantt-grid-line" style="left:${(new Date(mo.y,mo.m,1)-sd)/totalMs*100}%"></div>`).join('');
     return`<div class="gantt-row">
-      <div class="gantt-label">${item.label}<small>${item.sub}</small></div>
+      <div class="gantt-label">${item.label}<small>${item.sub||''}</small></div>
       <div class="gantt-track">${glines}
         <div class="gantt-today-line" style="left:${todayPct}%"><span class="gantt-today-tip">Today</span></div>
-        <div class="gantt-bar" style="left:${left}%;width:${width}%;background:${item.color}" title="${item.label}">${width>8?item.label:''}</div>
+        <div class="gantt-bar" style="left:${left}%;width:${width}%;background:${item.color||'#c4875a'}" title="${item.label}">${width>8?item.label:''}</div>
+      </div>
+      <div style="display:flex;gap:4px;margin-left:8px;flex-shrink:0;">
+        <button class="btn btn-edit btn-sm" onclick="openEditGantt(${item.id})">Edit</button>
+        <button class="btn btn-delete btn-sm" onclick="deleteGantt(${item.id})">Del</button>
       </div>
     </div>`;
   }).join('');
   container.innerHTML=hdr+rows;
 }
+
+function openAddGantt(){
+  editGanttId=null;
+  document.getElementById('ganttModalTitle').textContent='Add programme bar';
+  document.getElementById('gmLabel').value='';
+  document.getElementById('gmSub').value='';
+  document.getElementById('gmStart').value='';
+  document.getElementById('gmEnd').value='';
+  document.getElementById('gmColor').value='#c4875a';
+  openModal('ganttModal');
+}
+function openEditGantt(id){
+  const g=state.gantt.find(x=>x.id===id);if(!g)return;
+  editGanttId=id;
+  document.getElementById('ganttModalTitle').textContent='Edit programme bar';
+  document.getElementById('gmLabel').value=g.label;
+  document.getElementById('gmSub').value=g.sub||'';
+  document.getElementById('gmStart').value=g.startDate;
+  document.getElementById('gmEnd').value=g.endDate;
+  document.getElementById('gmColor').value=g.color||'#c4875a';
+  openModal('ganttModal');
+}
+function saveGantt(){
+  const label=document.getElementById('gmLabel').value.trim();
+  const start=document.getElementById('gmStart').value;
+  const end=document.getElementById('gmEnd').value;
+  if(!label||!start||!end)return;
+  const item={label,sub:document.getElementById('gmSub').value,startDate:start,endDate:end,color:document.getElementById('gmColor').value||'#c4875a'};
+  if(editGanttId)Object.assign(state.gantt.find(x=>x.id===editGanttId),item);
+  else state.gantt.push({id:newId(state.gantt),...item});
+  saveState();closeModal('ganttModal');renderGantt();
+}
+function deleteGantt(id){confirmDelete('Delete this bar?',()=>{state.gantt=state.gantt.filter(x=>x.id!==id);saveState();renderGantt();});}
 
 // ── 3D PLOT ──────────────────────────────────
 function project3D(x,y,z){
@@ -1799,5 +1815,37 @@ renderMaterials();
 renderVat();
 setTimeout(()=>renderBudget(),100);
 </script>
+
+<div class="modal-overlay" id="ganttModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('ganttModal')">×</button>
+    <h3 id="ganttModalTitle">Add programme bar</h3>
+    <div class="modal-meta">GANTT CHART · BUILD PROGRAMME</div>
+    <div class="form-grid">
+      <div class="form-row"><label>Phase / activity name *</label><input id="gmLabel" placeholder="e.g. Demolition"></div>
+      <div class="form-row"><label>Description</label><input id="gmSub" placeholder="e.g. Existing dwelling removed"></div>
+      <div class="form-row-two">
+        <div class="form-row"><label>Start date *</label><input type="date" id="gmStart"></div>
+        <div class="form-row"><label>End date *</label><input type="date" id="gmEnd"></div>
+      </div>
+      <div class="form-row">
+        <label>Bar colour</label>
+        <select id="gmColor">
+          <option value="#c4875a">Clay — planning / design</option>
+          <option value="#d4704a">Amber — urgent / asbestos</option>
+          <option value="#6b8fa3">Blue — contractor works</option>
+          <option value="#7a8c6e">Sage — site / groundworks</option>
+          <option value="#8a7a6e">Stone — structure / roof</option>
+          <option value="#8a6e7a">Plum — M&E / services</option>
+          <option value="#5a8c6e">Green — milestone / completion</option>
+        </select>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-save" onclick="saveGantt()">Save bar</button>
+        <button class="btn btn-cancel" onclick="closeModal('ganttModal')">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
