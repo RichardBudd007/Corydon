@@ -4,61 +4,51 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Corydon — Self Build</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#1a1a18;--paper:#f5f2eb;--clay:#c4875a;--sage:#7a8c6e;
-  --sky:#6b8fa3;--cream:#ede9de;--muted:#8a8880;--warn:#d4704a;
-  --done:#5a8c6e;--border:rgba(26,26,24,0.12);
-  /* Tab accent colours */
-  --t-dash:#c4875a;--t-gantt:#6b8fa3;--t-plot:#7a8c6e;
-  --t-budget:#8a7a6e;--t-vat:#5a8c6e;--t-mat:#6e7a8a;
-  --t-cal:#8a6e7a;--t-tasks:#d4704a;--t-events:#6b8fa3;
-  --t-prog:#7a8c6e;--t-team:#c4875a;
-  /* Dyslexia-friendly base sizes */
-  --fs-body:16px;--fs-label:13px;--fs-mono:13px;--fs-head:22px;
+  --ink:#1a1a18;--paper:#f4f1ea;--clay:#b87348;--sage:#6a7d60;
+  --sky:#5a7a8c;--cream:#eae6db;--muted:#8a8880;--warn:#c45a30;
+  --done:#4a7a5e;--border:rgba(26,26,24,0.11);
+  --t-dash:#b87348;--t-gantt:#5a7a8c;--t-plot:#6a7d60;
+  --t-budget:#8a7a6e;--t-vat:#4a7a5e;--t-mat:#6e7a8a;
+  --t-cal:#7a6e8a;--t-tasks:#c45a30;--t-events:#5a7a8c;
+  --t-prog:#6a7d60;--t-team:#b87348;--t-docs:#8a6e7a;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);font-size:var(--fs-body);line-height:1.6;}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--paper);color:var(--ink);font-size:15px;line-height:1.6;}
 
-/* ── HEADER ── */
+/* HEADER */
 header{
   background:var(--ink);color:var(--paper);
-  padding:16px 24px;display:flex;align-items:center;
+  padding:14px 24px;display:flex;align-items:center;
   justify-content:space-between;position:sticky;top:0;z-index:100;
-  border-bottom:4px solid var(--clay);
+  border-bottom:3px solid var(--clay);
 }
-.logo h1{font-family:'Playfair Display',serif;font-size:22px;}
-.logo span{font-family:'DM Mono',monospace;font-size:11px;color:var(--clay);letter-spacing:0.1em;text-transform:uppercase;margin-left:10px;}
+.logo h1{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;letter-spacing:0.02em;}
+.logo span{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--clay);letter-spacing:0.12em;text-transform:uppercase;margin-left:12px;}
 .header-right{display:flex;align-items:center;gap:14px;}
-.header-meta{font-family:'DM Mono',monospace;font-size:10px;color:rgba(245,242,235,0.4);text-align:right;line-height:1.8;}
-.saved-badge{font-family:'DM Mono',monospace;font-size:10px;color:var(--sage);padding:4px 10px;border:1px solid var(--sage);border-radius:3px;opacity:0;transition:opacity 0.4s;}
+.header-meta{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(244,241,234,0.35);text-align:right;line-height:1.8;}
+.saved-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--sage);padding:3px 10px;border:1px solid var(--sage);border-radius:2px;opacity:0;transition:opacity 0.4s;letter-spacing:0.06em;}
 .saved-badge.show{opacity:1;}
 
-/* ── NAV — tab bar with icons and colour accents ── */
+/* NAV */
 nav{
-  background:var(--ink);
-  border-bottom:1px solid rgba(255,255,255,0.08);
-  display:flex;padding:0 16px;overflow-x:auto;gap:2px;
+  background:var(--ink);border-bottom:1px solid rgba(255,255,255,0.07);
+  display:flex;padding:0 16px;overflow-x:auto;gap:1px;
 }
 nav::-webkit-scrollbar{height:3px;}
-nav::-webkit-scrollbar-thumb{background:rgba(196,135,90,0.3);}
-
+nav::-webkit-scrollbar-thumb{background:rgba(184,115,72,0.3);}
 .nav-btn{
   display:flex;flex-direction:column;align-items:center;gap:3px;
-  padding:10px 14px 8px;
-  background:none;border:none;cursor:pointer;
-  color:rgba(245,242,235,0.4);
-  border-bottom:3px solid transparent;
-  transition:all 0.2s;white-space:nowrap;flex-shrink:0;
-  position:relative;
+  padding:10px 14px 8px;background:none;border:none;cursor:pointer;
+  color:rgba(244,241,234,0.35);border-bottom:3px solid transparent;
+  transition:all 0.18s;white-space:nowrap;flex-shrink:0;
 }
-.nav-btn .nav-icon{font-size:18px;line-height:1;}
-.nav-btn .nav-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.06em;text-transform:uppercase;}
-.nav-btn:hover{color:rgba(245,242,235,0.8);}
+.nav-btn .nav-icon{font-size:17px;line-height:1;}
+.nav-btn .nav-lbl{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:0.07em;text-transform:uppercase;}
+.nav-btn:hover{color:rgba(244,241,234,0.7);}
 .nav-btn.active{color:var(--paper);}
-
-/* each tab gets its own accent colour */
 .nav-btn[data-tab="dashboard"].active{border-bottom-color:var(--t-dash);}
 .nav-btn[data-tab="gantt"].active{border-bottom-color:var(--t-gantt);}
 .nav-btn[data-tab="plot3d"].active{border-bottom-color:var(--t-plot);}
@@ -70,359 +60,318 @@ nav::-webkit-scrollbar-thumb{background:rgba(196,135,90,0.3);}
 .nav-btn[data-tab="events"].active{border-bottom-color:var(--t-events);}
 .nav-btn[data-tab="schedule"].active{border-bottom-color:var(--t-prog);}
 .nav-btn[data-tab="contacts"].active{border-bottom-color:var(--t-team);}
+.nav-btn[data-tab="drawings"].active{border-bottom-color:var(--t-docs);}
 
-/* ── PAGE TAB HEADER — coloured strip at top of each panel ── */
-.tab-header{
-  padding:20px 24px 16px;
-  margin-bottom:4px;
-  display:flex;align-items:center;gap:16px;
-  border-bottom:1px solid var(--border);
-}
-.tab-icon{font-size:32px;line-height:1;flex-shrink:0;}
-.tab-title{font-family:'Playfair Display',serif;font-size:26px;line-height:1;}
-.tab-sub{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:0.04em;}
-.tab-accent{height:4px;border-radius:2px;width:48px;margin-top:6px;}
+/* TAB HEADER */
+.tab-header{padding:20px 24px 16px;margin-bottom:4px;display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--border);}
+.tab-icon{font-size:30px;line-height:1;flex-shrink:0;}
+.tab-title{font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1;font-weight:300;}
+.tab-sub{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:0.03em;}
+.tab-accent{height:3px;border-radius:2px;width:40px;margin-top:6px;}
 
-main{padding:20px 24px;max-width:1400px;margin:0 auto;}
+main{padding:20px 24px;max-width:1440px;margin:0 auto;}
 .panel{display:none;}.panel.active{display:block;}
 
-/* ── CARDS ── */
-.card{background:white;border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:22px;}
-.card-head{
-  padding:14px 20px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  background:var(--cream);
-}
+/* CARDS */
+.card{background:white;border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:20px;}
+.card-head{padding:13px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--cream);}
 .card-head-left{display:flex;align-items:center;gap:10px;}
-.card-head-icon{font-size:20px;}
-.card-head h3{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;}
+.card-head-icon{font-size:18px;}
+.card-head h3{font-family:'IBM Plex Sans',sans-serif;font-size:14px;font-weight:500;}
 .card-body{padding:20px;}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 @media(max-width:860px){.two-col{grid-template-columns:1fr;}}
 
-/* ── STATS ── */
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:22px;}
-.stat{
-  background:white;border:1px solid var(--border);border-radius:6px;
-  padding:18px 20px;position:relative;overflow:hidden;
-}
-.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;}
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:20px;}
+.stat{background:white;border:1px solid var(--border);border-radius:4px;padding:18px 20px;position:relative;overflow:hidden;}
+.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
 .stat.clay::before{background:var(--clay);}
 .stat.sage::before{background:var(--sage);}
 .stat.sky::before{background:var(--sky);}
 .stat.warn::before{background:var(--warn);}
 .stat.done::before{background:var(--done);}
-.stat-icon{font-size:24px;margin-bottom:8px;}
-.stat-val{font-family:'Playfair Display',serif;font-size:32px;line-height:1;margin-bottom:4px;}
-.stat-label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);}
+.stat-icon{font-size:22px;margin-bottom:8px;}
+.stat-val{font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1;margin-bottom:4px;font-weight:300;}
+.stat-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);}
 
-/* ── PROGRESS ── */
-.overall-progress{margin-bottom:22px;}
+/* PROGRESS */
+.overall-progress{margin-bottom:20px;}
 .progress-label{display:flex;justify-content:space-between;margin-bottom:8px;align-items:baseline;}
-.progress-label .pl-text{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);}
-.progress-label .pl-num{font-family:'Playfair Display',serif;font-size:22px;}
-.progress-track{height:10px;background:var(--cream);border-radius:5px;overflow:hidden;}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--sage),var(--clay));border-radius:5px;transition:width 0.5s;}
+.pl-text{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);}
+.pl-num{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;}
+.progress-track{height:8px;background:var(--cream);border-radius:4px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--sage),var(--clay));border-radius:4px;transition:width 0.5s;}
 
-/* ── TAGS ── */
-.tag{display:inline-block;padding:3px 10px;border-radius:3px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.04em;text-transform:uppercase;font-weight:500;}
+/* TAGS */
+.tag{display:inline-block;padding:2px 9px;border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.04em;text-transform:uppercase;font-weight:500;}
 .tag.builder{background:#e8f0ff;color:#3a5a8a;}
-.tag.planning{background:#ffeee8;color:#b04a20;}
+.tag.planning{background:#ffeee8;color:#9a3a18;}
 .tag.milestone{background:#e8f5ee;color:var(--done);}
-.tag.utility{background:#f5f0e8;color:#a07840;}
-.tag.urgent{background:#ffe0e0;color:#c03030;}
-.tag.todo{background:#f0e0f0;color:#703080;}
+.tag.utility{background:#f5f0e8;color:#906030;}
+.tag.urgent{background:#ffe0e0;color:#b02020;}
+.tag.todo{background:#f0e0f0;color:#602870;}
 .tag.vat-yes{background:#e8f5ee;color:var(--done);}
 .tag.vat-no{background:#f0f0f0;color:var(--muted);}
-.tag.vat-zero{background:#ffeee8;color:#b04a20;}
 
-/* ── BUTTONS ── */
-.btn{padding:9px 18px;border-radius:4px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;transition:all 0.15s;display:inline-flex;align-items:center;gap:7px;}
+/* BUTTONS */
+.btn{padding:8px 16px;border-radius:3px;border:none;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;font-size:13px;font-weight:500;transition:all 0.15s;display:inline-flex;align-items:center;gap:6px;}
 .btn-primary{background:var(--ink);color:white;}.btn-primary:hover{background:var(--clay);}
 .btn-edit{background:var(--cream);color:var(--ink);border:1px solid var(--border);}.btn-edit:hover{background:var(--sky);color:white;}
 .btn-delete{background:white;color:var(--warn);border:1px solid var(--border);}.btn-delete:hover{background:var(--warn);color:white;}
 .btn-save{background:var(--done);color:white;}.btn-save:hover{opacity:0.88;}
 .btn-cancel{background:white;color:var(--muted);border:1px solid var(--border);}
-.btn-sm{padding:5px 12px;font-size:12px;}
-.btn-add{background:white;color:var(--sage);border:2px dashed var(--sage);width:100%;justify-content:center;padding:11px;margin-top:10px;font-size:14px;}.btn-add:hover{background:var(--sage);color:white;}
+.btn-sm{padding:4px 10px;font-size:12px;}
+.btn-add{background:white;color:var(--sage);border:2px dashed var(--sage);width:100%;justify-content:center;padding:10px;margin-top:10px;font-size:13px;}.btn-add:hover{background:var(--sage);color:white;}
 
-/* ── PHASE LIST ── */
-.phase-list{display:flex;flex-direction:column;gap:10px;}
-.phase-row{display:flex;align-items:center;gap:10px;padding:6px 0;}
-.phase-name{font-size:14px;min-width:165px;}
-.phase-bar-wrap{flex:1;background:var(--cream);border-radius:3px;height:10px;overflow:hidden;}
-.phase-bar{height:100%;border-radius:3px;transition:width 0.3s;}
-.phase-pct{font-family:'DM Mono',monospace;font-size:13px;color:var(--muted);min-width:40px;text-align:right;}
+/* PHASE LIST */
+.phase-list{display:flex;flex-direction:column;gap:9px;}
+.phase-row{display:flex;align-items:center;gap:10px;padding:5px 0;}
+.phase-name{font-size:13px;min-width:170px;}
+.phase-bar-wrap{flex:1;background:var(--cream);border-radius:2px;height:9px;overflow:hidden;}
+.phase-bar{height:100%;border-radius:2px;transition:width 0.3s;}
+.phase-pct{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);min-width:38px;text-align:right;}
 .phase-actions{display:flex;gap:4px;}
 
-/* ── UPCOMING ── */
+/* UPCOMING */
 .upcoming-list{display:flex;flex-direction:column;}
-.upcoming-item{display:flex;gap:14px;align-items:flex-start;padding:13px 0;border-bottom:1px solid var(--border);cursor:pointer;}
+.upcoming-item{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);cursor:pointer;}
 .upcoming-item:last-child{border-bottom:none;}
-.upcoming-date{font-family:'DM Mono',monospace;font-size:11px;text-align:center;min-width:42px;background:var(--cream);padding:6px 4px;border-radius:4px;line-height:1.3;}
-.upcoming-date .day{font-size:20px;font-weight:500;display:block;}
-.upcoming-title{font-size:15px;font-weight:500;margin-bottom:3px;}
-.upcoming-sub{font-size:13px;color:var(--muted);}
+.upcoming-date{font-family:'IBM Plex Mono',monospace;font-size:11px;text-align:center;min-width:40px;background:var(--cream);padding:6px 4px;border-radius:3px;line-height:1.3;}
+.upcoming-date .day{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;display:block;}
+.upcoming-title{font-size:14px;font-weight:500;margin-bottom:2px;}
+.upcoming-sub{font-size:12px;color:var(--muted);}
 
-/* ── CALENDAR ── */
-.cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
-.cal-header h2{font-family:'Playfair Display',serif;font-size:22px;}
-.cal-nav button{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:white;cursor:pointer;font-size:16px;}
-.cal-nav button:hover{background:var(--ink);color:white;}
+/* CALENDAR */
+.cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.cal-header h2{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;}
 .cal-nav{display:flex;gap:8px;}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
-.cal-dow{background:var(--cream);padding:10px 4px;text-align:center;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);}
-.cal-day{background:white;min-height:80px;padding:6px;cursor:pointer;}
+.cal-nav button{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:white;cursor:pointer;font-size:15px;}
+.cal-nav button:hover{background:var(--ink);color:white;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+.cal-dow{background:var(--cream);padding:9px 4px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);}
+.cal-day{background:white;min-height:72px;padding:6px;cursor:pointer;}
 .cal-day:hover{background:#faf8f4;}
 .cal-day.other-month .day-num{color:#ccc;}
 .cal-day.today .day-num{color:var(--clay);font-weight:700;}
-.day-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:3px;display:block;}
-.cal-event{font-size:10px;padding:2px 5px;border-radius:2px;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;}
+.day-num{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:3px;display:block;}
+.cal-event{font-size:9px;padding:2px 5px;border-radius:2px;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;}
 .cal-event.builder{background:#dde8ff;color:#3a5a8a;}
-.cal-event.planning{background:#ffe8de;color:#b04a20;}
-.cal-event.milestone{background:#ddf0e4;color:#2a6a44;}
-.cal-event.utility{background:#f0e8d8;color:#806030;}
-.cal-event.urgent{background:#ffe0e0;color:#c03030;}
+.cal-event.planning{background:#ffe8de;color:#9a3a18;}
+.cal-event.milestone{background:#ddf0e4;color:#2a5a3a;}
+.cal-event.utility{background:#f0e8d8;color:#705020;}
+.cal-event.urgent{background:#ffe0e0;color:#b02020;}
 
-/* ── TASKS ── */
-.task-filters{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;}
-.filter-btn{padding:7px 16px;border-radius:20px;border:1px solid var(--border);background:white;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:5px;}
+/* TASKS */
+.task-filters{display:flex;gap:7px;margin-bottom:16px;flex-wrap:wrap;}
+.filter-btn{padding:6px 14px;border-radius:16px;border:1px solid var(--border);background:white;font-family:'IBM Plex Sans',sans-serif;font-size:12px;cursor:pointer;transition:all 0.18s;display:flex;align-items:center;gap:5px;}
 .filter-btn.active{background:var(--ink);color:white;border-color:var(--ink);}
-.filter-icon{font-size:14px;}
-.task-list{display:flex;flex-direction:column;gap:8px;}
-.task-item{
-  background:white;border:1px solid var(--border);border-radius:6px;
-  padding:14px 16px;display:flex;align-items:flex-start;gap:12px;
-}
-.task-item.done{opacity:0.5;}
+.task-list{display:flex;flex-direction:column;gap:7px;}
+.task-item{background:white;border:1px solid var(--border);border-radius:4px;padding:13px 16px;display:flex;align-items:flex-start;gap:12px;}
+.task-item.done{opacity:0.45;}
 .task-item.done .task-title{text-decoration:line-through;}
 .task-item.urgent-task{border-left:4px solid var(--warn);}
-.task-check{width:22px;height:22px;border-radius:4px;border:2px solid var(--border);cursor:pointer;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;font-size:13px;}
+.task-check{width:21px;height:21px;border-radius:3px;border:2px solid var(--border);cursor:pointer;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all 0.18s;font-size:12px;}
 .task-check.checked{background:var(--done);border-color:var(--done);color:white;}
 .task-info{flex:1;}
-.task-title{font-size:15px;font-weight:500;margin-bottom:4px;}
-.task-notes{font-size:13px;color:var(--muted);margin-bottom:5px;line-height:1.5;}
-.task-meta{font-size:12px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
-.task-due{font-family:'DM Mono',monospace;}
+.task-title{font-size:14px;font-weight:500;margin-bottom:3px;}
+.task-notes{font-size:12px;color:var(--muted);margin-bottom:4px;line-height:1.5;}
+.task-meta{font-size:11px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.task-due{font-family:'IBM Plex Mono',monospace;}
 .task-due.overdue{color:var(--warn);font-weight:500;}
-.task-actions{display:flex;gap:5px;flex-shrink:0;}
+.task-actions{display:flex;gap:4px;flex-shrink:0;}
 .priority{display:flex;gap:3px;}
-.priority span{width:8px;height:8px;border-radius:50%;background:var(--border);}
+.priority span{width:7px;height:7px;border-radius:50%;background:var(--border);}
 .priority.high span:nth-child(-n+3){background:var(--warn);}
 .priority.med span:nth-child(-n+2){background:var(--clay);}
 .priority.low span:nth-child(-n+1){background:var(--sage);}
 
-/* ── EVENTS TABLE ── */
+/* EVENTS TABLE */
 .events-table{width:100%;border-collapse:collapse;}
-.events-table th{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);}
-.events-table td{padding:11px 12px;border-bottom:1px solid var(--border);font-size:14px;vertical-align:middle;}
+.events-table th{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);}
+.events-table td{padding:10px 12px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:middle;}
 .events-table tr:last-child td{border-bottom:none;}
 .events-table tr:hover td{background:#faf8f4;}
 
-/* ── TIMELINE ── */
+/* TIMELINE */
 .schedule-timeline{position:relative;}
 .timeline-item{display:flex;gap:16px;position:relative;}
-.timeline-item::before{content:'';position:absolute;left:94px;top:24px;bottom:-1px;width:1px;background:var(--border);}
+.timeline-item::before{content:'';position:absolute;left:92px;top:22px;bottom:-1px;width:1px;background:var(--border);}
 .timeline-item:last-child::before{display:none;}
-.tl-date{min-width:95px;text-align:right;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);padding-top:16px;padding-right:14px;line-height:1.4;}
-.tl-dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--clay);background:white;flex-shrink:0;margin-top:16px;z-index:1;}
+.tl-date{min-width:94px;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);padding-top:14px;padding-right:14px;line-height:1.4;}
+.tl-dot{width:13px;height:13px;border-radius:50%;border:2px solid var(--clay);background:white;flex-shrink:0;margin-top:14px;z-index:1;}
 .tl-dot.done{background:var(--done);border-color:var(--done);}
 .tl-dot.active-dot{background:var(--clay);}
-.tl-content{flex:1;background:white;border:1px solid var(--border);border-radius:6px;padding:14px 16px;margin-bottom:12px;}
-.tl-title{font-size:15px;font-weight:500;margin-bottom:4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.tl-desc{font-size:13px;color:var(--muted);line-height:1.6;}
-.tl-actions{display:flex;gap:5px;margin-top:10px;}
+.tl-content{flex:1;background:white;border:1px solid var(--border);border-radius:4px;padding:13px 16px;margin-bottom:11px;}
+.tl-title{font-size:14px;font-weight:500;margin-bottom:4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.tl-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+.tl-actions{display:flex;gap:4px;margin-top:9px;}
 
-/* ── CONTACTS ── */
-.contacts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
-.contact-card{background:white;border:1px solid var(--border);border-radius:6px;padding:18px;}
-.contact-avatar{width:44px;height:44px;border-radius:50%;background:var(--cream);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--clay);margin-bottom:12px;}
-.contact-name{font-size:16px;font-weight:500;margin-bottom:2px;}
-.contact-role{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
-.contact-detail{font-size:13px;color:var(--muted);line-height:1.9;}
+/* CONTACTS */
+.contacts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
+.contact-card{background:white;border:1px solid var(--border);border-radius:4px;padding:18px;}
+.contact-avatar{width:42px;height:42px;border-radius:50%;background:var(--cream);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:var(--clay);margin-bottom:11px;}
+.contact-name{font-size:15px;font-weight:500;margin-bottom:2px;}
+.contact-role{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.contact-detail{font-size:12px;color:var(--muted);line-height:1.9;}
 .contact-detail a{color:var(--sky);text-decoration:none;}
-.contact-actions{display:flex;gap:6px;margin-top:12px;}
+.contact-actions{display:flex;gap:6px;margin-top:11px;}
 
-/* ── BUDGET ── */
-.budget-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:22px;}
-.budget-stat{background:white;border:1px solid var(--border);border-radius:6px;padding:18px;}
-.budget-stat-icon{font-size:22px;margin-bottom:6px;}
-.budget-stat-val{font-family:'Playfair Display',serif;font-size:26px;margin-bottom:3px;}
-.budget-stat-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);}
+/* BUDGET */
+.budget-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:14px;margin-bottom:20px;}
+.budget-stat{background:white;border:1px solid var(--border);border-radius:4px;padding:16px;}
+.budget-stat-icon{font-size:20px;margin-bottom:6px;}
+.budget-stat-val{font-family:'Cormorant Garamond',serif;font-size:26px;margin-bottom:3px;font-weight:300;}
+.budget-stat-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);}
 .budget-stat.over .budget-stat-val{color:var(--warn);}
 .budget-stat.under .budget-stat-val{color:var(--done);}
 .budget-table{width:100%;border-collapse:collapse;}
-.budget-table th{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);}
-.budget-table td{padding:10px 12px;border-bottom:1px solid var(--border);font-size:14px;vertical-align:middle;}
+.budget-table th{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:9px 12px;border-bottom:2px solid var(--border);}
+.budget-table td{padding:9px 12px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:middle;}
 .budget-table tr:last-child td{border-bottom:none;}
-.budget-table .amount{font-family:'DM Mono',monospace;text-align:right;}
+.budget-table .amount{font-family:'IBM Plex Mono',monospace;text-align:right;}
 .budget-table .over-val{color:var(--warn);}
 .budget-table .under-val{color:var(--done);}
-.budget-mini-bar{height:7px;background:var(--cream);border-radius:3px;overflow:hidden;width:90px;}
+.budget-mini-bar{height:6px;background:var(--cream);border-radius:3px;overflow:hidden;width:80px;}
 .budget-mini-fill{height:100%;border-radius:3px;}
-#budgetCanvas{width:100%;display:block;}
-.num-in{font-family:'DM Mono',monospace;font-size:13px;border:1px solid var(--border);border-radius:3px;padding:5px 8px;background:var(--paper);width:110px;text-align:right;outline:none;}
+.num-in{font-family:'IBM Plex Mono',monospace;font-size:12px;border:1px solid var(--border);border-radius:2px;padding:4px 7px;background:var(--paper);width:105px;text-align:right;outline:none;}
 .num-in:focus{border-color:var(--clay);}
 
-/* ── VAT TRACKER ── */
-.vat-info-box{
-  background:#e8f5ee;border:1px solid #a0c8b0;border-radius:6px;
-  padding:16px 20px;margin-bottom:20px;
-  display:flex;gap:14px;align-items:flex-start;
-}
-.vat-info-icon{font-size:24px;flex-shrink:0;}
-.vat-info-text{font-size:14px;color:#2a5a3a;line-height:1.6;}
-.vat-info-title{font-size:15px;font-weight:500;margin-bottom:4px;}
-.vat-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:22px;}
-.vat-stat{background:white;border:1px solid var(--border);border-radius:6px;padding:18px;}
-.vat-stat-icon{font-size:22px;margin-bottom:6px;}
-.vat-stat-val{font-family:'Playfair Display',serif;font-size:26px;margin-bottom:3px;}
-.vat-stat-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);}
+/* VAT */
+.vat-info-box{background:#e8f4ee;border:1px solid #90b898;border-radius:4px;padding:16px 20px;margin-bottom:18px;display:flex;gap:12px;align-items:flex-start;}
+.vat-info-icon{font-size:22px;flex-shrink:0;}
+.vat-info-text{font-size:13px;color:#1a4a2a;line-height:1.6;}
+.vat-info-title{font-size:14px;font-weight:500;margin-bottom:4px;}
+.vat-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:20px;}
+.vat-stat{background:white;border:1px solid var(--border);border-radius:4px;padding:16px;}
+.vat-stat-val{font-family:'Cormorant Garamond',serif;font-size:26px;margin-bottom:3px;font-weight:300;}
+.vat-stat-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);}
 .vat-stat.green .vat-stat-val{color:var(--done);}
 .vat-stat.amber .vat-stat-val{color:var(--clay);}
 .vat-table{width:100%;border-collapse:collapse;}
-.vat-table th{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);white-space:nowrap;}
-.vat-table td{padding:10px 12px;border-bottom:1px solid var(--border);font-size:14px;vertical-align:middle;}
+.vat-table th{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:9px 12px;border-bottom:2px solid var(--border);white-space:nowrap;}
+.vat-table td{padding:9px 12px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:middle;}
 .vat-table tr:last-child td{border-bottom:none;}
 .vat-table tr:hover td{background:#faf8f4;}
-.vat-table .mono{font-family:'DM Mono',monospace;}
-.vat-table .amt{font-family:'DM Mono',monospace;text-align:right;}
-.vat-rate-badge{
-  display:inline-block;padding:3px 8px;border-radius:3px;
-  font-family:'DM Mono',monospace;font-size:11px;font-weight:500;
-}
-.vat-rate-badge.r20{background:#ddf0e4;color:#2a6a44;}
+.vat-table .mono{font-family:'IBM Plex Mono',monospace;}
+.vat-table .amt{font-family:'IBM Plex Mono',monospace;text-align:right;}
+.vat-rate-badge{display:inline-block;padding:2px 7px;border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;}
+.vat-rate-badge.r20{background:#ddf0e4;color:#1a5a2a;}
 .vat-rate-badge.r0{background:#f0f0f0;color:var(--muted);}
-.vat-rate-badge.rzero{background:#ffeee8;color:#b04a20;}
-.vat-reclaim-highlight{
-  background:linear-gradient(135deg,#e8f5ee,#f0faf4);
-  border:2px solid var(--done);border-radius:6px;
-  padding:16px 20px;text-align:center;
-}
-.vat-reclaim-amount{font-family:'Playfair Display',serif;font-size:40px;color:var(--done);line-height:1;}
-.vat-reclaim-label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--sage);margin-top:4px;}
-.vat-reclaim-note{font-size:12px;color:var(--muted);margin-top:8px;}
+.vat-reclaim-highlight{background:linear-gradient(135deg,#e8f4ee,#f0faf4);border:2px solid var(--done);border-radius:4px;padding:16px 20px;text-align:center;}
+.vat-reclaim-amount{font-family:'Cormorant Garamond',serif;font-size:44px;color:var(--done);line-height:1;font-weight:300;}
+.vat-reclaim-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--sage);margin-top:4px;}
+.vat-reclaim-note{font-size:11px;color:var(--muted);margin-top:8px;}
 
-/* ── MATERIALS ── */
-.materials-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
-.material-card{background:white;border:1px solid var(--border);border-radius:6px;padding:16px;display:flex;gap:12px;align-items:flex-start;}
-.material-swatch{width:14px;flex-shrink:0;align-self:stretch;border-radius:2px;}
-.material-element{font-size:14px;font-weight:500;margin-bottom:3px;}
-.material-spec{font-size:13px;color:var(--muted);line-height:1.5;}
+/* MATERIALS */
+.materials-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px;}
+.material-card{background:white;border:1px solid var(--border);border-radius:4px;padding:15px;display:flex;gap:12px;align-items:flex-start;}
+.material-swatch{width:12px;flex-shrink:0;align-self:stretch;border-radius:2px;}
+.material-element{font-size:13px;font-weight:500;margin-bottom:3px;}
+.material-spec{font-size:12px;color:var(--muted);line-height:1.5;}
 
-/* ── GANTT ── */
-/* ── GANTT ── */
-.gantt-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:16px;}
-.gantt-zoom-btn{padding:6px 14px;border-radius:4px;border:1px solid var(--border);background:white;font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;transition:all 0.15s;letter-spacing:0.04em;}
+/* GANTT */
+.gantt-controls{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-bottom:14px;}
+.gantt-zoom-btn{padding:5px 13px;border-radius:3px;border:1px solid var(--border);background:white;font-family:'IBM Plex Mono',monospace;font-size:10px;cursor:pointer;transition:all 0.14s;letter-spacing:0.04em;}
 .gantt-zoom-btn:hover{background:var(--cream);}
 .gantt-zoom-btn.active{background:var(--ink);color:white;border-color:var(--ink);}
-.gantt-date-range{display:flex;gap:6px;align-items:center;margin-left:8px;}
-.gantt-date-range input{font-family:'DM Mono',monospace;font-size:11px;border:1px solid var(--border);border-radius:4px;padding:5px 8px;background:var(--paper);outline:none;}
+.gantt-date-range{display:flex;gap:5px;align-items:center;margin-left:8px;}
+.gantt-date-range input{font-family:'IBM Plex Mono',monospace;font-size:10px;border:1px solid var(--border);border-radius:3px;padding:4px 7px;background:var(--paper);outline:none;}
 .gantt-date-range input:focus{border-color:var(--clay);}
-.gantt-date-range span{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);}
-.gantt-scroll-outer{overflow-x:auto;overflow-y:visible;cursor:grab;user-select:none;padding-bottom:8px;}
+.gantt-date-range span{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);}
+.gantt-scroll-outer{overflow-x:auto;cursor:grab;user-select:none;padding-bottom:6px;}
 .gantt-scroll-outer:active{cursor:grabbing;}
-.gantt-scroll-outer::-webkit-scrollbar{height:6px;}
-.gantt-scroll-outer::-webkit-scrollbar-thumb{background:rgba(196,135,90,0.3);border-radius:3px;}
+.gantt-scroll-outer::-webkit-scrollbar{height:5px;}
+.gantt-scroll-outer::-webkit-scrollbar-thumb{background:rgba(184,115,72,0.3);border-radius:2px;}
 .gantt-inner{position:relative;}
-.gantt-header-row{display:flex;margin-left:200px;margin-bottom:4px;border-bottom:1px solid var(--border);padding-bottom:4px;}
-.gantt-header-cell{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);text-align:center;letter-spacing:0.04em;border-left:1px solid var(--border);padding:3px 0;flex-shrink:0;overflow:hidden;}
-.gantt-row{display:flex;align-items:center;margin-bottom:6px;}
-.gantt-label{width:200px;flex-shrink:0;font-size:13px;padding-right:14px;line-height:1.3;}
-.gantt-label small{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);display:block;}
-.gantt-track{position:relative;height:30px;background:var(--cream);border-radius:3px;flex-shrink:0;}
-.gantt-bar{position:absolute;height:24px;top:3px;border-radius:3px;cursor:pointer;display:flex;align-items:center;padding:0 8px;font-size:10px;color:white;font-family:'DM Mono',monospace;white-space:nowrap;overflow:hidden;transition:opacity 0.15s;}
-.gantt-bar:hover{opacity:0.82;}
+.gantt-header-row{display:flex;margin-left:200px;margin-bottom:4px;border-bottom:1px solid var(--border);padding-bottom:3px;}
+.gantt-header-cell{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted);text-align:center;letter-spacing:0.04em;border-left:1px solid var(--border);padding:2px 0;flex-shrink:0;overflow:hidden;}
+.gantt-row{display:flex;align-items:center;margin-bottom:5px;}
+.gantt-label{width:200px;flex-shrink:0;font-size:12px;padding-right:12px;line-height:1.3;}
+.gantt-label small{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted);display:block;}
+.gantt-track{position:relative;height:28px;background:var(--cream);border-radius:2px;flex-shrink:0;}
+.gantt-bar{position:absolute;height:22px;top:3px;border-radius:2px;cursor:pointer;display:flex;align-items:center;padding:0 7px;font-size:9px;color:white;font-family:'IBM Plex Mono',monospace;white-space:nowrap;overflow:hidden;transition:opacity 0.14s;}
+.gantt-bar:hover{opacity:0.8;}
 .gantt-today-line{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--warn);z-index:10;pointer-events:none;}
-.gantt-today-tip{position:absolute;top:-16px;font-family:'DM Mono',monospace;font-size:8px;color:var(--warn);transform:translateX(-50%);white-space:nowrap;}
-.gantt-grid-line{position:absolute;top:0;bottom:0;width:1px;background:rgba(0,0,0,0.06);}
-.gantt-grid-line.major{background:rgba(0,0,0,0.1);}
-.gantt-actions{display:flex;gap:4px;margin-left:10px;flex-shrink:0;}
-.gm-swatch{
-  width:28px;height:28px;border-radius:4px;cursor:pointer;
-  border:2px solid transparent;transition:all 0.15s;flex-shrink:0;
-}
+.gantt-today-tip{position:absolute;top:-15px;font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--warn);transform:translateX(-50%);white-space:nowrap;}
+.gantt-grid-line{position:absolute;top:0;bottom:0;width:1px;background:rgba(0,0,0,0.05);}
+.gantt-actions{display:flex;gap:3px;margin-left:8px;flex-shrink:0;}
+.gm-swatch{width:26px;height:26px;border-radius:3px;cursor:pointer;border:2px solid transparent;transition:all 0.13s;flex-shrink:0;}
 .gm-swatch:hover{transform:scale(1.15);border-color:rgba(26,26,24,0.3);}
 .gm-swatch.selected{border-color:var(--ink);transform:scale(1.15);box-shadow:0 0 0 2px white,0 0 0 3px var(--ink);}
 
-/* ── 3D ── */
-#plotCanvas{width:100%;border-radius:6px;cursor:grab;display:block;touch-action:none;}
+/* 3D */
+#plotCanvas{width:100%;border-radius:4px;cursor:grab;display:block;touch-action:none;}
 #plotCanvas:active{cursor:grabbing;}
-.plot-controls{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;}
-.plot-btn{padding:7px 14px;background:white;border:1px solid var(--border);border-radius:4px;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:all 0.2s;}
+.plot-controls{display:flex;gap:7px;margin-bottom:10px;flex-wrap:wrap;}
+.plot-btn{padding:6px 13px;background:white;border:1px solid var(--border);border-radius:3px;font-family:'IBM Plex Sans',sans-serif;font-size:12px;cursor:pointer;transition:all 0.18s;}
 .plot-btn:hover,.plot-btn.active{background:var(--ink);color:white;}
-.plot-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;}
-.plot-legend-item{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--muted);}
-.plot-legend-dot{width:12px;height:12px;border-radius:3px;}
 
-/* ── GCAL ── */
-.gcal-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:4px;background:white;border:1px solid var(--border);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;text-decoration:none;color:var(--ink);transition:all 0.2s;}
+/* DRAWINGS */
+.drawings-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+.drawing-card{background:white;border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+.drawing-thumb{height:140px;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:40px;border-bottom:1px solid var(--border);}
+.drawing-info{padding:14px 16px;}
+.drawing-ref{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--clay);margin-bottom:4px;}
+.drawing-title{font-size:14px;font-weight:500;margin-bottom:3px;}
+.drawing-meta{font-size:11px;color:var(--muted);font-family:'IBM Plex Mono',monospace;}
+
+/* GCAL */
+.gcal-btn{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:3px;background:white;border:1px solid var(--border);font-family:'IBM Plex Sans',sans-serif;font-size:12px;cursor:pointer;text-decoration:none;color:var(--ink);transition:all 0.18s;}
 .gcal-btn:hover{background:var(--ink);color:white;}
-.gcal-icon{width:15px;height:15px;}
-.gcal-add-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:#4285f4;color:white;border:none;border-radius:4px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;text-decoration:none;margin-top:10px;}
+.gcal-icon{width:14px;height:14px;}
+.gcal-add-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;background:#4285f4;color:white;border:none;border-radius:3px;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;font-size:12px;text-decoration:none;margin-top:9px;}
 
-/* ── MODAL ── */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(26,26,24,0.55);z-index:200;align-items:center;justify-content:center;}
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(26,26,24,0.5);z-index:200;align-items:center;justify-content:center;}
 .modal-overlay.open{display:flex;}
-.modal{background:white;border-radius:8px;padding:28px;max-width:520px;width:92%;max-height:85vh;overflow-y:auto;position:relative;}
-.modal h3{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:4px;}
-.modal-meta{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:16px;letter-spacing:0.06em;}
-.modal-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);}
-.modal p{font-size:14px;line-height:1.6;color:#444;margin-bottom:12px;}
-.form-grid{display:flex;flex-direction:column;gap:14px;}
-.form-row{display:flex;flex-direction:column;gap:5px;}
-.form-row label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);}
-.form-row input,.form-row select,.form-row textarea{font-family:'DM Sans',sans-serif;font-size:14px;border:1px solid var(--border);border-radius:4px;padding:10px 12px;background:var(--paper);outline:none;width:100%;}
+.modal{background:white;border-radius:6px;padding:26px;max-width:520px;width:92%;max-height:85vh;overflow-y:auto;position:relative;}
+.modal h3{font-family:'Cormorant Garamond',serif;font-size:22px;margin-bottom:4px;font-weight:300;}
+.modal-meta{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:16px;letter-spacing:0.06em;text-transform:uppercase;}
+.modal-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted);}
+.modal p{font-size:13px;line-height:1.6;color:#444;margin-bottom:12px;}
+.form-grid{display:flex;flex-direction:column;gap:13px;}
+.form-row{display:flex;flex-direction:column;gap:4px;}
+.form-row label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);}
+.form-row input,.form-row select,.form-row textarea{font-family:'IBM Plex Sans',sans-serif;font-size:13px;border:1px solid var(--border);border-radius:3px;padding:9px 11px;background:var(--paper);outline:none;width:100%;}
 .form-row input:focus,.form-row select:focus,.form-row textarea:focus{border-color:var(--clay);}
-.form-row textarea{min-height:70px;resize:vertical;}
-.form-actions{display:flex;gap:8px;margin-top:4px;}
-.form-row-two{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.confirm-box{background:white;border-radius:8px;padding:24px;max-width:360px;width:90%;text-align:center;}
-.confirm-box h4{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:8px;}
-.confirm-box p{font-size:14px;color:var(--muted);margin-bottom:18px;}
-.confirm-actions{display:flex;gap:8px;justify-content:center;}
+.form-row textarea{min-height:65px;resize:vertical;}
+.form-actions{display:flex;gap:7px;margin-top:4px;}
+.form-row-two{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+.confirm-box{background:white;border-radius:6px;padding:22px;max-width:340px;width:90%;text-align:center;}
+.confirm-box h4{font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:8px;font-weight:300;}
+.confirm-box p{font-size:13px;color:var(--muted);margin-bottom:16px;}
+.confirm-actions{display:flex;gap:7px;justify-content:center;}
 
-/* ── ALERT ── */
-.alert-banner{background:#fff3e0;border:1px solid #ffb74d;border-radius:6px;padding:14px 18px;margin-bottom:18px;display:flex;align-items:flex-start;gap:12px;}
-.alert-icon{font-size:22px;flex-shrink:0;}
-.alert-text{font-size:14px;color:#e65100;line-height:1.5;}
-.alert-title{font-weight:600;margin-bottom:2px;font-size:15px;}
+/* ALERT */
+.alert-banner{background:#fff3e0;border:1px solid #e8a050;border-radius:4px;padding:13px 17px;margin-bottom:18px;display:flex;align-items:flex-start;gap:11px;}
+.alert-icon{font-size:20px;flex-shrink:0;}
+.alert-text{font-size:13px;color:#b04000;line-height:1.5;}
+.alert-title{font-weight:600;margin-bottom:2px;font-size:14px;}
 
-/* ── READONLY ── */
-.readonly-banner{background:var(--ink);color:var(--paper);padding:8px 24px;font-family:'DM Mono',monospace;font-size:10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(196,135,90,0.3);}
+/* READONLY */
+.readonly-banner{background:var(--ink);color:var(--paper);padding:7px 24px;font-family:'IBM Plex Mono',monospace;font-size:9px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(184,115,72,0.3);}
 .readonly-banner.hidden{display:none;}
-.readonly-tag{background:rgba(196,135,90,0.2);color:#c4875a;padding:2px 8px;border-radius:2px;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;}
-body.readonly .btn-primary{opacity:0.35;pointer-events:none;}
-body.readonly .btn-delete{opacity:0.35;pointer-events:none;}
-body.readonly .btn-save{opacity:0.35;pointer-events:none;}
-body.readonly .btn-add{opacity:0.35;pointer-events:none;}
-body.readonly input[type=number]{pointer-events:none;opacity:0.6;}
-body.readonly .task-check{pointer-events:none;opacity:0.6;}
-.logout-btn{background:none;border:none;cursor:pointer;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(245,242,235,0.4);transition:color 0.2s;}
-.logout-btn:hover{color:#c4875a;}
+.readonly-tag{background:rgba(184,115,72,0.2);color:var(--clay);padding:2px 7px;border-radius:2px;font-size:8px;letter-spacing:0.1em;text-transform:uppercase;}
+body.readonly .btn-primary{opacity:0.3;pointer-events:none;}
+body.readonly .btn-delete{opacity:0.3;pointer-events:none;}
+body.readonly .btn-save{opacity:0.3;pointer-events:none;}
+body.readonly .btn-add{opacity:0.3;pointer-events:none;}
+body.readonly .task-check{pointer-events:none;opacity:0.5;}
+.logout-btn{background:none;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(244,241,234,0.35);transition:color 0.18s;}
+.logout-btn:hover{color:var(--clay);}
 </style>
 </head>
 <body>
 
 <script>
 (function(){
-  var user=sessionStorage.getItem('corydon_user');
-  var access=sessionStorage.getItem('corydon_access');
-  if(!user){window.location.href='index.html';return;}
-  window._corydonUser=user;
-  window._corydonAccess=access;
+  var u=sessionStorage.getItem('corydon_user');
+  var a=sessionStorage.getItem('corydon_access');
+  if(!u){window.location.href='index.html';return;}
+  window._cu=u;window._ca=a;
 })();
 </script>
-
-<!-- readonly banner -->
-<div class="readonly-banner hidden" id="roBar">
-  <span id="roUserLabel"></span>
-  <div style="display:flex;align-items:center;gap:12px;">
-    <span class="readonly-tag" id="roTag"></span>
-    <button class="logout-btn" onclick="logout()">← Sign out</button>
-  </div>
-</div>
-
 
 <div class="readonly-banner hidden" id="roBar">
   <span id="roUserLabel"></span>
@@ -433,10 +382,7 @@ body.readonly .task-check{pointer-events:none;opacity:0.6;}
 </div>
 
 <header>
-  <div class="logo">
-    <h1>Corydon</h1>
-    <span>Self Build</span>
-  </div>
+  <div class="logo"><h1>Corydon</h1><span>Self Build</span></div>
   <div class="header-right">
     <span class="saved-badge" id="savedBadge">✓ Saved</span>
     <div class="header-meta">Roman Road · DT2 9DX<br>P-FUL-2025-05327</div>
@@ -444,175 +390,87 @@ body.readonly .task-check{pointer-events:none;opacity:0.6;}
 </header>
 
 <nav id="mainNav">
-  <button class="nav-btn active" data-tab="dashboard" onclick="showPanel('dashboard',this)">
-    <span class="nav-icon">🏠</span><span class="nav-lbl">Dashboard</span>
-  </button>
-  <button class="nav-btn" data-tab="gantt" onclick="showPanel('gantt',this)">
-    <span class="nav-icon">📅</span><span class="nav-lbl">Gantt</span>
-  </button>
-  <button class="nav-btn" data-tab="plot3d" onclick="showPanel('plot3d',this)">
-    <span class="nav-icon">🏗</span><span class="nav-lbl">Site 3D</span>
-  </button>
-  <button class="nav-btn" data-tab="budget" onclick="showPanel('budget',this)">
-    <span class="nav-icon">💷</span><span class="nav-lbl">Budget</span>
-  </button>
-  <button class="nav-btn" data-tab="vat" onclick="showPanel('vat',this)">
-    <span class="nav-icon">🧾</span><span class="nav-lbl">VAT</span>
-  </button>
-  <button class="nav-btn" data-tab="materials" onclick="showPanel('materials',this)">
-    <span class="nav-icon">🪵</span><span class="nav-lbl">Materials</span>
-  </button>
-  <button class="nav-btn" data-tab="calendar" onclick="showPanel('calendar',this)">
-    <span class="nav-icon">📆</span><span class="nav-lbl">Calendar</span>
-  </button>
-  <button class="nav-btn" data-tab="tasks" onclick="showPanel('tasks',this)">
-    <span class="nav-icon">✅</span><span class="nav-lbl">Tasks</span>
-  </button>
-  <button class="nav-btn" data-tab="events" onclick="showPanel('events',this)">
-    <span class="nav-icon">📌</span><span class="nav-lbl">Events</span>
-  </button>
-  <button class="nav-btn" data-tab="schedule" onclick="showPanel('schedule',this)">
-    <span class="nav-icon">🔨</span><span class="nav-lbl">Programme</span>
-  </button>
-  <button class="nav-btn" data-tab="contacts" onclick="showPanel('contacts',this)">
-    <span class="nav-icon">👥</span><span class="nav-lbl">Team</span>
-  </button>
+  <button class="nav-btn active" data-tab="dashboard" onclick="showPanel('dashboard',this)"><span class="nav-icon">🏠</span><span class="nav-lbl">Dashboard</span></button>
+  <button class="nav-btn" data-tab="gantt" onclick="showPanel('gantt',this)"><span class="nav-icon">📅</span><span class="nav-lbl">Gantt</span></button>
+  <button class="nav-btn" data-tab="plot3d" onclick="showPanel('plot3d',this)"><span class="nav-icon">🏗</span><span class="nav-lbl">Site 3D</span></button>
+  <button class="nav-btn" data-tab="budget" onclick="showPanel('budget',this)"><span class="nav-icon">💷</span><span class="nav-lbl">Budget</span></button>
+  <button class="nav-btn" data-tab="vat" onclick="showPanel('vat',this)"><span class="nav-icon">🧾</span><span class="nav-lbl">VAT</span></button>
+  <button class="nav-btn" data-tab="materials" onclick="showPanel('materials',this)"><span class="nav-icon">🪵</span><span class="nav-lbl">Materials</span></button>
+  <button class="nav-btn" data-tab="drawings" onclick="showPanel('drawings',this)"><span class="nav-icon">📐</span><span class="nav-lbl">Drawings</span></button>
+  <button class="nav-btn" data-tab="calendar" onclick="showPanel('calendar',this)"><span class="nav-icon">📆</span><span class="nav-lbl">Calendar</span></button>
+  <button class="nav-btn" data-tab="tasks" onclick="showPanel('tasks',this)"><span class="nav-icon">✅</span><span class="nav-lbl">Tasks</span></button>
+  <button class="nav-btn" data-tab="events" onclick="showPanel('events',this)"><span class="nav-icon">📌</span><span class="nav-lbl">Events</span></button>
+  <button class="nav-btn" data-tab="schedule" onclick="showPanel('schedule',this)"><span class="nav-icon">🔨</span><span class="nav-lbl">Programme</span></button>
+  <button class="nav-btn" data-tab="contacts" onclick="showPanel('contacts',this)"><span class="nav-icon">👥</span><span class="nav-lbl">Team</span></button>
 </nav>
 
 <main>
 
-<!-- ════════════ DASHBOARD ════════════ -->
+<!-- DASHBOARD -->
 <div id="dashboard" class="panel active">
   <div class="tab-header">
     <span class="tab-icon">🏠</span>
-    <div>
-      <div class="tab-title">Dashboard</div>
-      <div class="tab-sub">Project overview at a glance</div>
-      <div class="tab-accent" style="background:var(--t-dash);"></div>
-    </div>
+    <div><div class="tab-title">Dashboard</div><div class="tab-sub">Project overview · Corydon, Roman Road, Winterbourne Steepleton DT2 9DX</div><div class="tab-accent" style="background:var(--t-dash)"></div></div>
   </div>
-
   <div class="alert-banner">
     <span class="alert-icon">⚠️</span>
     <div class="alert-text">
-      <div class="alert-title">Action needed before demolition can start</div>
-      Asbestos survey CAS 3044 (Feb 2026) found 3 items to remove: window closer in Bedroom 2, panel + debris in undercroft. Call Complete Asbestos Solutions: 01202 099 906
+      <div class="alert-title">Action required before demolition</div>
+      Asbestos survey CAS 3044 (Feb 2026) identified 3 items: cavity closer Bedroom 2/G08, panel + debris in undercroft/B103. Must be removed before demolition. Call Complete Asbestos Solutions: <strong>01202 099 906</strong>
     </div>
   </div>
-
   <div class="overall-progress">
-    <div class="progress-label">
-      <span class="pl-text">Overall project progress</span>
-      <span class="pl-num" id="overallPct">0%</span>
-    </div>
+    <div class="progress-label"><span class="pl-text">Overall project progress</span><span class="pl-num" id="overallPct">0%</span></div>
     <div class="progress-track"><div class="progress-fill" id="overallBar" style="width:0%"></div></div>
   </div>
-
   <div class="stats-grid">
-    <div class="stat clay">
-      <div class="stat-icon">📋</div>
-      <div class="stat-val" id="statTasks">0</div>
-      <div class="stat-label">Open tasks</div>
-    </div>
-    <div class="stat sage">
-      <div class="stat-icon">📈</div>
-      <div class="stat-val" id="statPhases">0%</div>
-      <div class="stat-label">Avg progress</div>
-    </div>
-    <div class="stat sky">
-      <div class="stat-icon">💷</div>
-      <div class="stat-val" id="statBudget">£0</div>
-      <div class="stat-label">Budget remaining</div>
-    </div>
-    <div class="stat warn">
-      <div class="stat-icon">🔴</div>
-      <div class="stat-val" id="statOverdue">0</div>
-      <div class="stat-label">Overdue items</div>
-    </div>
-    <div class="stat done">
-      <div class="stat-icon">🧾</div>
-      <div class="stat-val" id="statVAT">£0</div>
-      <div class="stat-label">VAT to reclaim</div>
-    </div>
+    <div class="stat clay"><div class="stat-icon">📋</div><div class="stat-val" id="statTasks">0</div><div class="stat-label">Open tasks</div></div>
+    <div class="stat sage"><div class="stat-icon">📈</div><div class="stat-val" id="statPhases">0%</div><div class="stat-label">Avg progress</div></div>
+    <div class="stat sky"><div class="stat-icon">💷</div><div class="stat-val" id="statBudget">£0</div><div class="stat-label">Budget remaining</div></div>
+    <div class="stat warn"><div class="stat-icon">🔴</div><div class="stat-val" id="statOverdue">0</div><div class="stat-label">Overdue items</div></div>
+    <div class="stat done"><div class="stat-icon">🧾</div><div class="stat-val" id="statVAT">£0</div><div class="stat-label">VAT to reclaim</div></div>
   </div>
-
   <div class="two-col">
     <div class="card">
-      <div class="card-head">
-        <div class="card-head-left"><span class="card-head-icon">📊</span><h3>Phase progress</h3></div>
-        <span style="font-size:12px;color:var(--muted)">Click Edit to update %</span>
-      </div>
+      <div class="card-head"><div class="card-head-left"><span class="card-head-icon">📊</span><h3>Phase progress</h3></div><span style="font-size:11px;color:var(--muted)">Click Edit to update %</span></div>
       <div class="card-body"><div class="phase-list" id="dashPhaseList"></div></div>
     </div>
     <div class="card">
-      <div class="card-head">
-        <div class="card-head-left"><span class="card-head-icon">📅</span><h3>Coming up next</h3></div>
-        <a class="gcal-btn" href="#" onclick="openGcalModal(event)">
-          <svg class="gcal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          Google Cal
-        </a>
+      <div class="card-head"><div class="card-head-left"><span class="card-head-icon">📅</span><h3>Coming up next</h3></div>
+        <a class="gcal-btn" href="#" onclick="openGcalModal(event)"><svg class="gcal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Google Cal</a>
       </div>
       <div class="card-body"><div class="upcoming-list" id="upcomingList"></div></div>
     </div>
   </div>
 </div>
 
-<!-- ════════════ GANTT ════════════ -->
+<!-- GANTT -->
 <div id="gantt" class="panel">
-  <div class="tab-header">
-    <span class="tab-icon">📅</span>
-    <div>
-      <div class="tab-title">Build Programme</div>
-      <div class="tab-sub">Add bars with real dates · zoom · scroll · edit</div>
-      <div class="tab-accent" style="background:var(--t-gantt);"></div>
-    </div>
-  </div>
+  <div class="tab-header"><span class="tab-icon">📅</span><div><div class="tab-title">Build Programme</div><div class="tab-sub">Add bars · zoom · scroll · edit</div><div class="tab-accent" style="background:var(--t-gantt)"></div></div></div>
   <div class="card">
-    <div class="card-head">
-      <div class="card-head-left"><span class="card-head-icon">📅</span><h3>Programme</h3></div>
-      <button class="btn btn-primary" onclick="openAddGantt()">＋ Add bar</button>
-    </div>
+    <div class="card-head"><div class="card-head-left"><span class="card-head-icon">📅</span><h3>Programme</h3></div><button class="btn btn-primary" onclick="openAddGantt()">＋ Add bar</button></div>
     <div class="card-body">
-      <!-- Controls row -->
       <div class="gantt-controls">
         <button class="gantt-zoom-btn" onclick="ganttZoom('week',this)">Week</button>
         <button class="gantt-zoom-btn active" onclick="ganttZoom('month',this)">Month</button>
         <button class="gantt-zoom-btn" onclick="ganttZoom('quarter',this)">Quarter</button>
         <button class="gantt-zoom-btn" onclick="ganttZoom('year',this)">Year</button>
         <button class="gantt-zoom-btn" onclick="ganttZoom('all',this)">All</button>
-        <div class="gantt-date-range">
-          <span>From</span>
-          <input type="date" id="ganttFrom" onchange="ganttCustomRange()">
-          <span>to</span>
-          <input type="date" id="ganttTo" onchange="ganttCustomRange()">
-        </div>
+        <div class="gantt-date-range"><span>From</span><input type="date" id="ganttFrom" onchange="ganttCustomRange()"><span>to</span><input type="date" id="ganttTo" onchange="ganttCustomRange()"></div>
         <button class="gantt-zoom-btn" onclick="ganttScrollToday()" style="margin-left:auto">📍 Today</button>
       </div>
-      <!-- Scrollable chart -->
-      <div class="gantt-scroll-outer" id="ganttScroll">
-        <div class="gantt-inner" id="ganttContainer"></div>
-      </div>
+      <div class="gantt-scroll-outer" id="ganttScroll"><div class="gantt-inner" id="ganttContainer"></div></div>
     </div>
   </div>
 </div>
 
-<!-- ════════════ BUDGET ════════════ -->
+<!-- BUDGET -->
 <div id="budget" class="panel">
-  <div class="tab-header">
-    <span class="tab-icon">💷</span>
-    <div>
-      <div class="tab-title">Budget Tracker</div>
-      <div class="tab-sub">Based on Jewsons/Project Estimator 2505-0915-5056 · 394m² · Type figures directly in the table to update</div>
-      <div class="tab-accent" style="background:var(--t-budget);"></div>
-    </div>
+  <div class="tab-header"><span class="tab-icon">💷</span><div><div class="tab-title">Budget Tracker</div><div class="tab-sub">Jewsons estimate 2505-0915-5056 · 394m² · £619,611 ex-VAT · Type figures in table to update</div><div class="tab-accent" style="background:var(--t-budget)"></div></div></div>
+  <div style="background:#e8f0ff;border:1px solid #8aaecc;border-radius:4px;padding:13px 17px;margin-bottom:16px;font-size:13px;color:#1a3a5a;line-height:1.6;">
+    💡 <strong>VAT tip:</strong> Brindley James quote (£380–430k) is structural shell only — ~60% of full build. New build is <strong>zero-rated</strong> — reclaim VAT on materials you buy yourself. Track in the <strong>🧾 VAT tab</strong>.
   </div>
-  <div style="background:#e8f0ff;border:1px solid #6b8fa3;border-radius:6px;padding:14px 18px;margin-bottom:18px;font-size:14px;color:#2a3a5a;line-height:1.6;">
-    💡 <strong>VAT tip:</strong> Brindley quote (£380–430k) is structural shell only — about 60% of full build. Jewsons full estimate £619,611 ex-VAT. New build is <strong>zero-rated</strong> — you can reclaim VAT on materials you buy yourself. See the <strong>🧾 VAT tab</strong> to track this.
-  </div>
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-    <div></div>
-    <button class="btn btn-primary" onclick="openAddBudget()">＋ Add line</button>
-  </div>
+  <div style="display:flex;justify-content:flex-end;margin-bottom:14px;"><button class="btn btn-primary" onclick="openAddBudget()">＋ Add line</button></div>
   <div class="budget-summary">
     <div class="budget-stat"><div class="budget-stat-icon">📦</div><div class="budget-stat-val" id="budgetTotal">£0</div><div class="budget-stat-label">Total budget</div></div>
     <div class="budget-stat"><div class="budget-stat-icon">💳</div><div class="budget-stat-val" id="budgetSpent">£0</div><div class="budget-stat-label">Committed / spent</div></div>
@@ -636,61 +494,34 @@ body.readonly .task-check{pointer-events:none;opacity:0.6;}
   </div>
 </div>
 
-<!-- ════════════ VAT TRACKER ════════════ -->
+<!-- VAT -->
 <div id="vat" class="panel">
-  <div class="tab-header">
-    <span class="tab-icon">🧾</span>
-    <div>
-      <div class="tab-title">VAT Tracker</div>
-      <div class="tab-sub">HMRC VAT431NB — New Build VAT Reclaim · Track every purchase and see exactly what you can reclaim</div>
-      <div class="tab-accent" style="background:var(--t-vat);"></div>
-    </div>
-  </div>
-
+  <div class="tab-header"><span class="tab-icon">🧾</span><div><div class="tab-title">VAT Tracker</div><div class="tab-sub">HMRC VAT431NB — New Build VAT Reclaim · Submit within 3 months of practical completion</div><div class="tab-accent" style="background:var(--t-vat)"></div></div></div>
   <div class="vat-info-box">
     <span class="vat-info-icon">ℹ️</span>
     <div class="vat-info-text">
-      <div class="vat-info-title">How new build VAT reclaim works</div>
-      Your new build is <strong>zero-rated</strong> for VAT. You can reclaim 20% VAT on building materials you buy <strong>yourself directly</strong> (from builders merchants, suppliers etc.) using HMRC form VAT431NB. You <strong>cannot</strong> reclaim VAT on contractor invoices — their labour is already zero-rated. Keep every receipt. Submit within 3 months of completion.
+      <div class="vat-info-title">New build VAT reclaim — how it works</div>
+      Your new build is <strong>zero-rated</strong>. Reclaim 20% VAT on building materials you buy <strong>directly yourself</strong> using HMRC form VAT431NB. You <strong>cannot</strong> reclaim VAT on contractor invoices. Keep every receipt. Submit within 3 months of completion.
     </div>
   </div>
-
-  <div class="two-col" style="margin-bottom:20px;">
+  <div class="two-col" style="margin-bottom:18px;">
     <div class="vat-reclaim-highlight">
       <div class="vat-reclaim-amount" id="vatReclaimTotal">£0.00</div>
-      <div class="vat-reclaim-label">Total VAT you can reclaim from HMRC</div>
-      <div class="vat-reclaim-note">Submit on form VAT431NB within 3 months of practical completion</div>
+      <div class="vat-reclaim-label">Total VAT reclaimable from HMRC</div>
+      <div class="vat-reclaim-note">Submit form VAT431NB within 3 months of practical completion</div>
     </div>
-    <div class="vat-summary" style="margin-bottom:0;">
-      <div class="vat-stat green"><div class="vat-stat-icon">✅</div><div class="vat-stat-val" id="vatReclaimable">£0</div><div class="vat-stat-label">Reclaimable VAT</div></div>
-      <div class="vat-stat"><div class="vat-stat-icon">🔨</div><div class="vat-stat-val" id="vatContractor">£0</div><div class="vat-stat-label">Contractor spend</div></div>
-      <div class="vat-stat amber"><div class="vat-stat-icon">🛒</div><div class="vat-stat-val" id="vatMaterials">£0</div><div class="vat-stat-label">Self-supply spend</div></div>
-      <div class="vat-stat"><div class="vat-stat-icon">🧾</div><div class="vat-stat-val" id="vatReceiptCount">0</div><div class="vat-stat-label">Receipts logged</div></div>
+    <div class="vat-summary" style="margin-bottom:0">
+      <div class="vat-stat green"><div style="font-size:20px;margin-bottom:6px">✅</div><div class="vat-stat-val" id="vatReclaimable">£0</div><div class="vat-stat-label">Reclaimable VAT</div></div>
+      <div class="vat-stat"><div style="font-size:20px;margin-bottom:6px">🔨</div><div class="vat-stat-val" id="vatContractor">£0</div><div class="vat-stat-label">Contractor spend</div></div>
+      <div class="vat-stat amber"><div style="font-size:20px;margin-bottom:6px">🛒</div><div class="vat-stat-val" id="vatMaterials">£0</div><div class="vat-stat-label">Self-supply spend</div></div>
+      <div class="vat-stat"><div style="font-size:20px;margin-bottom:6px">🧾</div><div class="vat-stat-val" id="vatReceiptCount">0</div><div class="vat-stat-label">Receipts logged</div></div>
     </div>
   </div>
-
   <div class="card">
-    <div class="card-head">
-      <div class="card-head-left"><span class="card-head-icon">🧾</span><h3>VAT purchase log</h3></div>
-      <button class="btn btn-primary" onclick="openAddVat()">＋ Add purchase</button>
-    </div>
+    <div class="card-head"><div class="card-head-left"><span class="card-head-icon">🧾</span><h3>VAT purchase log</h3></div><button class="btn btn-primary" onclick="openAddVat()">＋ Add purchase</button></div>
     <div class="card-body" style="padding:0">
       <table class="vat-table">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Supplier</th>
-            <th>Type</th>
-            <th class="amt">Net (£)</th>
-            <th class="amt">VAT rate</th>
-            <th class="amt">VAT (£)</th>
-            <th class="amt">Total (£)</th>
-            <th>Reclaimable?</th>
-            <th>Receipt</th>
-            <th></th>
-          </tr>
-        </thead>
+        <thead><tr><th>Date</th><th>Description</th><th>Supplier</th><th>Type</th><th class="amt">Net (£)</th><th class="amt">Rate</th><th class="amt">VAT (£)</th><th class="amt">Total (£)</th><th>Reclaim?</th><th>Ref</th><th></th></tr></thead>
         <tbody id="vatBody"></tbody>
         <tfoot id="vatFoot"></tfoot>
       </table>
@@ -698,87 +529,59 @@ body.readonly .task-check{pointer-events:none;opacity:0.6;}
   </div>
 </div>
 
-<!-- ════════════ MATERIALS ════════════ -->
+<!-- MATERIALS -->
 <div id="materials" class="panel">
-  <div class="tab-header">
-    <span class="tab-icon">🪵</span>
-    <div>
-      <div class="tab-title">Materials Schedule</div>
-      <div class="tab-sub">From drawing CROY 2025 07B — Proposed Elevations by NA Williams</div>
-      <div class="tab-accent" style="background:var(--t-mat);"></div>
-    </div>
-  </div>
+  <div class="tab-header"><span class="tab-icon">🪵</span><div><div class="tab-title">Materials Schedule</div><div class="tab-sub">From drawing CROY 2025 07B — Proposed Elevations by NA Williams Building Consultancy Ltd</div><div class="tab-accent" style="background:var(--t-mat)"></div></div></div>
   <div class="materials-grid" id="materialsGrid"></div>
 </div>
 
-<!-- ════════════ CALENDAR ════════════ -->
+<!-- DRAWINGS -->
+<div id="drawings" class="panel">
+  <div class="tab-header"><span class="tab-icon">📐</span><div><div class="tab-title">Project Drawings</div><div class="tab-sub">All drawings by NA Williams Building Consultancy Ltd — ref CROY 2025/2026</div><div class="tab-accent" style="background:var(--t-docs)"></div></div></div>
+  <div class="drawings-grid" id="drawingsGrid"></div>
+</div>
+
+<!-- CALENDAR -->
 <div id="calendar" class="panel">
-  <div class="tab-header">
-    <span class="tab-icon">📆</span>
-    <div>
-      <div class="tab-title">Calendar</div>
-      <div class="tab-sub">All key dates · click an event to add to Google Calendar</div>
-      <div class="tab-accent" style="background:var(--t-cal);"></div>
-    </div>
-  </div>
+  <div class="tab-header"><span class="tab-icon">📆</span><div><div class="tab-title">Calendar</div><div class="tab-sub">All key dates · click an event to add to Google Calendar</div><div class="tab-accent" style="background:var(--t-cal)"></div></div></div>
   <div class="cal-header">
     <h2 id="calTitle"></h2>
     <div style="display:flex;gap:12px;align-items:center;">
-      <a class="gcal-btn" href="#" onclick="openGcalModal(event)">
-        <svg class="gcal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        Sync Google Cal
-      </a>
+      <a class="gcal-btn" href="#" onclick="openGcalModal(event)"><svg class="gcal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Sync Google Cal</a>
       <div class="cal-nav"><button onclick="changeMonth(-1)">‹</button><button onclick="changeMonth(1)">›</button></div>
     </div>
   </div>
   <div class="cal-grid" id="calGrid"></div>
-  <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;">
-    <span style="font-size:13px;display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;border-radius:2px;background:#ffe8de;display:inline-block;border:1px solid #f0a080;"></span>Planning</span>
-    <span style="font-size:13px;display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;border-radius:2px;background:#dde8ff;display:inline-block;border:1px solid #90aad8;"></span>Builder</span>
-    <span style="font-size:13px;display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;border-radius:2px;background:#ddf0e4;display:inline-block;border:1px solid #80c8a0;"></span>Milestone</span>
-    <span style="font-size:13px;display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;border-radius:2px;background:#ffe0e0;display:inline-block;border:1px solid #f08080;"></span>Urgent</span>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;">
+    <span style="font-size:12px;display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#ffe8de;display:inline-block;border:1px solid #e09070;"></span>Planning</span>
+    <span style="font-size:12px;display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#dde8ff;display:inline-block;border:1px solid #90a8d8;"></span>Builder</span>
+    <span style="font-size:12px;display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#ddf0e4;display:inline-block;border:1px solid #80b898;"></span>Milestone</span>
+    <span style="font-size:12px;display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#ffe0e0;display:inline-block;border:1px solid #e08080;"></span>Urgent</span>
   </div>
 </div>
 
-<!-- ════════════ TASKS ════════════ -->
+<!-- TASKS -->
 <div id="tasks" class="panel">
-  <div class="tab-header">
-    <span class="tab-icon">✅</span>
-    <div>
-      <div class="tab-title">Tasks</div>
-      <div class="tab-sub">Tick off as you go · red border = urgent · overdue shown in orange</div>
-      <div class="tab-accent" style="background:var(--t-tasks);"></div>
-    </div>
-  </div>
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+  <div class="tab-header"><span class="tab-icon">✅</span><div><div class="tab-title">Tasks</div><div class="tab-sub">Tick off as you go · red border = urgent · overdue shown in orange</div><div class="tab-accent" style="background:var(--t-tasks)"></div></div></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
     <div class="task-filters">
-      <button class="filter-btn active" onclick="filterTasks('all',this)"><span class="filter-icon">📋</span>All</button>
-      <button class="filter-btn" onclick="filterTasks('urgent',this)"><span class="filter-icon">🔴</span>Urgent</button>
-      <button class="filter-btn" onclick="filterTasks('planning',this)"><span class="filter-icon">📐</span>Planning</button>
-      <button class="filter-btn" onclick="filterTasks('builder',this)"><span class="filter-icon">🔨</span>Builder</button>
-      <button class="filter-btn" onclick="filterTasks('milestone',this)"><span class="filter-icon">🏁</span>Milestones</button>
-      <button class="filter-btn" onclick="filterTasks('utility',this)"><span class="filter-icon">⚡</span>Utilities</button>
-      <button class="filter-btn" onclick="filterTasks('done',this)"><span class="filter-icon">✔️</span>Done</button>
+      <button class="filter-btn active" onclick="filterTasks('all',this)">📋 All</button>
+      <button class="filter-btn" onclick="filterTasks('urgent',this)">🔴 Urgent</button>
+      <button class="filter-btn" onclick="filterTasks('planning',this)">📐 Planning</button>
+      <button class="filter-btn" onclick="filterTasks('builder',this)">🔨 Builder</button>
+      <button class="filter-btn" onclick="filterTasks('milestone',this)">🏁 Milestones</button>
+      <button class="filter-btn" onclick="filterTasks('utility',this)">⚡ Utilities</button>
+      <button class="filter-btn" onclick="filterTasks('done',this)">✔️ Done</button>
     </div>
     <button class="btn btn-primary" onclick="openAddTask()">＋ Add task</button>
   </div>
   <div class="task-list" id="taskList"></div>
 </div>
 
-<!-- ════════════ EVENTS ════════════ -->
+<!-- EVENTS -->
 <div id="events" class="panel">
-  <div class="tab-header">
-    <span class="tab-icon">📌</span>
-    <div>
-      <div class="tab-title">Key Events &amp; Dates</div>
-      <div class="tab-sub">All important project milestones · click any event to add to Google Calendar</div>
-      <div class="tab-accent" style="background:var(--t-events);"></div>
-    </div>
-  </div>
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-    <div></div>
-    <button class="btn btn-primary" onclick="openAddEvent()">＋ Add event</button>
-  </div>
+  <div class="tab-header"><span class="tab-icon">📌</span><div><div class="tab-title">Key Events &amp; Dates</div><div class="tab-sub">All important project milestones · click any event to add to Google Calendar</div><div class="tab-accent" style="background:var(--t-events)"></div></div></div>
+  <div style="display:flex;justify-content:flex-end;margin-bottom:14px;"><button class="btn btn-primary" onclick="openAddEvent()">＋ Add event</button></div>
   <div class="card">
     <div class="card-body" style="padding:0">
       <table class="events-table">
@@ -789,48 +592,39 @@ body.readonly .task-check{pointer-events:none;opacity:0.6;}
   </div>
 </div>
 
-<!-- ════════════ PROGRAMME ════════════ -->
+<!-- PROGRAMME -->
 <div id="schedule" class="panel">
-  <div class="tab-header">
-    <span class="tab-icon">🔨</span>
-    <div>
-      <div class="tab-title">Build Programme</div>
-      <div class="tab-sub">Phase by phase · Corydon, Winterbourne Steepleton · Ref: P-FUL-2025-05327</div>
-      <div class="tab-accent" style="background:var(--t-prog);"></div>
-    </div>
-  </div>
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-    <div></div>
-    <div style="display:flex;gap:8px;">
-      <button class="btn btn-primary" onclick="openAddSchedule()">＋ Add phase</button>
-      <a class="gcal-btn" href="#" onclick="openGcalModal(event)">
-        <svg class="gcal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        Export Google Cal
-      </a>
-    </div>
+  <div class="tab-header"><span class="tab-icon">🔨</span><div><div class="tab-title">Build Programme</div><div class="tab-sub">Phase by phase · Corydon, Winterbourne Steepleton · P-FUL-2025-05327</div><div class="tab-accent" style="background:var(--t-prog)"></div></div></div>
+  <div style="display:flex;justify-content:flex-end;gap:8px;margin-bottom:18px;">
+    <button class="btn btn-primary" onclick="openAddSchedule()">＋ Add phase</button>
+    <a class="gcal-btn" href="#" onclick="openGcalModal(event)"><svg class="gcal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Export Google Cal</a>
   </div>
   <div class="schedule-timeline" id="scheduleTimeline"></div>
 </div>
 
-<!-- ════════════ CONTACTS ════════════ -->
+<!-- CONTACTS -->
 <div id="contacts" class="panel">
-  <div class="tab-header">
-    <span class="tab-icon">👥</span>
-    <div>
-      <div class="tab-title">Project Team</div>
-      <div class="tab-sub">Everyone involved in the Corydon build</div>
-      <div class="tab-accent" style="background:var(--t-team);"></div>
-    </div>
-  </div>
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-    <div></div>
-    <button class="btn btn-primary" onclick="openAddContact()">＋ Add contact</button>
-  </div>
+  <div class="tab-header"><span class="tab-icon">👥</span><div><div class="tab-title">Project Team</div><div class="tab-sub">Everyone involved in the Corydon build</div><div class="tab-accent" style="background:var(--t-team)"></div></div></div>
+  <div style="display:flex;justify-content:flex-end;margin-bottom:14px;"><button class="btn btn-primary" onclick="openAddContact()">＋ Add contact</button></div>
   <div class="contacts-grid" id="contactsGrid"></div>
 </div>
 
-</main>
+<!-- SITE 3D -->
+<div id="plot3d" class="panel">
+  <div class="tab-header"><span class="tab-icon">🏗</span><div><div class="tab-title">Site 3D</div><div class="tab-sub">Drag to rotate · scroll to zoom · trees in red = scheduled for removal</div><div class="tab-accent" style="background:var(--t-plot)"></div></div></div>
+  <div class="plot-controls">
+    <button class="plot-btn active" id="btnPersp" onclick="setView('persp',this)">Perspective</button>
+    <button class="plot-btn" onclick="setView('top',this)">Top</button>
+    <button class="plot-btn" onclick="setView('south',this)">South</button>
+    <button class="plot-btn" onclick="resetView()">Reset</button>
+  </div>
+  <canvas id="plotCanvas" height="500"></canvas>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:var(--muted);">
+    <span>🟤 Proposed dwelling</span><span>🟢 Retained trees</span><span>🟠 Trees for removal (T1,T2,T3,T10)</span><span>🔵 ASHP</span>
+  </div>
+</div>
 
+</main>
 
 <!-- MODALS -->
 <div class="modal-overlay" id="eventViewModal">
@@ -846,8 +640,8 @@ body.readonly .task-check{pointer-events:none;opacity:0.6;}
   <div class="modal">
     <button class="modal-close" onclick="closeModal('gcalModal')">×</button>
     <h3>Add to Google Calendar</h3>
-    <div class="modal-meta">CLICK ANY EVENT TO ADD IT</div>
-    <div style="display:flex;flex-direction:column;gap:7px;margin-top:14px" id="gcalList"></div>
+    <div class="modal-meta">Click any event to add it</div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-top:12px" id="gcalList"></div>
   </div>
 </div>
 <div class="modal-overlay" id="taskModal">
@@ -902,18 +696,9 @@ body.readonly .task-check{pointer-events:none;opacity:0.6;}
     <button class="modal-close" onclick="closeModal('contactModal')">×</button>
     <h3 id="contactModalTitle">Add Contact</h3>
     <div class="form-grid">
-      <div class="form-row-two">
-        <div class="form-row"><label>Name *</label><input id="cmName"></div>
-        <div class="form-row"><label>Initials</label><input id="cmInitials" maxlength="4"></div>
-      </div>
-      <div class="form-row-two">
-        <div class="form-row"><label>Role *</label><input id="cmRole"></div>
-        <div class="form-row"><label>Company</label><input id="cmFirm"></div>
-      </div>
-      <div class="form-row-two">
-        <div class="form-row"><label>Phone</label><input id="cmPhone"></div>
-        <div class="form-row"><label>Mobile</label><input id="cmMobile"></div>
-      </div>
+      <div class="form-row-two"><div class="form-row"><label>Name *</label><input id="cmName"></div><div class="form-row"><label>Initials</label><input id="cmInitials" maxlength="4"></div></div>
+      <div class="form-row-two"><div class="form-row"><label>Role *</label><input id="cmRole"></div><div class="form-row"><label>Company</label><input id="cmFirm"></div></div>
+      <div class="form-row-two"><div class="form-row"><label>Phone</label><input id="cmPhone"></div><div class="form-row"><label>Mobile</label><input id="cmMobile"></div></div>
       <div class="form-row"><label>Email</label><input type="email" id="cmEmail"></div>
       <div class="form-row"><label>Website</label><input id="cmWeb"></div>
       <div class="form-actions"><button class="btn btn-save" onclick="saveContact()">Save</button><button class="btn btn-cancel" onclick="closeModal('contactModal')">Cancel</button></div>
@@ -926,10 +711,7 @@ body.readonly .task-check{pointer-events:none;opacity:0.6;}
     <h3 id="budgetModalTitle">Add Budget Line</h3>
     <div class="form-grid">
       <div class="form-row"><label>Item name *</label><input id="bmCat"></div>
-      <div class="form-row-two">
-        <div class="form-row"><label>Budget (£)</label><input type="number" id="bmBudget"></div>
-        <div class="form-row"><label>Actual (£)</label><input type="number" id="bmActual"></div>
-      </div>
+      <div class="form-row-two"><div class="form-row"><label>Budget (£)</label><input type="number" id="bmBudget"></div><div class="form-row"><label>Actual (£)</label><input type="number" id="bmActual"></div></div>
       <div class="form-actions"><button class="btn btn-save" onclick="saveBudgetItem()">Save</button><button class="btn btn-cancel" onclick="closeModal('budgetModal')">Cancel</button></div>
     </div>
   </div>
@@ -940,44 +722,29 @@ body.readonly .task-check{pointer-events:none;opacity:0.6;}
     <h3 id="vatModalTitle">Add Purchase</h3>
     <div class="modal-meta">VAT RECLAIM LOG</div>
     <div class="form-grid">
-      <div class="form-row-two">
-        <div class="form-row"><label>Date *</label><input type="date" id="vmDate"></div>
-        <div class="form-row"><label>Receipt ref</label><input id="vmRef" placeholder="e.g. INV-001"></div>
-      </div>
+      <div class="form-row-two"><div class="form-row"><label>Date *</label><input type="date" id="vmDate"></div><div class="form-row"><label>Receipt ref</label><input id="vmRef" placeholder="e.g. INV-001"></div></div>
       <div class="form-row"><label>Description *</label><input id="vmDesc" placeholder="What did you buy?"></div>
       <div class="form-row"><label>Supplier</label><input id="vmSupplier" placeholder="e.g. Jewsons, Travis Perkins…"></div>
       <div class="form-row"><label>Purchase type</label>
         <select id="vmType" onchange="vatTypeChanged()">
-          <option value="materials">🛒 Self-supply materials (I bought this directly)</option>
-          <option value="contractor">🔨 Contractor invoice (they supplied labour/materials)</option>
-          <option value="professional">📋 Professional fees (architect, surveyor etc.)</option>
+          <option value="materials">🛒 Self-supply materials</option>
+          <option value="contractor">🔨 Contractor invoice</option>
+          <option value="professional">📋 Professional fees</option>
           <option value="other">📦 Other</option>
         </select>
       </div>
       <div class="form-row-two">
-        <div class="form-row"><label>Net amount (£) *</label><input type="number" id="vmNet" step="0.01" placeholder="0.00" oninput="calcVatModal()"></div>
-        <div class="form-row"><label>VAT rate</label>
-          <select id="vmVatRate" onchange="calcVatModal()">
-            <option value="20">20% — Standard rate</option>
-            <option value="0">0% — Zero rated</option>
-            <option value="5">5% — Reduced rate</option>
-          </select>
-        </div>
+        <div class="form-row"><label>Net amount (£) *</label><input type="number" id="vmNet" step="0.01" oninput="calcVatModal()"></div>
+        <div class="form-row"><label>VAT rate</label><select id="vmVatRate" onchange="calcVatModal()"><option value="20">20% Standard</option><option value="0">0% Zero rated</option><option value="5">5% Reduced</option></select></div>
       </div>
       <div class="form-row-two">
-        <div class="form-row"><label>VAT amount (£)</label><input type="number" id="vmVat" step="0.01" placeholder="Auto-calculated" readonly style="background:#f0f0f0;"></div>
-        <div class="form-row"><label>Total (£)</label><input type="number" id="vmTotal" step="0.01" placeholder="Auto-calculated" readonly style="background:#f0f0f0;"></div>
+        <div class="form-row"><label>VAT (£)</label><input type="number" id="vmVat" step="0.01" readonly style="background:#f0f0f0"></div>
+        <div class="form-row"><label>Total (£)</label><input type="number" id="vmTotal" step="0.01" readonly style="background:#f0f0f0"></div>
       </div>
-      <div class="form-row" id="vmReclaimRow">
-        <label>Reclaimable from HMRC?</label>
-        <select id="vmReclaim">
-          <option value="yes">✅ Yes — I can reclaim this VAT</option>
-          <option value="no">❌ No — contractor / zero-rated</option>
-        </select>
+      <div class="form-row"><label>Reclaimable from HMRC?</label>
+        <select id="vmReclaim"><option value="yes">✅ Yes — reclaimable</option><option value="no">❌ No</option></select>
       </div>
-      <div id="vmReclaimNote" style="font-size:13px;color:var(--done);padding:8px 12px;background:#e8f5ee;border-radius:4px;display:none;">
-        ✅ This VAT will be added to your HMRC VAT431NB reclaim total
-      </div>
+      <div id="vmReclaimNote" style="font-size:12px;padding:7px 11px;background:#e8f4ee;border-radius:3px;display:none;color:var(--done);"></div>
       <div class="form-actions"><button class="btn btn-save" onclick="saveVatItem()">Save purchase</button><button class="btn btn-cancel" onclick="closeModal('vatModal')">Cancel</button></div>
     </div>
   </div>
@@ -993,132 +760,177 @@ body.readonly .task-check{pointer-events:none;opacity:0.6;}
     </div>
   </div>
 </div>
+<div class="modal-overlay" id="ganttModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('ganttModal')">×</button>
+    <h3 id="ganttModalTitle">Add programme bar</h3>
+    <div class="modal-meta">BUILD PROGRAMME</div>
+    <div class="form-grid">
+      <div class="form-row"><label>Phase / activity name *</label><input id="gmLabel" placeholder="e.g. Demolition"></div>
+      <div class="form-row"><label>Description</label><input id="gmSub" placeholder="e.g. Existing dwelling removed"></div>
+      <div class="form-row-two"><div class="form-row"><label>Start date *</label><input type="date" id="gmStart"></div><div class="form-row"><label>End date *</label><input type="date" id="gmEnd"></div></div>
+      <div class="form-row">
+        <label>Bar colour</label>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:9px" id="gmSwatches">
+          <div class="gm-swatch" data-color="#b87348" style="background:#b87348"></div>
+          <div class="gm-swatch" data-color="#c45a30" style="background:#c45a30"></div>
+          <div class="gm-swatch" data-color="#5a7a8c" style="background:#5a7a8c"></div>
+          <div class="gm-swatch" data-color="#6a7d60" style="background:#6a7d60"></div>
+          <div class="gm-swatch" data-color="#8a7a6e" style="background:#8a7a6e"></div>
+          <div class="gm-swatch" data-color="#7a6e8a" style="background:#7a6e8a"></div>
+          <div class="gm-swatch" data-color="#4a7a5e" style="background:#4a7a5e"></div>
+          <div class="gm-swatch" data-color="#6e7a8a" style="background:#6e7a8a"></div>
+          <div class="gm-swatch" data-color="#906030" style="background:#906030"></div>
+          <div class="gm-swatch" data-color="#8a4a4a" style="background:#8a4a4a"></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div id="gmColorPreview" style="width:34px;height:34px;border-radius:4px;border:2px solid rgba(26,26,24,0.2);background:#b87348;flex-shrink:0"></div>
+          <div style="display:flex;align-items:center;gap:7px">
+            <input type="color" id="gmColorPicker" value="#b87348" oninput="ganttColorFromPicker(this.value)" style="width:40px;height:30px;border:1px solid var(--border);border-radius:3px;cursor:pointer;padding:2px">
+            <input type="text" id="gmColorHex" value="#b87348" maxlength="7" oninput="ganttColorFromHex(this.value)" style="width:85px;font-family:'IBM Plex Mono',monospace;font-size:12px;border:1px solid var(--border);border-radius:3px;padding:5px 7px;background:var(--paper)">
+          </div>
+        </div>
+        <input type="hidden" id="gmColor" value="#b87348">
+      </div>
+      <div class="form-actions"><button class="btn btn-save" onclick="saveGantt()">Save bar</button><button class="btn btn-cancel" onclick="closeModal('ganttModal')">Cancel</button></div>
+    </div>
+  </div>
+</div>
 <div class="modal-overlay" id="confirmModal">
   <div class="confirm-box">
     <h4>Delete this item?</h4>
     <p id="confirmMsg">This cannot be undone.</p>
-    <div class="confirm-actions">
-      <button class="btn btn-delete" id="confirmYes">Delete</button>
-      <button class="btn btn-cancel" onclick="closeModal('confirmModal')">Cancel</button>
-    </div>
+    <div class="confirm-actions"><button class="btn btn-delete" id="confirmYes">Delete</button><button class="btn btn-cancel" onclick="closeModal('confirmModal')">Cancel</button></div>
   </div>
 </div>
 
 <script>
-// ══════════════════════════════════════════════
+// ═══════════════════════════════
 // STATE & DEFAULTS
-// ══════════════════════════════════════════════
-const STORE='corydon_v8';
-const today=new Date(); today.setHours(0,0,0,0);
-let currentMonth=today.getMonth(), currentYear=today.getFullYear();
+// ═══════════════════════════════
+const STORE='corydon_v9';
+const today=new Date();today.setHours(0,0,0,0);
+let currentMonth=today.getMonth(),currentYear=today.getFullYear();
 let activeTaskFilter='all';
-let plotRotX=-0.4, plotRotY=0.5, plotZoom=1;
-let plotDragging=false, plotLastX, plotLastY, plotHandlersInit=false;
-let editPhaseId=null, editEventId=null, editTaskId=null, editGanttId=null;
-let editScheduleId=null, editContactId=null, editBudgetId=null, editVatId=null;
+let plotRotX=-0.4,plotRotY=0.5,plotZoom=1;
+let plotDragging=false,plotLastX,plotLastY,plotHandlersInit=false;
+let editPhaseId=null,editEventId=null,editTaskId=null,editGanttId=null;
+let editScheduleId=null,editContactId=null,editBudgetId=null,editVatId=null;
+let ganttViewMode='month',ganttViewStart=null,ganttViewEnd=null;
 
 const DEFAULTS={
   phases:[
-    {id:1,name:'Planning & Design',pct:85,color:'#c4875a'},
-    {id:2,name:'Arboricultural Works',pct:20,color:'#7a8c6e'},
-    {id:3,name:'Asbestos Removal',pct:0,color:'#d4704a'},
-    {id:4,name:'Demolition',pct:0,color:'#8a6e7a'},
-    {id:5,name:'Groundworks',pct:0,color:'#7a8c6e'},
-    {id:6,name:'Foundations',pct:0,color:'#6b8fa3'},
+    {id:1,name:'Planning & Design',pct:85,color:'#b87348'},
+    {id:2,name:'Arboricultural Works',pct:20,color:'#6a7d60'},
+    {id:3,name:'Asbestos Removal',pct:0,color:'#c45a30'},
+    {id:4,name:'Demolition',pct:0,color:'#7a6e8a'},
+    {id:5,name:'Groundworks',pct:0,color:'#6a7d60'},
+    {id:6,name:'Foundations',pct:0,color:'#5a7a8c'},
     {id:7,name:'Structure & Walls',pct:0,color:'#6e7a8a'},
     {id:8,name:'Roof',pct:0,color:'#8a7a6e'},
-    {id:9,name:'Services & M&E',pct:0,color:'#7a8a6e'},
-    {id:10,name:'Fit-out & Finish',pct:0,color:'#c4875a'},
+    {id:9,name:'Services & M&E',pct:0,color:'#6a7d60'},
+    {id:10,name:'Fit-out & Finish',pct:0,color:'#b87348'},
   ],
   events:[
-    {id:1,date:'2025-04-22',title:'Planning Application Submitted',cat:'planning',desc:'P-FUL-2025-05327 submitted to Dorset Council. Drawings by NA Williams Building Consultancy Ltd. Arboricultural reports TR-1A & TPP-1A by NB Tree Management (19.11.2025).'},
+    {id:1,date:'2025-04-22',title:'Planning Application Submitted',cat:'planning',desc:'P-FUL-2025-05327 submitted to Dorset Council. Drawings by NA Williams Building Consultancy Ltd. Arboricultural reports TR-1A & TPP-1A by NB Tree Management (19.11.2025). 4 bed replacement dwelling, 394m², 3 storeys inc lower ground.'},
     {id:2,date:'2025-04-25',title:'Asbestos Tile Test — No ACM Found',cat:'milestone',desc:'Linsch Consultants (Batch B92798) tested cement tiles at Corydon. Result: No asbestos detected.'},
-    {id:3,date:'2025-05-08',title:'Brindley James Estimate Received',cat:'builder',desc:'Estimate CORYDON01: £380,000–£430,000 structural shell only. Excludes roof covering, windows, electrics, plumbing, finishes.'},
-    {id:4,date:'2025-05-14',title:'Evergreen — Heating System Estimate PL-8739',cat:'builder',desc:'Ref PL-8739. UFH ground floor (Mercury Atlas) + radiators first floor. Total £14,422.25 inc VAT at 0%. Materials £6,457.25, Labour £7,740, Commissioning £225. Deposit: £3,605.56. NOTE: Expired — request updated quote. Paul Reynolds, Evergreen Renewable Energy Ltd, 01297 443209.'},
-    {id:5,date:'2025-05-15',title:'Jewsons Full Build Estimate',cat:'builder',desc:'Project Estimator ref 2505-0915-5056. Full build: £619,611.74 ex-VAT / £743,534.09 inc-VAT. 394m², 68 weeks.'},
+    {id:3,date:'2025-05-08',title:'Brindley James Estimate Received',cat:'builder',desc:'Estimate CORYDON01: £380,000–£430,000 structural shell only. Excludes roof covering, windows, electrics, plumbing, finishes. Contact: 01308 459300 / 07971 899542. build@brindleyjames.com'},
+    {id:4,date:'2025-05-14',title:'Evergreen Heating Quote PL-8739',cat:'builder',desc:'UFH ground floor (Mercury Atlas) + radiators first floor. Total £14,422.25 inc VAT 0%. Materials £6,457.25, Labour £7,740, Commissioning £225. Deposit: £3,605.56. NOTE: EXPIRED — request updated quote. Paul Reynolds, Evergreen Renewable Energy Ltd, 01297 443209.'},
+    {id:5,date:'2025-05-15',title:'Jewsons Full Build Estimate',cat:'builder',desc:'Project Estimator ref 2505-0915-5056. Full build: £619,611.74 ex-VAT / £743,534.09 inc-VAT. 394m², 68 weeks to completion. £1,572/m².'},
     {id:6,date:'2025-10-23',title:'Demolition Notice Filed',cat:'milestone',desc:'B/DEM/2025/00041 submitted to Dorset Council under Section 80(2)(a) Building Act 1984. Acknowledged by Graeme Matthews, Senior Building Control Surveyor.'},
-    {id:7,date:'2025-11-18',title:'SSE Power Supply Disconnected',cat:'utility',desc:'Scottish & Southern Electricity Network. Cutting existing power supply for new build. Invoice £307.60 inc VAT £51.27.'},
-    {id:8,date:'2025-11-22',title:'Nick Baxter Tree Report',cat:'planning',desc:'Tree protection report for planning. Invoice £905.00. Nick Baxter, NB Tree Management.'},
-    {id:9,date:'2026-01-29',title:'NA Williams Fees — Invoice 7',cat:'planning',desc:'NA Williams Building Consultancy Ltd fees. Invoice £7,020.00.'},
-    {id:10,date:'2026-02-05',title:'Evergreen — Hot Water Return Loop PL-8772',cat:'builder',desc:'Ref PL-8772. Domestic hot water return loop for new build. Bronze pump with timer, non-return valve, copper & plastic pipe, lagging. Pump control TBC: timed or PIR. Materials £650, Labour £900. Total £1,550 inc VAT at 0%. Deposit: £387.50. NOTE: Expired — request updated quote. Paul Reynolds, 01297 443209.'},
+    {id:7,date:'2025-11-18',title:'SSE Power Supply Disconnected',cat:'utility',desc:'Scottish & Southern Electricity Network. Cutting existing power supply. Invoice £307.60 inc VAT £51.27.'},
+    {id:8,date:'2025-11-22',title:'Nick Baxter Tree Report',cat:'planning',desc:'Tree protection report for planning. Invoice £905.00. Nick@nbtreemanagement.co.uk'},
+    {id:9,date:'2026-01-29',title:'NA Williams Building Regs Submitted',cat:'planning',desc:'Full building regulations submitted. Building Regs Notes compiled 26.01.2026 (amended 16.03.2026). Drawings CROY 2026 09, 10, 13 issued. NA Williams fees £7,020.'},
+    {id:10,date:'2026-02-05',title:'Evergreen Hot Water Loop Quote PL-8772',cat:'builder',desc:'Domestic hot water return loop. Materials £650, Labour £900. Total £1,550 inc VAT 0%. Deposit: £387.50. NOTE: EXPIRED — request updated quote. Paul Reynolds, 01297 443209.'},
     {id:11,date:'2026-02-09',title:'Asbestos Demolition Survey — CAS 3044',cat:'urgent',desc:'Complete Asbestos Solutions surveyed whole property. 3 low-risk chrysotile items requiring removal before demolition: (1) Cavity closer, Bedroom 2/G08; (2) Panel to wall, Undercroft/B103; (3) Debris to floor, Undercroft/B103. Invoice £474 inc VAT £79.'},
-    {id:12,date:'2026-02-23',title:'Asbestos Survey Report Issued — CAS 3044',cat:'urgent',desc:'CAS 3044 final report issued. All 3 ACM items must be removed before demolition proceeds. Call Complete Asbestos Solutions: 01202 099 906.'},
-    {id:13,date:'2026-02-25',title:'SGN Gas Disconnected',cat:'utility',desc:'Gas disconnection completed. Invoice £1,211.00.'},
-    {id:14,date:'2026-03-10',title:'Heras Fencing Installed — Events Crew',cat:'builder',desc:'Tree protection Heras fencing installed. Events Crew, invoice EVC-12149. £627 inc VAT £104.50. VAT reclaimable.'},
-    {id:15,date:'2026-03-17',title:'Dorset Council — Unilateral Undertaking Discharged',cat:'planning',desc:'Unilateral Undertaking discharge. Ref PP-14783530-v1. Invoice £383.'},
-    {id:16,date:'2026-03-19',title:'Stroma Building Control — Part Payment',cat:'planning',desc:'Building Control part payment of £1,500 total. Invoice £540 inc VAT £90. VAT no 5193561.'},
-    {id:17,date:'2026-03-21',title:'MKM Plywood Purchased',cat:'builder',desc:'Plywood purchased by R.Budd via First Direct. MKM. £459 inc VAT £76.50. VAT reclaimable.'},
+    {id:12,date:'2026-02-23',title:'CAS 3044 Final Report Issued',cat:'urgent',desc:'All 3 ACM items must be removed before demolition proceeds. Call Complete Asbestos Solutions: 01202 099 906.'},
+    {id:13,date:'2026-02-25',title:'SGN Gas Disconnected',cat:'utility',desc:'Gas disconnection completed. R.Budd. Invoice £1,211.00.'},
+    {id:14,date:'2026-03-10',title:'Heras Fencing Installed',cat:'builder',desc:'Tree protection Heras fencing installed by Events Crew. Invoice EVC-12149. £627 inc VAT £104.50. VAT reclaimable.'},
+    {id:15,date:'2026-03-17',title:'Dorset Council — UU Discharged',cat:'planning',desc:'Unilateral Undertaking discharge. Ref PP-14783530-v1. Invoice £383.'},
+    {id:16,date:'2026-03-19',title:'Stroma Building Control — Part Payment',cat:'planning',desc:'Building Control part payment of £1,500 total. Invoice £540 inc VAT £90.'},
+    {id:17,date:'2026-03-21',title:'Plywood Purchased — MKM',cat:'builder',desc:'Plywood purchased by R.Budd via First Direct. £459 inc VAT £76.50. VAT reclaimable.'},
+    {id:18,date:'2026-04-15',title:'Mains Water Pipe & Fittings',cat:'builder',desc:'John Davidson (Pipes) Ltd. Mains water pipe and fittings. £66.32 inc VAT £11.05. Ref C003002. VAT reclaimable.'},
   ],
   tasks:[
-    {id:1,title:'Commission asbestos removal — 3 ACM items',cat:'urgent',due:'2026-04-15',prio:'high',done:false,notes:'CAS 3044. Items: cavity closer Bedroom 2/G08, panel + debris in undercroft/B103. MUST be done before demolition. Call Complete Asbestos Solutions: 01202 099 906.'},
-    {id:2,title:'Obtain asbestos removal completion certificate',cat:'urgent',due:'2026-04-30',prio:'high',done:false,notes:'Required before demolition contractor can start on site.'},
-    {id:3,title:'Confirm 0% VAT eligibility with HMRC',cat:'planning',due:'2026-05-01',prio:'high',done:false,notes:'New build is zero-rated. Register for VAT431NB reclaim. Keep all receipts for self-supply materials.'},
-    {id:4,title:'Instruct structural engineer',cat:'planning',due:'2026-05-15',prio:'high',done:false,notes:'Required for foundation design and cantilevered roof structure.'},
-    {id:5,title:'Disconnect water supply before demolition',cat:'builder',due:'2026-04-20',prio:'high',done:false,notes:'Gas and electricity already disconnected. Water still to do.'},
-    {id:6,title:'Confirm tree protection fencing in place — TPP-1A',cat:'builder',due:'2026-05-01',prio:'high',done:false,notes:'Heras fencing installed by Events Crew. Check positions match arboricultural plan TPP-1A by NB Tree Management.'},
-    {id:7,title:'Arrange T1, T2, T3, T10 & Hedge H3 removal',cat:'builder',due:'2026-05-10',prio:'high',done:false,notes:'Per arboricultural drawings TR-1A & TPP-1A by NB Tree Management, dated 19.11.2025.'},
-    {id:8,title:'Await planning decision — P-FUL-2025-05327',cat:'planning',due:'2026-06-01',prio:'high',done:false,notes:'Dorset Council. Planning ref P-FUL-2025-05327. Chase if no decision by June 2026.'},
-    {id:9,title:'Request updated quotes from Evergreen',cat:'builder',due:'2026-06-01',prio:'med',done:false,notes:'Both PL-8739 (heating £14,422) and PL-8772 (hot water loop £1,550) have expired. Contact Paul Reynolds: 01297 443209.'},
-    {id:10,title:'Submit HMRC VAT431NB reclaim after completion',cat:'milestone',due:'2027-12-01',prio:'high',done:false,notes:'Must submit within 3 months of practical completion. All reclaimable receipts tracked in VAT tab. Current reclaimable: £209.22.'},
+    {id:1,title:'Commission asbestos removal — 3 ACM items',cat:'urgent',due:'2026-04-30',prio:'high',done:false,notes:'CAS 3044. Items: cavity closer Bedroom 2/G08, panel + debris in undercroft/B103. MUST be done before demolition. Complete Asbestos Solutions: 01202 099 906.'},
+    {id:2,title:'Obtain asbestos removal completion certificate',cat:'urgent',due:'2026-05-15',prio:'high',done:false,notes:'Required before demolition contractor can start on site.'},
+    {id:3,title:'Instruct structural engineer',cat:'planning',due:'2026-05-15',prio:'high',done:false,notes:'Required for: foundation design, cantilevered roof, steel beam calcs (beams A-F), terrace structure, and concrete pad-stones throughout. All calcs to be issued to Building Control.'},
+    {id:4,title:'Disconnect water supply before demolition',cat:'builder',due:'2026-04-30',prio:'high',done:false,notes:'Gas and electricity already disconnected. Water still to do. New mains water pipe and fittings purchased (John Davidson, Apr 2026).'},
+    {id:5,title:'Confirm tree protection fencing — TPP-1A',cat:'builder',due:'2026-05-01',prio:'high',done:false,notes:'Heras fencing installed by Events Crew. Check positions match arboricultural plan TPP-1A by NB Tree Management, dated 19.11.2025.'},
+    {id:6,title:'Arrange T1, T2, T3, T10 & Hedge H3 removal',cat:'builder',due:'2026-05-10',prio:'high',done:false,notes:'Per arboricultural drawings TR-1A & TPP-1A by NB Tree Management. These are within the build footprint or obstruct access.'},
+    {id:7,title:'Await planning decision — P-FUL-2025-05327',cat:'planning',due:'2026-06-01',prio:'high',done:false,notes:'Dorset Council. Chase if no decision by June 2026.'},
+    {id:8,title:'Request updated quotes from Paul Reynolds (Evergreen)',cat:'builder',due:'2026-06-01',prio:'med',done:false,notes:'Both PL-8739 (heating £14,422) and PL-8772 (hot water loop £1,550) have expired. Contact Paul Reynolds: 01297 443209. evergreenrenwable.co.uk — also ask about solar.'},
+    {id:9,title:'Submit HMRC VAT431NB reclaim after completion',cat:'milestone',due:'2027-12-01',prio:'high',done:false,notes:'Must submit within 3 months of practical completion. All reclaimable receipts tracked in VAT tab.'},
+    {id:10,title:'Confirm 0% VAT eligibility with HMRC',cat:'planning',due:'2026-05-01',prio:'high',done:false,notes:'New build is zero-rated. Register for VAT431NB reclaim. Keep all receipts for self-supply materials.'},
+    {id:11,title:'Site investigation before foundation excavation',cat:'builder',due:'2026-06-01',prio:'high',done:false,notes:'Required per building regs section 1.0.1 — establish nature and depth of existing foundations before excavating. If piles found, instruct structural engineer.'},
+    {id:12,title:'Percolation test for soakaways',cat:'builder',due:'2026-07-01',prio:'med',done:false,notes:'Site percolation test to BS 6297-1983 required before soakaway design. Results to be issued to Building Control. Two soakaways required (RWP1/2 and RWP3).'},
+    {id:13,title:'GRAF One2Clean PTP — Environment Agency notification',cat:'planning',due:'2026-06-01',prio:'med',done:false,notes:'Package treatment plant (7PE, 4800L) to be installed in front grounds. Check General Binding Rules compliance re: 30m from public sewer and 500m from SAC/SSSI.'},
   ],
   budget:[
-    {id:1,cat:'Professional Fees',budget:45000,actual:9785,color:'#c4875a'},
-    {id:2,cat:'Site Setup & Demolition',budget:15000,actual:1519,color:'#8a6e7a'},
-    {id:3,cat:'Asbestos Removal',budget:3000,actual:474,color:'#d4704a'},
-    {id:4,cat:'Groundworks & Foundations',budget:55000,actual:0,color:'#7a8c6e'},
-    {id:5,cat:'External Walls & Lintels',budget:130000,actual:0,color:'#6b8fa3'},
+    {id:1,cat:'Professional Fees',budget:45000,actual:9785,color:'#b87348'},
+    {id:2,cat:'Site Setup & Demolition',budget:15000,actual:1519,color:'#7a6e8a'},
+    {id:3,cat:'Asbestos Removal',budget:3000,actual:474,color:'#c45a30'},
+    {id:4,cat:'Groundworks & Foundations',budget:55000,actual:66,color:'#6a7d60'},
+    {id:5,cat:'External Walls & Lintels',budget:130000,actual:0,color:'#5a7a8c'},
     {id:6,cat:'Roof Structure',budget:58000,actual:0,color:'#8a7a6e'},
-    {id:7,cat:'Roof Covering — Greencoat PLX',budget:47000,actual:0,color:'#8a6e7a'},
+    {id:7,cat:'Roof — Greencoat PLX',budget:47000,actual:0,color:'#7a6e8a'},
     {id:8,cat:'Scaffolding',budget:22500,actual:0,color:'#6e7a8a'},
-    {id:9,cat:'Windows & External Doors',budget:62600,actual:0,color:'#7a8a6e'},
-    {id:10,cat:'1st Fix Carpentry',budget:48000,actual:0,color:'#c4875a'},
-    {id:11,cat:'Heating — UFH & Radiators (Evergreen PL-8739)',budget:14422,actual:0,color:'#7a8c6e'},
-    {id:12,cat:'Hot Water Return Loop (Evergreen PL-8772)',budget:1550,actual:0,color:'#6b8fa3'},
-    {id:13,cat:'Electrics',budget:29000,actual:0,color:'#6b8fa3'},
+    {id:9,cat:'Windows & External Doors',budget:62600,actual:0,color:'#6a7d60'},
+    {id:10,cat:'1st Fix Carpentry',budget:48000,actual:0,color:'#b87348'},
+    {id:11,cat:'Heating — UFH & Radiators (Evergreen PL-8739)',budget:14422,actual:0,color:'#6a7d60'},
+    {id:12,cat:'Hot Water Return Loop (Evergreen PL-8772)',budget:1550,actual:0,color:'#5a7a8c'},
+    {id:13,cat:'Electrics',budget:29000,actual:0,color:'#5a7a8c'},
     {id:14,cat:'Plastering & Render',budget:40500,actual:0,color:'#8a7a6e'},
     {id:15,cat:'2nd Fix Carpentry & Joinery',budget:11200,actual:0,color:'#6e7a8a'},
-    {id:16,cat:'Decorating',budget:21900,actual:0,color:'#7a8a6e'},
-    {id:17,cat:'Finishes & Tiling',budget:7400,actual:0,color:'#c4875a'},
-    {id:18,cat:'Guttering',budget:8100,actual:0,color:'#8a6e7a'},
+    {id:16,cat:'Decorating',budget:21900,actual:0,color:'#6a7d60'},
+    {id:17,cat:'Finishes & Tiling',budget:7400,actual:0,color:'#b87348'},
+    {id:18,cat:'Guttering & Drainage',budget:8100,actual:0,color:'#7a6e8a'},
     {id:19,cat:'Contingency (10%)',budget:62000,actual:0,color:'#8a8880'},
   ],
   vat:[
-    {id:1,date:'2025-11-18',desc:'Cutting existing power supply for new build',supplier:'Scottish & Southern Electricity Network',type:'contractor',net:256.33,vatRate:20,vat:51.27,total:307.60,reclaim:'no',ref:'Inv-1',notes:'Utility disconnection'},
-    {id:2,date:'2025-11-22',desc:'Tree protection report',supplier:'Nick Baxter Tree Report',type:'professional',net:905.00,vatRate:0,vat:0,total:905.00,reclaim:'no',ref:'Inv-2',notes:'No VAT charged'},
-    {id:3,date:'2025-11-27',desc:'Bat boxes to rehouse bats',supplier:'Bat Boxes',type:'materials',net:93.89,vatRate:20,vat:18.78,total:112.67,reclaim:'yes',ref:'Inv-3',notes:'Self-supply materials - reclaimable. Copy in folder.'},
-    {id:4,date:'2025-12-20',desc:'Materials purchase',supplier:'Jewson',type:'materials',net:18.90,vatRate:0,vat:0,total:18.90,reclaim:'no',ref:'Inv-4',notes:'No VAT details on record'},
-    {id:5,date:'2025-12-19',desc:'White temp electrical box',supplier:'Travis Perkins',type:'materials',net:47.18,vatRate:20,vat:9.44,total:56.62,reclaim:'yes',ref:'Inv-5',notes:'Self-supply materials - reclaimable. Copy in folder.'},
-    {id:6,date:'2026-01-19',desc:'Unilateral Undertaking fee',supplier:'Dorset Council',type:'other',net:500.00,vatRate:0,vat:0,total:500.00,reclaim:'no',ref:'Inv-6',notes:'Council fee - not reclaimable'},
-    {id:7,date:'2026-01-29',desc:'Building consultancy fees',supplier:'NA Williams Building Consultancy',type:'professional',net:7020.00,vatRate:0,vat:0,total:7020.00,reclaim:'no',ref:'Inv-7',notes:'Professional fees'},
-    {id:8,date:'2026-02-12',desc:'BNG Monitoring fee - Unilateral Undertaking',supplier:'Dorset Council',type:'other',net:92.00,vatRate:0,vat:0,total:92.00,reclaim:'no',ref:'1801565636',notes:'Copy in folder'},
-    {id:9,date:'2026-02-17',desc:'Asbestos review for demolition CAS 3044',supplier:'Complete Asbestos Solutions Ltd',type:'professional',net:395.00,vatRate:20,vat:79.00,total:474.00,reclaim:'no',ref:'2502',notes:'VAT no 364519678. Professional survey - not reclaimable on VAT431NB'},
-    {id:10,date:'2026-02-25',desc:'SGN Gas disconnection',supplier:'SGN via R.Budd',type:'contractor',net:1211.00,vatRate:0,vat:0,total:1211.00,reclaim:'no',ref:'Inv-10',notes:'Gas disconnection'},
-    {id:11,date:'2026-03-10',desc:'Heras fencing supply and install',supplier:'Events Crew',type:'materials',net:522.50,vatRate:20,vat:104.50,total:627.00,reclaim:'yes',ref:'EVC-12149',notes:'VAT no 81600182. Tree protection fencing - reclaimable. Copy in folder.'},
-    {id:12,date:'2026-03-11',desc:'Cedar Direct sample',supplier:'Cedar Direct',type:'materials',net:28.45,vatRate:20,vat:5.69,total:34.14,reclaim:'no',ref:'Inv-12',notes:'Sample - check if reclaimable'},
-    {id:13,date:'2026-03-13',desc:'Bat licence application and planning submission',supplier:'Redstone Ecology Ltd',type:'professional',net:1200.00,vatRate:0,vat:0,total:1200.00,reclaim:'no',ref:'Inv-13',notes:'Zero rated professional fee'},
-    {id:14,date:'2026-03-17',desc:'Unilateral Undertaking discharge',supplier:'Dorset Council',type:'other',net:383.00,vatRate:0,vat:0,total:383.00,reclaim:'no',ref:'PP-14783530-v1',notes:'Council discharge fee. Copy in folder.'},
-    {id:15,date:'2026-03-19',desc:'Building Control part payment',supplier:'Stroma Building Control',type:'professional',net:450.00,vatRate:20,vat:90.00,total:540.00,reclaim:'no',ref:'Inv-15',notes:'VAT no 5193561. Building control - not reclaimable'},
-    {id:16,date:'2026-03-20',desc:'Ground pins for tree protection',supplier:'Ultimate One',type:'materials',net:76.55,vatRate:20,vat:15.31,total:91.86,reclaim:'no',ref:'189967',notes:'VAT no 238884655. Check if reclaimable'},
-    {id:17,date:'2026-03-21',desc:'Plywood',supplier:'MKM via R.Budd',type:'materials',net:382.50,vatRate:20,vat:76.50,total:459.00,reclaim:'yes',ref:'Inv-17',notes:'Self-supply building materials - reclaimable. Copy in folder.'},
-    {id:18,date:'2026-03-25',desc:'Cloth and socket pipes',supplier:'Plumbfix via R.Budd',type:'materials',net:56.69,vatRate:0,vat:0,total:56.69,reclaim:'no',ref:'a25331570407',notes:'VAT no 232555575. Check VAT rate on receipt'},
-    {id:19,date:'2026-03-30',desc:'Tree report for fencing install',supplier:'Nick Baxter Tree Report',type:'professional',net:120.00,vatRate:0,vat:0,total:120.00,reclaim:'no',ref:'Inv-19',notes:'Professional report - no VAT'},
+    {id:1,date:'2025-11-18',desc:'Cutting existing power supply',supplier:'SSE Network',type:'contractor',net:256.33,vatRate:20,vat:51.27,total:307.60,reclaim:'no',ref:'Inv-1'},
+    {id:2,date:'2025-11-22',desc:'Tree protection report',supplier:'Nick Baxter Tree Report',type:'professional',net:905.00,vatRate:0,vat:0,total:905.00,reclaim:'no',ref:'Inv-2'},
+    {id:3,date:'2025-11-27',desc:'Bat boxes to rehouse bats',supplier:'Bat Boxes',type:'materials',net:93.89,vatRate:20,vat:18.78,total:112.67,reclaim:'yes',ref:'Inv-3'},
+    {id:4,date:'2025-12-20',desc:'Materials purchase',supplier:'Jewson',type:'materials',net:18.90,vatRate:0,vat:0,total:18.90,reclaim:'no',ref:'Inv-4'},
+    {id:5,date:'2025-12-19',desc:'White temp electrical box',supplier:'Travis Perkins',type:'materials',net:47.18,vatRate:20,vat:9.44,total:56.62,reclaim:'yes',ref:'Inv-5'},
+    {id:6,date:'2026-01-19',desc:'Unilateral Undertaking fee',supplier:'Dorset Council',type:'other',net:500.00,vatRate:0,vat:0,total:500.00,reclaim:'no',ref:'Inv-6'},
+    {id:7,date:'2026-01-29',desc:'Building consultancy fees',supplier:'NA Williams Building Consultancy',type:'professional',net:7020.00,vatRate:0,vat:0,total:7020.00,reclaim:'no',ref:'Inv-7'},
+    {id:8,date:'2026-02-12',desc:'BNG Monitoring fee — Unilateral Undertaking',supplier:'Dorset Council',type:'other',net:92.00,vatRate:0,vat:0,total:92.00,reclaim:'no',ref:'1801565636'},
+    {id:9,date:'2026-02-17',desc:'Asbestos review for demolition CAS 3044',supplier:'Complete Asbestos Solutions Ltd',type:'professional',net:395.00,vatRate:20,vat:79.00,total:474.00,reclaim:'no',ref:'2502'},
+    {id:10,date:'2026-02-25',desc:'SGN Gas disconnection',supplier:'R.Budd via SGN',type:'contractor',net:1211.00,vatRate:0,vat:0,total:1211.00,reclaim:'no',ref:'Inv-10'},
+    {id:11,date:'2026-03-10',desc:'Heras fencing supply and install',supplier:'Events Crew',type:'materials',net:522.50,vatRate:20,vat:104.50,total:627.00,reclaim:'yes',ref:'EVC-12149'},
+    {id:12,date:'2026-03-11',desc:'Cedar Direct sample',supplier:'Cedar Direct',type:'materials',net:28.45,vatRate:20,vat:5.69,total:34.14,reclaim:'no',ref:'Inv-12'},
+    {id:13,date:'2026-03-13',desc:'Bat licence application and planning submission',supplier:'Redstone Ecology Ltd',type:'professional',net:1200.00,vatRate:0,vat:0,total:1200.00,reclaim:'no',ref:'Inv-13'},
+    {id:14,date:'2026-03-17',desc:'Unilateral Undertaking discharge',supplier:'Dorset Council',type:'other',net:383.00,vatRate:0,vat:0,total:383.00,reclaim:'no',ref:'PP-14783530-v1'},
+    {id:15,date:'2026-03-19',desc:'Building Control part payment',supplier:'Stroma Building Control',type:'professional',net:450.00,vatRate:20,vat:90.00,total:540.00,reclaim:'no',ref:'Inv-15'},
+    {id:16,date:'2026-03-20',desc:'Ground pins for tree protection',supplier:'Ultimate One',type:'materials',net:76.55,vatRate:20,vat:15.31,total:91.86,reclaim:'no',ref:'189967'},
+    {id:17,date:'2026-03-21',desc:'Plywood',supplier:'MKM via R.Budd',type:'materials',net:382.50,vatRate:20,vat:76.50,total:459.00,reclaim:'yes',ref:'Inv-17'},
+    {id:18,date:'2026-03-25',desc:'Cloth and socket pipes',supplier:'Plumbfix via R.Budd',type:'materials',net:56.69,vatRate:0,vat:0,total:56.69,reclaim:'no',ref:'a25331570407'},
+    {id:19,date:'2026-03-30',desc:'Tree report for fencing install',supplier:'Nick Baxter Tree Report',type:'professional',net:120.00,vatRate:0,vat:0,total:120.00,reclaim:'no',ref:'Inv-19'},
+    {id:20,date:'2026-04-15',desc:'Mains water pipe and fittings',supplier:'John Davidson (Pipes) Ltd',type:'materials',net:55.27,vatRate:20,vat:11.05,total:66.32,reclaim:'yes',ref:'C003002'},
   ],
   schedule:[
-    {id:1,date:'Apr 2025',title:'Planning Application Submitted',status:'done',desc:'P-FUL-2025-05327 submitted to Dorset Council. Drawings by NA Williams. Arboricultural reports TR-1A & TPP-1A by NB Tree Management.',cat:'planning'},
-    {id:2,date:'May 2025',title:'Estimates Obtained',status:'done',desc:'Brindley James £380k-£430k shell. Jewsons £619,611 ex-VAT full build, 68 weeks, 394m². Evergreen heating PL-8739 £14,422.',cat:'planning'},
-    {id:3,date:'Oct 2025',title:'Demolition Notice Filed',status:'done',desc:'B/DEM/2025/00041 submitted and acknowledged by Dorset Council Building Control (Graeme Matthews).',cat:'milestone'},
-    {id:4,date:'Nov 2025',title:'Services Disconnection Begins',status:'done',desc:'SSE electricity disconnected Nov 2025. SGN gas disconnected Feb 2026.',cat:'utility'},
-    {id:5,date:'Feb 2026',title:'Asbestos Demolition Survey — CAS 3044',status:'done',desc:'Complete Asbestos Solutions. 3 low-risk chrysotile ACM items identified. All must be removed before demolition.',cat:'milestone'},
-    {id:6,date:'Mar 2026',title:'Site Protection Works',status:'done',desc:'Heras fencing installed by Events Crew. Plywood and pipe materials purchased. Stroma Building Control appointed.',cat:'builder'},
-    {id:7,date:'Apr–May 2026',title:'Asbestos Removal',status:'active',desc:'3 ACM items to be removed by licensed contractor before demolition. Obtain completion certificate.',cat:'builder'},
-    {id:8,date:'2026',title:'Planning Decision Awaited',status:'',desc:'Awaiting Dorset Council decision on P-FUL-2025-05327.',cat:'planning'},
+    {id:1,date:'Apr 2025',title:'Planning Application Submitted',status:'done',desc:'P-FUL-2025-05327 submitted to Dorset Council. 4-bed replacement dwelling, 394m², 3 storeys. Drawings by NA Williams. Arboricultural reports TR-1A & TPP-1A.',cat:'planning'},
+    {id:2,date:'May 2025',title:'Estimates Obtained',status:'done',desc:'Brindley James £380k–£430k shell only. Jewsons £619,611 ex-VAT full build. Evergreen heating PL-8739 £14,422 (expired). 68 weeks, 394m², £1,572/m².',cat:'planning'},
+    {id:3,date:'Oct 2025',title:'Demolition Notice Filed',status:'done',desc:'B/DEM/2025/00041 submitted and acknowledged by Dorset Council Building Control (Graeme Matthews, Senior Building Control Surveyor).',cat:'milestone'},
+    {id:4,date:'Nov 2025',title:'Services Disconnection Begins',status:'done',desc:'SSE electricity disconnected Nov 2025. SGN gas disconnected Feb 2026. Water still to be disconnected.',cat:'utility'},
+    {id:5,date:'Jan 2026',title:'Building Regulations Submitted',status:'done',desc:'Full building regs notes compiled by NA Williams (26.01.2026, amended 16.03.2026). Drawings CROY 2026 09, 10, 13. Stroma Building Control appointed.',cat:'planning'},
+    {id:6,date:'Feb 2026',title:'Asbestos Demolition Survey — CAS 3044',status:'done',desc:'Complete Asbestos Solutions. 3 low-risk chrysotile ACM items identified. All must be removed before demolition.',cat:'milestone'},
+    {id:7,date:'Mar 2026',title:'Site Protection Works',status:'done',desc:'Heras fencing installed by Events Crew. Plywood, pipes and materials purchased. Ground pins for tree protection installed.',cat:'builder'},
+    {id:8,date:'Apr–May 2026',title:'Asbestos Removal',status:'active',desc:'3 ACM items to be removed by licensed contractor. Obtain completion certificate before demolition.',cat:'builder'},
+    {id:9,date:'2026',title:'Planning Decision Awaited',status:'',desc:'Awaiting Dorset Council decision on P-FUL-2025-05327.',cat:'planning'},
+    {id:10,date:'Mid 2026',title:'Tender & Appoint Contractor',status:'',desc:'Issue tender pack. Brindley James already quoted. Appoint main contractor and structural engineer.',cat:'builder'},
+    {id:11,date:'Late 2026',title:'Demolition & Groundworks',status:'',desc:'Demolish existing dwelling. Foundation excavation, trench fill foundations, beam & block floor. ASHP position prepared.',cat:'builder'},
+    {id:12,date:'2026–2027',title:'Structure, Roof & Services',status:'',desc:'External walls (cavity with Celotex PIR), Greencoat PLX flat roof, timber frame, glazing (Catnic lintels). 1st fix services including UFH, ASHP, SVP stacks.',cat:'builder'},
   ],
   gantt:[
-    {id:1,label:'Planning & Surveys',sub:'Application, estimates, surveys',startDate:'2025-04-01',endDate:'2026-02-28',color:'#c4875a'},
-    {id:2,label:'Asbestos Removal',sub:'CAS 3044 — 3 ACM items to remove',startDate:'2026-04-01',endDate:'2026-04-30',color:'#d4704a'},
+    {id:1,label:'Planning & Surveys',sub:'Application, estimates, surveys',startDate:'2025-04-01',endDate:'2026-03-31',color:'#b87348'},
+    {id:2,label:'Services Disconnection',sub:'Electricity, gas, water',startDate:'2025-11-01',endDate:'2026-04-30',color:'#6e7a8a'},
+    {id:3,label:'Asbestos Removal',sub:'CAS 3044 — 3 ACM items',startDate:'2026-04-01',endDate:'2026-05-31',color:'#c45a30'},
+    {id:4,label:'Building Regs & Tender',sub:'NA Williams, contractor selection',startDate:'2026-01-01',endDate:'2026-09-30',color:'#5a7a8c'},
   ],
   contacts:[
-    {id:1,initials:'RB',name:'Richard Budd',role:'Client / Self Builder',firm:'',phone:'07767895205',mobile:'07767895205',email:'richard@richardbudd.co.uk',web:''},
+    {id:1,initials:'RB',name:'Richard Budd',role:'Client / Self Builder',firm:'',phone:'07767895205',mobile:'07767895205',email:'richard@richardbudd.co.uk',web:'richardbudd.co.uk'},
     {id:2,initials:'LB',name:'Laura Budd',role:'Client / Owner',firm:'',phone:'',mobile:'',email:'',web:''},
     {id:3,initials:'NAW',name:'N.A. Williams',role:'Building Consultant',firm:'NA Williams Building Consultancy Ltd',phone:'01305 269283',mobile:'07717 682937',email:'nawilliams@gmx.com',web:'nawilliamsbuildingconsultancy.co.uk'},
     {id:4,initials:'NB',name:'Nick Baxter',role:'Arboricultural Consultant',firm:'NB Tree Management',phone:'',mobile:'',email:'nick@nbtreemanagement.co.uk',web:''},
@@ -1126,52 +938,65 @@ const DEFAULTS={
     {id:6,initials:'CAS',name:'Complete Asbestos Solutions',role:'Asbestos Surveyor — CAS 3044',firm:'Complete Asbestos Solutions Ltd',phone:'01202 099 906',mobile:'',email:'info@completeasbestos.uk',web:''},
     {id:7,initials:'DC',name:'Dorset Council Planning',role:'Planning Authority',firm:'Dorset Council',phone:'01305 221000',mobile:'',email:'planning@dorsetcouncil.gov.uk',web:'dorsetcouncil.gov.uk'},
     {id:8,initials:'GM',name:'Graeme Matthews',role:'Senior Building Control Surveyor',firm:'Dorset Council Building Control',phone:'01305 252254',mobile:'',email:'buildingcontrol@dorsetcouncil.gov.uk',web:''},
-    {id:9,initials:'PR',name:'Paul Reynolds',role:'Heating & Plumbing Engineer',firm:'Evergreen Renewable Energy Ltd',phone:'01297 443209',mobile:'',email:'',web:'evergreensw.co.uk'},
+    {id:9,initials:'PR',name:'Paul Reynolds',role:'Heating, Plumbing & Solar',firm:'Evergreen Renewable Energy Ltd',phone:'01297 443209',mobile:'',email:'',web:'evergreensw.co.uk'},
     {id:10,initials:'RE',name:'Redstone Ecology',role:'Bat Licence & Ecology',firm:'Redstone Ecology Ltd',phone:'',mobile:'',email:'',web:''},
-    {id:11,initials:'SE',name:'Structural Engineer',role:'To be appointed',firm:'',phone:'',mobile:'',email:'',web:''},
-    {id:12,initials:'MC',name:'Main Contractor',role:'To be tendered',firm:'',phone:'',mobile:'',email:'',web:''},
+    {id:11,initials:'ST',name:'Stroma Building Control',role:'Building Control Inspector',firm:'Stroma Certification',phone:'',mobile:'',email:'',web:'stroma.com'},
+    {id:12,initials:'SE',name:'Structural Engineer',role:'To be appointed',firm:'',phone:'',mobile:'',email:'',web:''},
+    {id:13,initials:'MC',name:'Main Contractor',role:'To be tendered',firm:'',phone:'',mobile:'',email:'',web:''},
   ]
 };
 
 const materials=[
-  {element:'Roofs',spec:'Greencoat PLX standing seam coated steel — grey',color:'#8a8880'},
-  {element:'Eaves — fascia / bargeboards',spec:'Aluminium seamless cladding — black',color:'#1a1a18'},
+  {element:'Roofs',spec:'Greencoat PLX standing seam coated steel. Colour grey (SSAB Swedish Steel Ltd)',color:'#888480'},
+  {element:'Eaves — fascia / bargeboards',spec:'Aluminium seamless cladding. Black',color:'#1a1a18'},
   {element:'Roofs — soffit / canopies',spec:'Siberian larch cladding — left to weather to silvery grey',color:'#c8b88a'},
-  {element:'Rainwater downpipes',spec:'Aluminium circular flush joint — black',color:'#1a1a18'},
-  {element:'Walls — 1st floor',spec:'Timber 145mm face width cladding — black',color:'#1a1a18'},
-  {element:'Balconies — 1st floor',spec:'Canadian Western Red Cedar 145mm cladding — orangey-brown maintained',color:'#c4875a'},
-  {element:'Walls — ground floor',spec:'Render / through colour — K-Rend col. Causeway',color:'#d4c4a8'},
-  {element:'Walls — plinth',spec:'Natural stone — knapped field flint',color:'#8a8880'},
-  {element:'Wall — S/E elevation',spec:'Random course Portland stone with dressed openings, quoins & stone sub cills',color:'#e8e0d0'},
-  {element:'Chimney stack',spec:'Render / through colour — K-Rend col. Causeway',color:'#d4c4a8'},
-  {element:'Balcony — soffit',spec:'Siberian larch cladding — left to weather to silvery grey',color:'#c8b88a'},
-  {element:'Columns',spec:'Painted steel — black',color:'#1a1a18'},
-  {element:'Roof window',spec:'TBC — anthracite',color:'#6e7a8a'},
-  {element:'Windows & doors',spec:'Double glazed aluminium, powder coated — anthracite',color:'#6e7a8a'},
-  {element:'Garage door',spec:'Garador Gararoll — anthracite',color:'#6e7a8a'},
-  {element:'Air Source Heat Pump',spec:'12kW Samsung GEN7 R290 — east side of dwelling',color:'#6b8fa3'},
+  {element:'Rainwater downpipes',spec:'Aluminium circular flush joint. Black',color:'#1a1a18'},
+  {element:'Walls — 1st floor',spec:'Timber 145mm face width cladding. Black (British Western Red Cedar, Sikkens Cetol Ebony C20)',color:'#1a1a18'},
+  {element:'Balconies — 1st floor',spec:'Canadian Western Red Cedar 145mm cladding — maintained at orangey-brown colour',color:'#b87348'},
+  {element:'Walls — ground floor',spec:'K-Rend through-colour render. Colour: Causeway',color:'#d4c4a0'},
+  {element:'Walls — plinth',spec:'Natural stone — Knapped field flint (St Catherine Flint Products)',color:'#9a8870'},
+  {element:'Wall — SE elevation',spec:'Random course Portland stone with natural stone dressed openings, quoins & stone sub cills',color:'#e8e0d0'},
+  {element:'Chimney stack',spec:'Render / through colour K-Rend Causeway. Schiedel DM36 pumice block flue system',color:'#d4c4a0'},
+  {element:'Balcony soffit',spec:'Siberian larch cladding — left to weather to silvery grey',color:'#c8b88a'},
+  {element:'Columns',spec:'Painted steel. Black',color:'#1a1a18'},
+  {element:'Roof window',spec:'Velux solar powered, electronically operated flat glass (ISU 2093 150150 / CVU 0520Q)',color:'#6e8a9a'},
+  {element:'Windows & doors',spec:'Double glazed aluminium frame — powder coated anthracite. U-value 1.40. Argon filled, low-E',color:'#6e7a8a'},
+  {element:'Garage door',spec:'Garador Gararoll electronically operated roller shutter. Anthracite RAL 7016. 5000mm × 2100mm',color:'#6e7a8a'},
+  {element:'Air Source Heat Pump',spec:'12kW Samsung GEN7 R290 — east side of dwelling. UFH ground floor, aluminium rads first floor',color:'#5a7a8c'},
+  {element:'External terrace decking',spec:'Cladco recycled plastic decking SKU: PLASD271536GR — grey, 150mm × 27mm',color:'#888480'},
+  {element:'External stair treads',spec:'Black powder-coated 5-bar aluminium chequer plate with blackened patina and revealed highlights',color:'#2a2a28'},
 ];
 
+const drawings=[
+  {ref:'CROY 2025 01',title:'Existing Site Plan',desc:'Survey site plan at 1:500 (@A3). Shows existing dwelling "Corydon", 0.91m RH boundary, Wessex Water network, ward boundary. Drawn BH, 12.03.25.',date:'12.03.25',scale:'1:500',type:'Survey',icon:'🗺️'},
+  {ref:'CROY 2025 02',title:'Existing Floor Plans',desc:'Survey floor plans at 1:50 (@A2). Ground floor: Kitchen, Utility, Hall, WC, Bathroom, Living, En-suite, 3 Bedrooms, Conservatory. Lower ground: Photography Studio, Store, WC. First floor shown.',date:'12.03.25',scale:'1:50',type:'Survey',icon:'📋'},
+  {ref:'CROY 2025 03',title:'Survey Elevations',desc:'Existing elevations at 1:100 (@A3). Front/NW, Rear/SE, Flank/SW, Flank/NE. Existing materials: fibre cement slates, GRP flat roof, stained timber soffits, facing brick, PVC windows/doors.',date:'12.03.25',scale:'1:100',type:'Survey',icon:'📐'},
+  {ref:'CROY 2025 04',title:'Proposed Site Plan',desc:'Planning site plan at 1:500 (@A3). Shows proposed dwelling position, tree survey (CYP, PIN, HAZ, YEW etc), root protection areas, notional sun path 21st June, contours, 0.91m RH boundary.',date:'22.04.25',scale:'1:500',type:'Planning',icon:'🗺️'},
+  {ref:'CROY 2025 07B',title:'Proposed Elevations',desc:'Planning elevations at 1:100 (@A2). All 4 elevations shown with materials schedule. Front/SE: Portland stone plinth, render, timber cladding, large glazing, terrace. Rear/NW, Flanks NE & SW.',date:'22.04.25',scale:'1:100',type:'Planning',icon:'🏠'},
+  {ref:'CROY 2026 09',title:'Proposed Ground & Lower Ground Floor Plan',desc:'Building Control floor plans at 1:50 (@A2). Ground: Snug, Bedroom 3, Shower, Entrance Hall, Kitchen/Dining, Larder, Bedroom 4, Boot Rm, Photography Studio, Shower. Lower Ground: Garage. ASHP position shown.',date:'28.01.26',scale:'1:50',type:'Building Control',icon:'📏'},
+  {ref:'CROY 2026 10',title:'Proposed First Floor Plan',desc:'Building Control first floor at 1:50 (@A2). Lounge, Kitchenette, Landing, Bedroom 2, En-suite, Dining, Study, Dressing Rm, Bathroom, Bedroom 1, two Balconies. Window refs W8-W17, expansion joints marked.',date:'28.01.26',scale:'1:50',type:'Building Control',icon:'📏'},
+  {ref:'CROY 2026 13',title:'Proposed Cross Section AA',desc:'Building Control section at 1:50/1:20 (@A2). Shows all 3 levels: Lower Ground (127.870 T/o screed), Ground, First. 13° pitch rear roof, 5° pitch front roof. Ridge 135.700m. Flat roof construction detail.',date:'26.01.26',scale:'1:50 / 1:20',type:'Building Control',icon:'✂️'},
+  {ref:'CROY 2025 05A',title:'Proposed Ground Floor — Sleeper Walls',desc:'Referenced in building regs notes section 2.0.2. Shows sleeper wall locations for beam & block floor support.',date:'2026',scale:'TBC',type:'Building Control',icon:'📐'},
+  {ref:'CORY 2026 14',title:'Box Gutter Detail',desc:'Referenced in building regs notes section 6.0.4. Box gutter construction details.',date:'2026',scale:'TBC',type:'Building Control',icon:'📐'},
+  {ref:'Location Plan',title:'Location Plan',desc:'OS MasterMap 1:1250 scale. Centre: 363138 E, 90951 N. Shows site location, Roman Road access, surrounding properties. Crown Copyright OS Licence AC0000849896.',date:'Sep 2025',scale:'1:1250',type:'Planning',icon:'📍'},
+];
 
-
-// ── LOAD STATE ────────────────────────────────
 let state;
-try{ const s=localStorage.getItem(STORE); state=s?JSON.parse(s):JSON.parse(JSON.stringify(DEFAULTS)); }
-catch(e){ state=JSON.parse(JSON.stringify(DEFAULTS)); }
+try{const s=localStorage.getItem(STORE);state=s?JSON.parse(s):JSON.parse(JSON.stringify(DEFAULTS));}
+catch(e){state=JSON.parse(JSON.stringify(DEFAULTS));}
 
 function saveState(){
   try{
     localStorage.setItem(STORE,JSON.stringify(state));
     const b=document.getElementById('savedBadge');
-    b.classList.add('show');
-    setTimeout(()=>b.classList.remove('show'),2000);
+    b.classList.add('show');setTimeout(()=>b.classList.remove('show'),2000);
   }catch(e){}
 }
 function newId(arr){return arr.length?Math.max(...arr.map(x=>x.id))+1:1;}
 function fmt(n){return'£'+Math.round(n).toLocaleString('en-GB');}
 function fmtDec(n){return'£'+(parseFloat(n)||0).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',');}
 
-// ── NAVIGATION ───────────────────────────────
+// NAVIGATION
 function showPanel(id,btn){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
@@ -1188,24 +1013,25 @@ function showPanel(id,btn){
   if(id==='events')renderEventsTable();
   if(id==='schedule')renderSchedule();
   if(id==='contacts')renderContacts();
+  if(id==='drawings')renderDrawings();
 }
 
-// ── DASHBOARD ────────────────────────────────
+// DASHBOARD
 function renderDashboard(){
-  const openTasks=state.tasks.filter(t=>!t.done).length;
-  const overdue=state.tasks.filter(t=>!t.done&&new Date(t.due)<today).length;
-  const avgPct=state.phases.length?Math.round(state.phases.reduce((s,p)=>s+p.pct,0)/state.phases.length):0;
-  const totalBudget=state.budget.reduce((s,b)=>s+b.budget,0);
+  const open=state.tasks.filter(t=>!t.done).length;
+  const over=state.tasks.filter(t=>!t.done&&new Date(t.due)<today).length;
+  const avg=state.phases.length?Math.round(state.phases.reduce((s,p)=>s+p.pct,0)/state.phases.length):0;
+  const tot=state.budget.reduce((s,b)=>s+b.budget,0);
   const spent=state.budget.reduce((s,b)=>s+b.actual,0);
-  const vatReclaim=state.vat.filter(v=>v.reclaim==='yes').reduce((s,v)=>s+(parseFloat(v.vat)||0),0);
-  document.getElementById('statTasks').textContent=openTasks;
-  document.getElementById('statPhases').textContent=avgPct+'%';
-  document.getElementById('statBudget').textContent=fmt(totalBudget-spent);
-  document.getElementById('statOverdue').textContent=overdue;
-  document.getElementById('statVAT').textContent=fmtDec(vatReclaim);
-  document.getElementById('overallPct').textContent=avgPct+'%';
-  document.getElementById('overallBar').style.width=avgPct+'%';
-  renderDashPhases(); renderUpcoming();
+  const vat=state.vat.filter(v=>v.reclaim==='yes').reduce((s,v)=>s+(parseFloat(v.vat)||0),0);
+  document.getElementById('statTasks').textContent=open;
+  document.getElementById('statPhases').textContent=avg+'%';
+  document.getElementById('statBudget').textContent=fmt(tot-spent);
+  document.getElementById('statOverdue').textContent=over;
+  document.getElementById('statVAT').textContent=fmtDec(vat);
+  document.getElementById('overallPct').textContent=avg+'%';
+  document.getElementById('overallBar').style.width=avg+'%';
+  renderDashPhases();renderUpcoming();
 }
 
 function renderDashPhases(){
@@ -1224,59 +1050,64 @@ function renderDashPhases(){
 }
 
 function renderUpcoming(){
-  const future=[...state.events]
-    .filter(e=>new Date(e.date)>=today)
-    .sort((a,b)=>new Date(a.date)-new Date(b.date))
-    .slice(0,6);
+  const future=[...state.events].filter(e=>new Date(e.date)>=today).sort((a,b)=>new Date(a.date)-new Date(b.date)).slice(0,6);
   document.getElementById('upcomingList').innerHTML=future.map(e=>{
     const d=new Date(e.date);
     return`<div class="upcoming-item" onclick="showEventView(${e.id})">
       <div class="upcoming-date"><span class="day">${d.getDate()}</span>${d.toLocaleString('en-GB',{month:'short'})}</div>
-      <div>
-        <div class="upcoming-title">${e.title}</div>
-        <div class="upcoming-sub">${(e.desc||'').substring(0,60)}…</div>
-        <span class="tag ${e.cat}">${e.cat}</span>
-      </div>
+      <div><div class="upcoming-title">${e.title}</div><div class="upcoming-sub">${(e.desc||'').substring(0,60)}…</div><span class="tag ${e.cat}">${e.cat}</span></div>
     </div>`;
   }).join('');
 }
 
-// ── PHASES ───────────────────────────────────
+// PHASES
 function openAddPhase(){editPhaseId=null;document.getElementById('phaseModalTitle').textContent='Add Phase';document.getElementById('pmName').value='';document.getElementById('pmPct').value='0';openModal('phaseModal');}
 function openEditPhase(id){const p=state.phases.find(x=>x.id===id);if(!p)return;editPhaseId=id;document.getElementById('phaseModalTitle').textContent='Edit Phase';document.getElementById('pmName').value=p.name;document.getElementById('pmPct').value=p.pct;openModal('phaseModal');}
 function savePhase(){
   const name=document.getElementById('pmName').value.trim();
   const pct=Math.min(100,Math.max(0,parseInt(document.getElementById('pmPct').value)||0));
   if(!name)return;
-  const cols=['#c4875a','#7a8c6e','#6b8fa3','#8a7a6e','#6e7a8a','#8a6e7a','#d4704a'];
+  const cols=['#b87348','#6a7d60','#5a7a8c','#8a7a6e','#6e7a8a','#7a6e8a','#c45a30'];
   if(editPhaseId){const p=state.phases.find(x=>x.id===editPhaseId);if(p){p.name=name;p.pct=pct;}}
   else state.phases.push({id:newId(state.phases),name,pct,color:cols[state.phases.length%cols.length]});
   saveState();closeModal('phaseModal');renderDashboard();
 }
 function deletePhase(id){confirmDelete('Delete this phase?',()=>{state.phases=state.phases.filter(x=>x.id!==id);saveState();renderDashboard();});}
 
-// ── MATERIALS ────────────────────────────────
+// MATERIALS
 function renderMaterials(){
   document.getElementById('materialsGrid').innerHTML=materials.map(m=>`
     <div class="material-card">
       <div class="material-swatch" style="background:${m.color}"></div>
-      <div>
-        <div class="material-element">${m.element}</div>
-        <div class="material-spec">${m.spec}</div>
+      <div><div class="material-element">${m.element}</div><div class="material-spec">${m.spec}</div></div>
+    </div>`).join('');
+}
+
+// DRAWINGS
+function renderDrawings(){
+  const typeColors={Survey:'#8a7a6e',Planning:'#b87348','Building Control':'#5a7a8c'};
+  document.getElementById('drawingsGrid').innerHTML=drawings.map(d=>`
+    <div class="drawing-card">
+      <div class="drawing-thumb">${d.icon}</div>
+      <div class="drawing-info">
+        <div class="drawing-ref">${d.ref}</div>
+        <div class="drawing-title">${d.title}</div>
+        <div class="drawing-meta" style="margin-bottom:8px">${d.scale} · ${d.date} · <span style="color:${typeColors[d.type]||'var(--muted)'}">${d.type}</span></div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.5">${d.desc}</div>
       </div>
     </div>`).join('');
 }
 
-// ── EVENTS ───────────────────────────────────
+// EVENTS
 function renderEventsTable(){
   const sorted=[...state.events].sort((a,b)=>new Date(a.date)-new Date(b.date));
   document.getElementById('eventsBody').innerHTML=sorted.map(e=>`
     <tr>
-      <td style="font-family:'DM Mono',monospace;font-size:13px;white-space:nowrap">${new Date(e.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</td>
-      <td style="font-weight:500;font-size:15px">${e.title}</td>
+      <td style="font-family:'IBM Plex Mono',monospace;font-size:12px;white-space:nowrap">${new Date(e.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</td>
+      <td style="font-weight:500;font-size:14px">${e.title}</td>
       <td><span class="tag ${e.cat}">${e.cat}</span></td>
-      <td style="color:var(--muted);font-size:13px;max-width:240px">${(e.desc||'').substring(0,70)}${(e.desc||'').length>70?'…':''}</td>
-      <td><div style="display:flex;gap:5px">
+      <td style="color:var(--muted);font-size:12px;max-width:220px">${(e.desc||'').substring(0,65)}${(e.desc||'').length>65?'…':''}</td>
+      <td><div style="display:flex;gap:4px">
         <button class="btn btn-edit btn-sm" onclick="openEditEvent(${e.id})">Edit</button>
         <button class="btn btn-delete btn-sm" onclick="deleteEvent(${e.id})">Delete</button>
       </div></td>
@@ -1303,7 +1134,7 @@ function showEventView(id){
   openModal('eventViewModal');
 }
 
-// ── TASKS ────────────────────────────────────
+// TASKS
 function renderTasks(){
   let f;
   if(activeTaskFilter==='done')f=state.tasks.filter(t=>t.done);
@@ -1312,15 +1143,15 @@ function renderTasks(){
   else f=state.tasks.filter(t=>t.cat===activeTaskFilter&&!t.done);
   f.sort((a,b)=>new Date(a.due)-new Date(b.due));
   document.getElementById('taskList').innerHTML=f.map(t=>{
-    const due=new Date(t.due), overdue=!t.done&&due<today;
-    const dueStr=due.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+    const due=new Date(t.due),overdue=!t.done&&due<today;
+    const ds=due.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
     return`<div class="task-item${t.done?' done':''}${t.cat==='urgent'?' urgent-task':''}">
       <div class="task-check${t.done?' checked':''}" onclick="toggleTask(${t.id})">${t.done?'✓':''}</div>
       <div class="task-info">
         <div class="task-title">${t.title}</div>
         ${t.notes?`<div class="task-notes">${t.notes}</div>`:''}
         <div class="task-meta">
-          <span class="task-due${overdue?' overdue':''}">${overdue?'⚠ OVERDUE — ':'Due '}${dueStr}</span>
+          <span class="task-due${overdue?' overdue':''}">${overdue?'⚠ OVERDUE — ':'Due '}${ds}</span>
           <span class="tag ${t.cat}">${t.cat}</span>
           <div class="priority ${t.prio}"><span></span><span></span><span></span></div>
         </div>
@@ -1331,9 +1162,9 @@ function renderTasks(){
       </div>
     </div>`;
   }).join('');
-  if(!f.length)document.getElementById('taskList').innerHTML=`<div style="text-align:center;padding:40px;color:var(--muted);font-size:16px">No tasks here — looking good! 🎉</div>`;
+  if(!f.length)document.getElementById('taskList').innerHTML=`<div style="text-align:center;padding:40px;color:var(--muted);font-size:16px">No tasks here 🎉</div>`;
 }
-function toggleTask(id){const t=state.tasks.find(t=>t.id===id);if(t){t.done=!t.done;saveState();renderTasks();renderDashboard();}}
+function toggleTask(id){const t=state.tasks.find(x=>x.id===id);if(t){t.done=!t.done;saveState();renderTasks();renderDashboard();}}
 function openAddTask(){editTaskId=null;document.getElementById('taskModalTitle').textContent='Add Task';['tmTitle','tmDate','tmNotes'].forEach(id=>document.getElementById(id).value='');document.getElementById('tmPrio').value='high';document.getElementById('tmCat').value='planning';openModal('taskModal');}
 function openEditTask(id){const t=state.tasks.find(x=>x.id===id);if(!t)return;editTaskId=id;document.getElementById('taskModalTitle').textContent='Edit Task';document.getElementById('tmTitle').value=t.title;document.getElementById('tmDate').value=t.due;document.getElementById('tmPrio').value=t.prio;document.getElementById('tmCat').value=t.cat;document.getElementById('tmNotes').value=t.notes||'';openModal('taskModal');}
 function saveTask(){
@@ -1346,7 +1177,7 @@ function saveTask(){
 function deleteTask(id){confirmDelete('Delete this task?',()=>{state.tasks=state.tasks.filter(x=>x.id!==id);saveState();renderTasks();renderDashboard();});}
 function filterTasks(f,btn){activeTaskFilter=f;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderTasks();}
 
-// ── SCHEDULE ─────────────────────────────────
+// SCHEDULE
 function renderSchedule(){
   document.getElementById('scheduleTimeline').innerHTML=state.schedule.map(s=>`
     <div class="timeline-item">
@@ -1373,7 +1204,7 @@ function saveSchedule(){
 }
 function deleteSchedule(id){confirmDelete('Delete this phase?',()=>{state.schedule=state.schedule.filter(x=>x.id!==id);saveState();renderSchedule();});}
 
-// ── CONTACTS ─────────────────────────────────
+// CONTACTS
 function renderContacts(){
   document.getElementById('contactsGrid').innerHTML=state.contacts.map(c=>`
     <div class="contact-card">
@@ -1385,7 +1216,8 @@ function renderContacts(){
         ${c.phone?`<div>📞 <a href="tel:${c.phone}">${c.phone}</a></div>`:''}
         ${c.mobile&&c.mobile!==c.phone?`<div>📱 <a href="tel:${c.mobile}">${c.mobile}</a></div>`:''}
         ${c.email?`<div>✉️ <a href="mailto:${c.email}">${c.email}</a></div>`:''}
-        ${!c.firm&&!c.phone&&!c.email?'<div style="color:var(--warn);font-size:13px">⚠ To be appointed</div>':''}
+        ${c.web?`<div>🌐 <a href="https://${c.web}" target="_blank">${c.web}</a></div>`:''}
+        ${!c.firm&&!c.phone&&!c.email?'<div style="color:var(--warn);font-size:12px">⚠ To be appointed</div>':''}
       </div>
       <div class="contact-actions">
         <button class="btn btn-edit btn-sm" onclick="openEditContact(${c.id})">Edit</button>
@@ -1404,25 +1236,25 @@ function saveContact(){
 }
 function deleteContact(id){confirmDelete('Delete this contact?',()=>{state.contacts=state.contacts.filter(x=>x.id!==id);saveState();renderContacts();});}
 
-// ── BUDGET ───────────────────────────────────
+// BUDGET
 function renderBudget(){
-  const total=state.budget.reduce((s,b)=>s+b.budget,0);
+  const tot=state.budget.reduce((s,b)=>s+b.budget,0);
   const spent=state.budget.reduce((s,b)=>s+b.actual,0);
-  const remain=total-spent; const pct=total>0?Math.round(spent/total*100):0;
-  document.getElementById('budgetTotal').textContent=fmt(total);
+  const rem=tot-spent;const pct=tot>0?Math.round(spent/tot*100):0;
+  document.getElementById('budgetTotal').textContent=fmt(tot);
   document.getElementById('budgetSpent').textContent=fmt(spent);
-  document.getElementById('budgetRemain').textContent=fmt(remain);
+  document.getElementById('budgetRemain').textContent=fmt(rem);
   document.getElementById('budgetPct').textContent=pct+'%';
-  document.getElementById('budgetRemainStat').className='budget-stat '+(remain<0?'over':'under');
+  document.getElementById('budgetRemainStat').className='budget-stat '+(rem<0?'over':'under');
   document.getElementById('budgetBody').innerHTML=state.budget.map(b=>{
     const over=b.actual>b.budget;
-    const barPct=b.budget>0?Math.min(100,b.actual/b.budget*100):0;
+    const bp=b.budget>0?Math.min(100,b.actual/b.budget*100):0;
     return`<tr>
-      <td style="font-size:14px">${b.cat}</td>
+      <td style="font-size:13px">${b.cat}</td>
       <td class="amount"><input class="num-in" type="number" value="${b.budget}" onchange="updateBudgetField(${b.id},'budget',this.value)"></td>
       <td class="amount ${over?'over-val':'under-val'}"><input class="num-in" type="number" value="${b.actual}" onchange="updateBudgetField(${b.id},'actual',this.value)"></td>
-      <td><div class="budget-mini-bar"><div class="budget-mini-fill" style="width:${barPct}%;background:${over?'var(--warn)':b.color}"></div></div></td>
-      <td><div style="display:flex;gap:5px"><button class="btn btn-edit btn-sm" onclick="openEditBudget(${b.id})">Edit</button><button class="btn btn-delete btn-sm" onclick="deleteBudget(${b.id})">Del</button></div></td>
+      <td><div class="budget-mini-bar"><div class="budget-mini-fill" style="width:${bp}%;background:${over?'var(--warn)':b.color}"></div></div></td>
+      <td><div style="display:flex;gap:4px"><button class="btn btn-edit btn-sm" onclick="openEditBudget(${b.id})">Edit</button><button class="btn btn-delete btn-sm" onclick="deleteBudget(${b.id})">Del</button></div></td>
     </tr>`;
   }).join('');
   drawBudgetChart();
@@ -1432,7 +1264,7 @@ function openAddBudget(){editBudgetId=null;document.getElementById('budgetModalT
 function openEditBudget(id){const b=state.budget.find(x=>x.id===id);if(!b)return;editBudgetId=id;document.getElementById('budgetModalTitle').textContent='Edit Line';document.getElementById('bmCat').value=b.cat;document.getElementById('bmBudget').value=b.budget;document.getElementById('bmActual').value=b.actual;openModal('budgetModal');}
 function saveBudgetItem(){
   const cat=document.getElementById('bmCat').value.trim();if(!cat)return;
-  const cols=['#c4875a','#7a8c6e','#6b8fa3','#8a7a6e'];
+  const cols=['#b87348','#6a7d60','#5a7a8c','#8a7a6e'];
   const item={cat,budget:parseFloat(document.getElementById('bmBudget').value)||0,actual:parseFloat(document.getElementById('bmActual').value)||0};
   if(editBudgetId)Object.assign(state.budget.find(x=>x.id===editBudgetId),item);
   else state.budget.push({id:newId(state.budget),...item,color:cols[state.budget.length%cols.length]});
@@ -1444,57 +1276,42 @@ function drawBudgetChart(){
   const canvas=document.getElementById('budgetCanvas');if(!canvas)return;
   const W=canvas.offsetWidth||400,H=300;canvas.width=W;canvas.height=H;
   const ctx=canvas.getContext('2d');ctx.clearRect(0,0,W,H);
-  const pad={top:16,right:16,bottom:90,left:75};
+  const pad={top:14,right:14,bottom:88,left:72};
   const cW=W-pad.left-pad.right,cH=H-pad.top-pad.bottom;
   const n=state.budget.length;if(!n)return;
-  const gap=cW/n,barW=gap*0.35;
-  const maxVal=Math.max(...state.budget.map(b=>Math.max(b.budget,b.actual)),1)*1.1;
-  ctx.strokeStyle='rgba(0,0,0,0.06)';ctx.lineWidth=1;
+  const gap=cW/n,bW=gap*0.34;
+  const maxVal=Math.max(...state.budget.map(b=>Math.max(b.budget,b.actual)),1)*1.12;
+  ctx.strokeStyle='rgba(0,0,0,0.05)';ctx.lineWidth=1;
   [0,0.25,0.5,0.75,1].forEach(f=>{
     const y=pad.top+cH*(1-f);
     ctx.beginPath();ctx.moveTo(pad.left,y);ctx.lineTo(pad.left+cW,y);ctx.stroke();
-    ctx.fillStyle='#8a8880';ctx.font='10px DM Mono,monospace';ctx.textAlign='right';
+    ctx.fillStyle='#8a8880';ctx.font='9px IBM Plex Mono,monospace';ctx.textAlign='right';
     ctx.fillText(fmt(maxVal*f),pad.left-4,y+3);
   });
   state.budget.forEach((b,i)=>{
     const x=pad.left+i*gap+gap/2;
     const bH=cH*(b.budget/maxVal),aH=cH*(b.actual/maxVal);
-    ctx.fillStyle=b.color+'28';ctx.strokeStyle=b.color;ctx.lineWidth=1.5;
-    ctx.fillRect(x-barW/2,pad.top+cH-bH,barW,bH);ctx.strokeRect(x-barW/2,pad.top+cH-bH,barW,bH);
-    if(b.actual>0){ctx.fillStyle=b.actual>b.budget?'#d4704a':b.color;ctx.fillRect(x-barW/2+2,pad.top+cH-aH,barW-4,aH);}
-    ctx.save();ctx.translate(x,pad.top+cH+7);ctx.rotate(-Math.PI/3.5);
-    ctx.fillStyle='#8a8880';ctx.font='9px DM Mono,monospace';ctx.textAlign='right';
+    ctx.fillStyle=b.color+'22';ctx.strokeStyle=b.color;ctx.lineWidth=1.2;
+    ctx.fillRect(x-bW/2,pad.top+cH-bH,bW,bH);ctx.strokeRect(x-bW/2,pad.top+cH-bH,bW,bH);
+    if(b.actual>0){ctx.fillStyle=b.actual>b.budget?'#c45a30':b.color;ctx.fillRect(x-bW/2+2,pad.top+cH-aH,bW-4,aH);}
+    ctx.save();ctx.translate(x,pad.top+cH+6);ctx.rotate(-Math.PI/3.5);
+    ctx.fillStyle='#8a8880';ctx.font='8px IBM Plex Mono,monospace';ctx.textAlign='right';
     ctx.fillText(b.cat.length>14?b.cat.slice(0,13)+'…':b.cat,0,0);ctx.restore();
   });
 }
 
-// ── VAT TRACKER ──────────────────────────────
+// VAT
 function vatTypeChanged(){
   const type=document.getElementById('vmType').value;
   const rateEl=document.getElementById('vmVatRate');
   const reclaimEl=document.getElementById('vmReclaim');
   const noteEl=document.getElementById('vmReclaimNote');
-  if(type==='contractor'){
-    rateEl.value='0';reclaimEl.value='no';
-    noteEl.style.display='block';
-    noteEl.style.background='#f0f0f0';noteEl.style.color='var(--muted)';
-    noteEl.textContent='ℹ️ Contractor invoices are zero-rated on new builds — no VAT to reclaim from these';
-  } else if(type==='materials'){
-    rateEl.value='20';reclaimEl.value='yes';
-    noteEl.style.display='block';
-    noteEl.style.background='#e8f5ee';noteEl.style.color='var(--done)';
-    noteEl.textContent='✅ Self-supply materials at 20% VAT are reclaimable via HMRC VAT431NB';
-  } else if(type==='professional'){
-    rateEl.value='20';reclaimEl.value='no';
-    noteEl.style.display='block';
-    noteEl.style.background='#fff3e0';noteEl.style.color='#b06000';
-    noteEl.textContent='⚠️ Professional fees — VAT charged at 20% but generally not reclaimable on VAT431NB. Check with HMRC.';
-  } else {
-    noteEl.style.display='none';
-  }
+  if(type==='contractor'){rateEl.value='0';reclaimEl.value='no';noteEl.style.display='block';noteEl.textContent='ℹ️ Contractor invoices are zero-rated on new builds — no VAT to reclaim';}
+  else if(type==='materials'){rateEl.value='20';reclaimEl.value='yes';noteEl.style.display='block';noteEl.textContent='✅ Self-supply materials at 20% VAT are reclaimable via HMRC VAT431NB';}
+  else if(type==='professional'){rateEl.value='20';reclaimEl.value='no';noteEl.style.display='block';noteEl.style.background='#fff3e0';noteEl.style.color='#a04000';noteEl.textContent='⚠️ Professional fees — VAT charged but generally not reclaimable on VAT431NB';}
+  else{noteEl.style.display='none';}
   calcVatModal();
 }
-
 function calcVatModal(){
   const net=parseFloat(document.getElementById('vmNet').value)||0;
   const rate=parseFloat(document.getElementById('vmVatRate').value)||0;
@@ -1502,120 +1319,79 @@ function calcVatModal(){
   document.getElementById('vmVat').value=vat.toFixed(2);
   document.getElementById('vmTotal').value=(net+vat).toFixed(2);
 }
-
 function renderVat(){
   const items=state.vat||[];
-  const reclaimable=items.filter(v=>v.reclaim==='yes').reduce((s,v)=>s+(parseFloat(v.vat)||0),0);
-  const contractorSpend=items.filter(v=>v.type==='contractor').reduce((s,v)=>s+(parseFloat(v.net)||0),0);
-  const materialsSpend=items.filter(v=>v.type==='materials').reduce((s,v)=>s+(parseFloat(v.net)||0),0);
-
-  document.getElementById('vatReclaimTotal').textContent=fmtDec(reclaimable);
-  document.getElementById('vatReclaimable').textContent=fmtDec(reclaimable);
-  document.getElementById('vatContractor').textContent=fmt(contractorSpend);
-  document.getElementById('vatMaterials').textContent=fmt(materialsSpend);
+  const reclaim=items.filter(v=>v.reclaim==='yes').reduce((s,v)=>s+(parseFloat(v.vat)||0),0);
+  const contractor=items.filter(v=>v.type==='contractor').reduce((s,v)=>s+(parseFloat(v.net)||0),0);
+  const mats=items.filter(v=>v.type==='materials').reduce((s,v)=>s+(parseFloat(v.net)||0),0);
+  document.getElementById('vatReclaimTotal').textContent=fmtDec(reclaim);
+  document.getElementById('vatReclaimable').textContent=fmtDec(reclaim);
+  document.getElementById('vatContractor').textContent=fmt(contractor);
+  document.getElementById('vatMaterials').textContent=fmt(mats);
   document.getElementById('vatReceiptCount').textContent=items.filter(v=>v.ref&&v.ref.trim()).length;
-
   const sorted=[...items].sort((a,b)=>new Date(b.date)-new Date(a.date));
-  const totalNet=items.reduce((s,v)=>s+(parseFloat(v.net)||0),0);
-  const totalVat=items.reduce((s,v)=>s+(parseFloat(v.vat)||0),0);
-  const totalAll=items.reduce((s,v)=>s+(parseFloat(v.total)||0),0);
-  const totalReclaim=reclaimable;
-
-  document.getElementById('vatBody').innerHTML=sorted.map(v=>{
-    const rateBadgeClass=v.vatRate==20?'r20':v.vatRate==0?'r0':'r20';
-    const typeIcons={materials:'🛒',contractor:'🔨',professional:'📋',other:'📦'};
-    return`<tr>
-      <td class="mono" style="white-space:nowrap">${new Date(v.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</td>
-      <td style="font-weight:500;font-size:14px">${v.desc}</td>
-      <td style="font-size:13px;color:var(--muted)">${v.supplier||'—'}</td>
-      <td>${typeIcons[v.type]||'📦'} <span style="font-size:12px;color:var(--muted)">${v.type}</span></td>
+  const tNet=items.reduce((s,v)=>s+(parseFloat(v.net)||0),0);
+  const tVat=items.reduce((s,v)=>s+(parseFloat(v.vat)||0),0);
+  const tAll=items.reduce((s,v)=>s+(parseFloat(v.total)||0),0);
+  const tIcons={materials:'🛒',contractor:'🔨',professional:'📋',other:'📦'};
+  document.getElementById('vatBody').innerHTML=sorted.map(v=>`
+    <tr>
+      <td class="mono" style="white-space:nowrap;font-size:11px">${new Date(v.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</td>
+      <td style="font-weight:500;font-size:13px">${v.desc}</td>
+      <td style="font-size:12px;color:var(--muted)">${v.supplier||'—'}</td>
+      <td>${tIcons[v.type]||'📦'} <span style="font-size:11px;color:var(--muted)">${v.type}</span></td>
       <td class="amt mono">${fmtDec(v.net)}</td>
-      <td><span class="vat-rate-badge ${rateBadgeClass}">${v.vatRate}%</span></td>
+      <td><span class="vat-rate-badge ${v.vatRate==20?'r20':'r0'}">${v.vatRate}%</span></td>
       <td class="amt mono" style="color:${v.vatRate>0?'var(--clay)':'var(--muted)'}">${fmtDec(v.vat)}</td>
       <td class="amt mono">${fmtDec(v.total)}</td>
-      <td>
-        ${v.reclaim==='yes'
-          ?'<span class="tag vat-yes">✅ Reclaim</span>'
-          :'<span class="tag vat-no">❌ No</span>'}
-      </td>
-      <td class="mono" style="font-size:12px;color:var(--muted)">${v.ref||'—'}</td>
-      <td><div style="display:flex;gap:5px">
-        <button class="btn btn-edit btn-sm" onclick="openEditVat(${v.id})">Edit</button>
-        <button class="btn btn-delete btn-sm" onclick="deleteVat(${v.id})">Del</button>
-      </div></td>
-    </tr>`;
-  }).join('');
-
+      <td>${v.reclaim==='yes'?'<span class="tag vat-yes">✅ Reclaim</span>':'<span class="tag vat-no">❌ No</span>'}</td>
+      <td class="mono" style="font-size:11px;color:var(--muted)">${v.ref||'—'}</td>
+      <td><div style="display:flex;gap:4px"><button class="btn btn-edit btn-sm" onclick="openEditVat(${v.id})">Edit</button><button class="btn btn-delete btn-sm" onclick="deleteVat(${v.id})">Del</button></div></td>
+    </tr>`).join('');
   document.getElementById('vatFoot').innerHTML=`
-    <tr style="background:var(--cream);font-weight:500;">
-      <td colspan="4" style="padding:10px 12px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)">TOTALS</td>
-      <td class="amt mono" style="padding:10px 12px;font-size:14px">${fmtDec(totalNet)}</td>
+    <tr style="background:var(--cream);font-weight:500">
+      <td colspan="4" style="padding:9px 12px;font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;color:var(--muted)">TOTALS</td>
+      <td class="amt mono" style="padding:9px 12px">${fmtDec(tNet)}</td>
       <td></td>
-      <td class="amt mono" style="padding:10px 12px;font-size:14px;color:var(--clay)">${fmtDec(totalVat)}</td>
-      <td class="amt mono" style="padding:10px 12px;font-size:14px">${fmtDec(totalAll)}</td>
-      <td colspan="3" style="padding:10px 12px;color:var(--done);font-weight:600;font-size:14px">✅ HMRC reclaim: ${fmtDec(totalReclaim)}</td>
+      <td class="amt mono" style="padding:9px 12px;color:var(--clay)">${fmtDec(tVat)}</td>
+      <td class="amt mono" style="padding:9px 12px">${fmtDec(tAll)}</td>
+      <td colspan="3" style="padding:9px 12px;color:var(--done);font-weight:600">✅ HMRC reclaim: ${fmtDec(reclaim)}</td>
     </tr>`;
-
-  // Update dashboard VAT stat
-  document.getElementById('statVAT').textContent=fmtDec(reclaimable);
 }
-
 function openAddVat(){
-  editVatId=null;
-  document.getElementById('vatModalTitle').textContent='Add Purchase';
-  ['vmDesc','vmSupplier','vmRef','vmNotes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  editVatId=null;document.getElementById('vatModalTitle').textContent='Add Purchase';
+  ['vmDesc','vmSupplier','vmRef'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
   document.getElementById('vmDate').value=new Date().toISOString().split('T')[0];
-  document.getElementById('vmType').value='materials';
-  document.getElementById('vmNet').value='';
-  document.getElementById('vmVatRate').value='20';
-  document.getElementById('vmVat').value='';
-  document.getElementById('vmTotal').value='';
-  document.getElementById('vmReclaim').value='yes';
-  vatTypeChanged();
-  openModal('vatModal');
+  document.getElementById('vmType').value='materials';document.getElementById('vmNet').value='';
+  document.getElementById('vmVatRate').value='20';document.getElementById('vmVat').value='';
+  document.getElementById('vmTotal').value='';document.getElementById('vmReclaim').value='yes';
+  vatTypeChanged();openModal('vatModal');
 }
-
 function openEditVat(id){
-  const v=state.vat.find(x=>x.id===id);if(!v)return;
-  editVatId=id;
+  const v=state.vat.find(x=>x.id===id);if(!v)return;editVatId=id;
   document.getElementById('vatModalTitle').textContent='Edit Purchase';
-  document.getElementById('vmDate').value=v.date;
-  document.getElementById('vmDesc').value=v.desc;
-  document.getElementById('vmSupplier').value=v.supplier||'';
-  document.getElementById('vmType').value=v.type||'materials';
-  document.getElementById('vmNet').value=v.net||0;
-  document.getElementById('vmVatRate').value=v.vatRate||20;
+  document.getElementById('vmDate').value=v.date;document.getElementById('vmDesc').value=v.desc;
+  document.getElementById('vmSupplier').value=v.supplier||'';document.getElementById('vmType').value=v.type||'materials';
+  document.getElementById('vmNet').value=v.net||0;document.getElementById('vmVatRate').value=v.vatRate||20;
   document.getElementById('vmVat').value=(parseFloat(v.vat)||0).toFixed(2);
   document.getElementById('vmTotal').value=(parseFloat(v.total)||0).toFixed(2);
-  document.getElementById('vmReclaim').value=v.reclaim||'yes';
-  document.getElementById('vmRef').value=v.ref||'';
-  vatTypeChanged();
-  openModal('vatModal');
+  document.getElementById('vmReclaim').value=v.reclaim||'yes';document.getElementById('vmRef').value=v.ref||'';
+  vatTypeChanged();openModal('vatModal');
 }
-
 function saveVatItem(){
-  const desc=document.getElementById('vmDesc').value.trim();
-  const date=document.getElementById('vmDate').value;
-  if(!desc||!date)return;
+  const desc=document.getElementById('vmDesc').value.trim();const date=document.getElementById('vmDate').value;if(!desc||!date)return;
   const net=parseFloat(document.getElementById('vmNet').value)||0;
   const vatRate=parseFloat(document.getElementById('vmVatRate').value)||0;
   const vat=parseFloat(document.getElementById('vmVat').value)||(net*vatRate/100);
   const total=parseFloat(document.getElementById('vmTotal').value)||(net+vat);
-  const item={
-    date,desc,
-    supplier:document.getElementById('vmSupplier').value,
-    type:document.getElementById('vmType').value,
-    net,vatRate,vat,total,
-    reclaim:document.getElementById('vmReclaim').value,
-    ref:document.getElementById('vmRef').value,
-  };
+  const item={date,desc,supplier:document.getElementById('vmSupplier').value,type:document.getElementById('vmType').value,net,vatRate,vat,total,reclaim:document.getElementById('vmReclaim').value,ref:document.getElementById('vmRef').value};
   if(editVatId)Object.assign(state.vat.find(x=>x.id===editVatId),item);
   else state.vat.push({id:newId(state.vat),...item});
   saveState();closeModal('vatModal');renderVat();renderDashboard();
 }
 function deleteVat(id){confirmDelete('Delete this VAT entry?',()=>{state.vat=state.vat.filter(x=>x.id!==id);saveState();renderVat();renderDashboard();});}
 
-// ── CALENDAR ─────────────────────────────────
+// CALENDAR
 function renderCalendar(){
   document.getElementById('calTitle').textContent=new Date(currentYear,currentMonth,1).toLocaleString('en-GB',{month:'long',year:'numeric'});
   const grid=document.getElementById('calGrid');
@@ -1640,158 +1416,62 @@ function renderCalendar(){
 }
 function changeMonth(dir){currentMonth+=dir;if(currentMonth>11){currentMonth=0;currentYear++;}if(currentMonth<0){currentMonth=11;currentYear--;}renderCalendar();}
 
-// ── GANTT ────────────────────────────────────
-// ── GANTT STATE ─────────────────────────────────
-let ganttViewMode='month';
-let ganttViewStart=null;
-let ganttViewEnd=null;
-const GANTT_PX_PER_DAY={week:40,month:8,quarter:3.5,year:1.4,all:null,custom:null};
-
-function ganttZoom(mode, btn){
-  ganttViewMode=mode;
-  ganttViewStart=null;ganttViewEnd=null;
+// GANTT
+function ganttZoom(mode,btn){
+  ganttViewMode=mode;ganttViewStart=null;ganttViewEnd=null;
   document.querySelectorAll('.gantt-zoom-btn').forEach(b=>b.classList.remove('active'));
-  if(btn)btn.classList.add('active');
-  renderGantt();
+  if(btn)btn.classList.add('active');renderGantt();
 }
 function ganttCustomRange(){
-  const f=document.getElementById('ganttFrom').value;
-  const t=document.getElementById('ganttTo').value;
-  if(f&&t){
-    ganttViewStart=new Date(f);
-    ganttViewEnd=new Date(t);
-    ganttViewMode='custom';
-    document.querySelectorAll('.gantt-zoom-btn').forEach(b=>b.classList.remove('active'));
-    renderGantt();
-  }
+  const f=document.getElementById('ganttFrom').value,t=document.getElementById('ganttTo').value;
+  if(f&&t){ganttViewStart=new Date(f);ganttViewEnd=new Date(t);ganttViewMode='custom';document.querySelectorAll('.gantt-zoom-btn').forEach(b=>b.classList.remove('active'));renderGantt();}
 }
 function ganttScrollToday(){
   const scroll=document.getElementById('ganttScroll');
-  if(!scroll)return;
   const inner=document.getElementById('ganttContainer');
   const todayLine=inner.querySelector('.gantt-today-line');
-  if(todayLine){
-    const lineLeft=parseFloat(todayLine.style.left);
-    const trackWidth=inner.querySelector('.gantt-track')?.offsetWidth||0;
-    const scrollTo=(lineLeft/100*trackWidth)-scroll.offsetWidth/2+200;
-    scroll.scrollTo({left:Math.max(0,scrollTo),behavior:'smooth'});
-  }
+  if(todayLine&&scroll){const ll=parseFloat(todayLine.style.left);scroll.scrollTo({left:Math.max(0,ll-scroll.offsetWidth/2+200),behavior:'smooth'});}
 }
-
 function renderGantt(){
-  const container=document.getElementById('ganttContainer');
-  if(!container)return;
-
-  if(!state.gantt||!state.gantt.length){
-    container.innerHTML=`<div style="text-align:center;padding:48px;color:var(--muted);font-size:16px">
-      <div style="font-size:32px;margin-bottom:12px">📅</div>
-      <div style="font-weight:500;margin-bottom:8px">No programme bars yet</div>
-      <div style="font-size:14px">Click <strong>＋ Add bar</strong> to start building your programme</div>
-    </div>`;
-    return;
-  }
-
-  // Work out full data range
-  const allStarts=state.gantt.map(g=>new Date(g.startDate));
-  const allEnds=state.gantt.map(g=>new Date(g.endDate));
-  const dataStart=new Date(Math.min(...allStarts));
-  const dataEnd=new Date(Math.max(...allEnds));
-
-  // Work out view window
-  let vStart,vEnd;
-  if(ganttViewMode==='custom'&&ganttViewStart&&ganttViewEnd){
-    vStart=new Date(ganttViewStart);vEnd=new Date(ganttViewEnd);
-  } else if(ganttViewMode==='week'){
-    // centre on today ±3.5 days
-    vStart=new Date(today); vStart.setDate(today.getDate()-7);
-    vEnd=new Date(today); vEnd.setDate(today.getDate()+21);
-  } else if(ganttViewMode==='month'){
-    vStart=new Date(today.getFullYear(),today.getMonth()-1,1);
-    vEnd=new Date(today.getFullYear(),today.getMonth()+3,0);
-  } else if(ganttViewMode==='quarter'){
-    vStart=new Date(today.getFullYear(),today.getMonth()-2,1);
-    vEnd=new Date(today.getFullYear(),today.getMonth()+7,0);
-  } else if(ganttViewMode==='year'){
-    vStart=new Date(today.getFullYear()-0,0,1);
-    vEnd=new Date(today.getFullYear()+1,11,31);
-  } else {
-    // all — fit entire data range
-    vStart=new Date(dataStart.getFullYear(),dataStart.getMonth(),1);
-    vEnd=new Date(dataEnd.getFullYear(),dataEnd.getMonth()+1,0);
-  }
-
-  // Snap to day boundaries
-  vStart.setHours(0,0,0,0); vEnd.setHours(23,59,59,999);
-
-  // Pixel width per day
-  let pxDay;
+  const container=document.getElementById('ganttContainer');if(!container)return;
+  if(!state.gantt||!state.gantt.length){container.innerHTML=`<div style="text-align:center;padding:48px;color:var(--muted)"><div style="font-size:32px;margin-bottom:12px">📅</div><div style="font-weight:500">No programme bars yet</div><div style="font-size:13px;margin-top:6px">Click <strong>＋ Add bar</strong> to start</div></div>`;return;}
+  const allS=state.gantt.map(g=>new Date(g.startDate));
+  const allE=state.gantt.map(g=>new Date(g.endDate));
+  const dataS=new Date(Math.min(...allS)),dataE=new Date(Math.max(...allE));
+  let vS,vE;
+  if(ganttViewMode==='custom'&&ganttViewStart&&ganttViewEnd){vS=new Date(ganttViewStart);vE=new Date(ganttViewEnd);}
+  else if(ganttViewMode==='week'){vS=new Date(today);vS.setDate(today.getDate()-7);vE=new Date(today);vE.setDate(today.getDate()+21);}
+  else if(ganttViewMode==='month'){vS=new Date(today.getFullYear(),today.getMonth()-1,1);vE=new Date(today.getFullYear(),today.getMonth()+3,0);}
+  else if(ganttViewMode==='quarter'){vS=new Date(today.getFullYear(),today.getMonth()-2,1);vE=new Date(today.getFullYear(),today.getMonth()+7,0);}
+  else if(ganttViewMode==='year'){vS=new Date(today.getFullYear(),0,1);vE=new Date(today.getFullYear()+1,11,31);}
+  else{vS=new Date(dataS.getFullYear(),dataS.getMonth(),1);vE=new Date(dataE.getFullYear(),dataE.getMonth()+1,0);}
+  vS.setHours(0,0,0,0);vE.setHours(23,59,59,999);
   const modeMap={week:38,month:9,quarter:4,year:1.8,all:null,custom:5};
-  if(ganttViewMode==='all'){
-    const days=(vEnd-vStart)/864e5;
-    const scrollW=document.getElementById('ganttScroll')?.offsetWidth||800;
-    pxDay=Math.max(1,(scrollW-200)/days);
-  } else {
-    pxDay=modeMap[ganttViewMode]||5;
+  let pxDay;
+  if(ganttViewMode==='all'){const days=(vE-vS)/864e5;const sw=document.getElementById('ganttScroll')?.offsetWidth||800;pxDay=Math.max(1,(sw-200)/days);}
+  else{pxDay=modeMap[ganttViewMode]||5;}
+  const totalDays=(vE-vS)/864e5,trackW=Math.round(totalDays*pxDay);
+  let hHTML='<div class="gantt-header-row" style="width:'+(trackW+200)+'px">';
+  let gd=new Date(vS.getFullYear(),vS.getMonth(),1);
+  while(gd<=vE){
+    const mS=new Date(Math.max(gd,vS)),mE=new Date(Math.min(new Date(gd.getFullYear(),gd.getMonth()+1,0),vE));
+    const mD=(mE-mS)/864e5+1,mW=Math.round(mD*pxDay);
+    const isTM=gd.getMonth()===today.getMonth()&&gd.getFullYear()===today.getFullYear();
+    hHTML+=`<div class="gantt-header-cell" style="width:${mW}px;${isTM?'color:var(--clay);font-weight:600':''}">${gd.toLocaleString('en-GB',{month:'short',year:'2-digit'})}</div>`;
+    gd=new Date(gd.getFullYear(),gd.getMonth()+1,1);
   }
-
-  const totalDays=(vEnd-vStart)/864e5;
-  const trackW=Math.round(totalDays*pxDay);
-
-  // Build header — week labels for week view, month for others
-  let headerHTML='<div class="gantt-header-row" style="width:'+(trackW+200)+'px">';
-  if(ganttViewMode==='week'){
-    // Day labels
-    let d=new Date(vStart);
-    while(d<=vEnd){
-      const dayW=pxDay;
-      const isToday=d.toDateString()===today.toDateString();
-      headerHTML+=`<div class="gantt-header-cell" style="width:${dayW}px;${isToday?'color:var(--warn);font-weight:600':''}">${d.getDate()}<br><span style="font-size:8px">${d.toLocaleString('en-GB',{weekday:'short'})}</span></div>`;
-      d=new Date(d); d.setDate(d.getDate()+1);
-    }
-  } else {
-    // Month labels
-    let d=new Date(vStart.getFullYear(),vStart.getMonth(),1);
-    while(d<=vEnd){
-      const mStart=new Date(Math.max(d,vStart));
-      const mEnd=new Date(Math.min(new Date(d.getFullYear(),d.getMonth()+1,0),vEnd));
-      const mDays=(mEnd-mStart)/864e5+1;
-      const mW=Math.round(mDays*pxDay);
-      const isThisMonth=d.getMonth()===today.getMonth()&&d.getFullYear()===today.getFullYear();
-      headerHTML+=`<div class="gantt-header-cell" style="width:${mW}px;${isThisMonth?'color:var(--clay);font-weight:600':''}">${d.toLocaleString('en-GB',{month:'short',year:'2-digit'})}</div>`;
-      d=new Date(d.getFullYear(),d.getMonth()+1,1);
-    }
-  }
-  headerHTML+='</div>';
-
-  // Today position
-  const todayLeft=200+Math.max(0,Math.min(trackW,(today-vStart)/864e5*pxDay));
-
-  // Build rows
+  hHTML+='</div>';
+  const todayLeft=200+Math.max(0,Math.min(trackW,(today-vS)/864e5*pxDay));
   const rowsHTML=state.gantt.map(item=>{
-    const s=new Date(item.startDate);
-    const e=new Date(item.endDate);
-    const barLeft=Math.round((s-vStart)/864e5*pxDay);
-    const barW=Math.round((e-s)/864e5*pxDay);
-    const clampedLeft=Math.max(0,barLeft);
-    const clampedW=Math.max(4,barW-(clampedLeft-barLeft));
-    const visible=barLeft+barW>0&&barLeft<trackW;
-
-    // Grid lines — months
-    let gridLines='';
-    let gd=new Date(vStart.getFullYear(),vStart.getMonth(),1);
-    while(gd<=vEnd){
-      const gl=Math.round((gd-vStart)/864e5*pxDay);
-      gridLines+=`<div class="gantt-grid-line${gd.getDate()===1?'':''}" style="left:${gl}px"></div>`;
-      if(ganttViewMode==='week') gd=new Date(gd); gd.setDate(gd.getDate()+(ganttViewMode==='week'?1:0));
-      if(ganttViewMode!=='week') gd=new Date(gd.getFullYear(),gd.getMonth()+1,1);
-    }
-
+    const s=new Date(item.startDate),e=new Date(item.endDate);
+    const bL=Math.round((s-vS)/864e5*pxDay),bW=Math.round((e-s)/864e5*pxDay);
+    const cL=Math.max(0,bL),cW=Math.max(4,bW-(cL-bL));
+    const vis=bL+bW>0&&bL<trackW;
     return`<div class="gantt-row">
       <div class="gantt-label" style="width:200px">${item.label}<small>${item.sub||''}</small></div>
-      <div class="gantt-track" style="width:${trackW}px;flex-shrink:0;">
-        ${gridLines}
+      <div class="gantt-track" style="width:${trackW}px;flex-shrink:0">
         <div class="gantt-today-line" style="left:${todayLeft-200}px"><span class="gantt-today-tip">Today</span></div>
-        ${visible?`<div class="gantt-bar" style="left:${clampedLeft}px;width:${clampedW}px;background:${item.color||'#c4875a'}" title="${item.label}: ${item.startDate} – ${item.endDate}">${clampedW>60?item.label:''}</div>`:''}
+        ${vis?`<div class="gantt-bar" style="left:${cL}px;width:${cW}px;background:${item.color||'#b87348'}" title="${item.label}: ${item.startDate} – ${item.endDate}">${cW>60?item.label:''}</div>`:''}
       </div>
       <div class="gantt-actions">
         <button class="btn btn-edit btn-sm" onclick="openEditGantt(${item.id})">Edit</button>
@@ -1799,85 +1479,33 @@ function renderGantt(){
       </div>
     </div>`;
   }).join('');
-
   container.style.minWidth=(trackW+200+120)+'px';
-  container.innerHTML=headerHTML+rowsHTML;
-
-  // Update date range inputs to reflect current view
-  const fEl=document.getElementById('ganttFrom');
-  const tEl=document.getElementById('ganttTo');
-  if(fEl&&!fEl.value) fEl.value=vStart.toISOString().split('T')[0];
-  if(tEl&&!tEl.value) tEl.value=vEnd.toISOString().split('T')[0];
-
-  // Scroll to today on first render
-  setTimeout(()=>{
-    const scroll=document.getElementById('ganttScroll');
-    if(scroll&&todayLeft>scroll.offsetWidth){
-      scroll.scrollLeft=todayLeft-scroll.offsetWidth/2;
-    }
-  },50);
+  container.innerHTML=hHTML+rowsHTML;
+  const fEl=document.getElementById('ganttFrom'),tEl=document.getElementById('ganttTo');
+  if(fEl&&!fEl.value)fEl.value=vS.toISOString().split('T')[0];
+  if(tEl&&!tEl.value)tEl.value=vE.toISOString().split('T')[0];
+  setTimeout(()=>{const scroll=document.getElementById('ganttScroll');if(scroll&&todayLeft>scroll.offsetWidth)scroll.scrollLeft=todayLeft-scroll.offsetWidth/2;},50);
 }
-
-function openAddGantt(){
-  editGanttId=null;
-  document.getElementById('ganttModalTitle').textContent='Add programme bar';
-  document.getElementById('gmLabel').value='';
-  document.getElementById('gmSub').value='';
-  document.getElementById('gmStart').value='';
-  document.getElementById('gmEnd').value='';
-  openModal('ganttModal');
-  setTimeout(()=>{initGanttSwatches();ganttSetColor('#c4875a');},50);
-}
-function openEditGantt(id){
-  const g=state.gantt.find(x=>x.id===id);if(!g)return;
-  editGanttId=id;
-  document.getElementById('ganttModalTitle').textContent='Edit programme bar';
-  document.getElementById('gmLabel').value=g.label;
-  document.getElementById('gmSub').value=g.sub||'';
-  document.getElementById('gmStart').value=g.startDate;
-  document.getElementById('gmEnd').value=g.endDate;
-  openModal('ganttModal');
-  setTimeout(()=>{initGanttSwatches();ganttSetColor(g.color||'#c4875a');},50);
-}
-function ganttSetColor(hex){
-  document.getElementById('gmColor').value=hex;
-  document.getElementById('gmColorPreview').style.background=hex;
-  document.getElementById('gmColorPicker').value=hex;
-  document.getElementById('gmColorHex').value=hex;
-  document.querySelectorAll('.gm-swatch').forEach(s=>{
-    s.classList.toggle('selected', s.dataset.color===hex);
-  });
-}
-function ganttColorFromPicker(hex){
-  ganttSetColor(hex);
-}
-function ganttColorFromHex(val){
-  if(/^#[0-9a-fA-F]{6}$/.test(val)) ganttSetColor(val);
-}
-function initGanttSwatches(){
-  document.querySelectorAll('.gm-swatch').forEach(s=>{
-    s.addEventListener('click',()=>ganttSetColor(s.dataset.color));
-    s.setAttribute('title',s.getAttribute('title'));
-  });
-}
+function openAddGantt(){editGanttId=null;document.getElementById('ganttModalTitle').textContent='Add programme bar';document.getElementById('gmLabel').value='';document.getElementById('gmSub').value='';document.getElementById('gmStart').value='';document.getElementById('gmEnd').value='';openModal('ganttModal');setTimeout(()=>{initGanttSwatches();ganttSetColor('#b87348');},50);}
+function openEditGantt(id){const g=state.gantt.find(x=>x.id===id);if(!g)return;editGanttId=id;document.getElementById('ganttModalTitle').textContent='Edit programme bar';document.getElementById('gmLabel').value=g.label;document.getElementById('gmSub').value=g.sub||'';document.getElementById('gmStart').value=g.startDate;document.getElementById('gmEnd').value=g.endDate;openModal('ganttModal');setTimeout(()=>{initGanttSwatches();ganttSetColor(g.color||'#b87348');},50);}
+function ganttSetColor(hex){document.getElementById('gmColor').value=hex;document.getElementById('gmColorPreview').style.background=hex;document.getElementById('gmColorPicker').value=hex;document.getElementById('gmColorHex').value=hex;document.querySelectorAll('.gm-swatch').forEach(s=>s.classList.toggle('selected',s.dataset.color===hex));}
+function ganttColorFromPicker(hex){ganttSetColor(hex);}
+function ganttColorFromHex(val){if(/^#[0-9a-fA-F]{6}$/.test(val))ganttSetColor(val);}
+function initGanttSwatches(){document.querySelectorAll('.gm-swatch').forEach(s=>s.addEventListener('click',()=>ganttSetColor(s.dataset.color)));}
 function saveGantt(){
-  const label=document.getElementById('gmLabel').value.trim();
-  const start=document.getElementById('gmStart').value;
-  const end=document.getElementById('gmEnd').value;
-  if(!label||!start||!end)return;
-  const item={label,sub:document.getElementById('gmSub').value,startDate:start,endDate:end,color:document.getElementById('gmColor').value||'#c4875a'};
+  const label=document.getElementById('gmLabel').value.trim();const start=document.getElementById('gmStart').value;const end=document.getElementById('gmEnd').value;if(!label||!start||!end)return;
+  const item={label,sub:document.getElementById('gmSub').value,startDate:start,endDate:end,color:document.getElementById('gmColor').value||'#b87348'};
   if(editGanttId)Object.assign(state.gantt.find(x=>x.id===editGanttId),item);
   else state.gantt.push({id:newId(state.gantt),...item});
   saveState();closeModal('ganttModal');renderGantt();
 }
 function deleteGantt(id){confirmDelete('Delete this bar?',()=>{state.gantt=state.gantt.filter(x=>x.id!==id);saveState();renderGantt();});}
 
-// ── 3D PLOT ──────────────────────────────────
+// 3D SITE PLOT
 function project3D(x,y,z){
-  const rx=x*Math.cos(plotRotY)+z*Math.sin(plotRotY);
-  const rz=-x*Math.sin(plotRotY)+z*Math.cos(plotRotY);
-  const ry2=y*Math.cos(plotRotX)-rz*Math.sin(plotRotX);
-  return{sx:rx,sy:ry2};
+  const rx=x*Math.cos(plotRotY)+z*Math.sin(plotRotY),rz=-x*Math.sin(plotRotY)+z*Math.cos(plotRotY);
+  const ry=y*Math.cos(plotRotX)-rz*Math.sin(plotRotX);
+  return{sx:rx,sy:ry};
 }
 function drawPlot(){
   const canvas=document.getElementById('plotCanvas');if(!canvas)return;
@@ -1886,47 +1514,67 @@ function drawPlot(){
   const cx=W/2,cy=H/2+20,scale=Math.min(W,H)/85*plotZoom;
   ctx.clearRect(0,0,W,H);
   const bg=ctx.createLinearGradient(0,0,0,H);
-  bg.addColorStop(0,'#dce4ea');bg.addColorStop(1,'#eee9e0');
+  bg.addColorStop(0,'#d8e2e8');bg.addColorStop(1,'#eae6dc');
   ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+  // Ground plane
   const gp=[[-40,0,-40],[40,0,-40],[40,0,40],[-40,0,40]];
   ctx.beginPath();gp.forEach((p,i)=>{const{sx,sy}=project3D(...p);if(i===0)ctx.moveTo(cx+sx*scale,cy-sy*scale);else ctx.lineTo(cx+sx*scale,cy-sy*scale);});
-  ctx.closePath();ctx.fillStyle='#ddd8cc';ctx.fill();ctx.strokeStyle='rgba(0,0,0,0.06)';ctx.lineWidth=1;ctx.stroke();
+  ctx.closePath();ctx.fillStyle='#d4cfc4';ctx.fill();ctx.strokeStyle='rgba(0,0,0,0.05)';ctx.lineWidth=1;ctx.stroke();
+  // Grid
   ctx.strokeStyle='rgba(0,0,0,0.04)';ctx.lineWidth=0.5;
   for(let i=-40;i<=40;i+=10){
-    const a=project3D(i,0,-40),b=project3D(i,0,40),c=project3D(-40,0,i),dd=project3D(40,0,i);
+    const a=project3D(i,0,-40),b=project3D(i,0,40),c=project3D(-40,0,i),d=project3D(40,0,i);
     ctx.beginPath();ctx.moveTo(cx+a.sx*scale,cy-a.sy*scale);ctx.lineTo(cx+b.sx*scale,cy-b.sy*scale);ctx.stroke();
-    ctx.beginPath();ctx.moveTo(cx+c.sx*scale,cy-c.sy*scale);ctx.lineTo(cx+dd.sx*scale,cy-dd.sy*scale);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(cx+c.sx*scale,cy-c.sy*scale);ctx.lineTo(cx+d.sx*scale,cy-d.sy*scale);ctx.stroke();
   }
   function drawBox(bx,bz,bw,bd,bh,cTop,cSide,cFront,lbl){
     const v=[[bx,0,bz],[bx+bw,0,bz],[bx+bw,0,bz+bd],[bx,0,bz+bd],[bx,bh,bz],[bx+bw,bh,bz],[bx+bw,bh,bz+bd],[bx,bh,bz+bd]];
     const p=v.map(vt=>project3D(...vt));
-    function face(idx,fill){ctx.beginPath();idx.forEach((i,n)=>{if(n===0)ctx.moveTo(cx+p[i].sx*scale,cy-p[i].sy*scale);else ctx.lineTo(cx+p[i].sx*scale,cy-p[i].sy*scale);});ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle='rgba(0,0,0,0.1)';ctx.lineWidth=0.8;ctx.stroke();}
+    function face(idx,fill){ctx.beginPath();idx.forEach((i,n)=>{if(n===0)ctx.moveTo(cx+p[i].sx*scale,cy-p[i].sy*scale);else ctx.lineTo(cx+p[i].sx*scale,cy-p[i].sy*scale);});ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle='rgba(0,0,0,0.08)';ctx.lineWidth=0.8;ctx.stroke();}
     face([0,1,5,4],cSide);face([1,2,6,5],cFront);face([4,5,6,7],cTop);face([0,3,7,4],cSide);
-    if(lbl){const t=project3D(bx+bw/2,bh+0.8,bz+bd/2);ctx.fillStyle='#1a1a18';ctx.font=`bold ${Math.max(9,10*plotZoom)}px DM Sans,sans-serif`;ctx.textAlign='center';ctx.fillText(lbl,cx+t.sx*scale,cy-t.sy*scale);}
+    if(lbl){const t=project3D(bx+bw/2,bh+0.9,bz+bd/2);ctx.fillStyle='#1a1a18';ctx.font=`bold ${Math.max(8,9*plotZoom)}px IBM Plex Sans,sans-serif`;ctx.textAlign='center';ctx.fillText(lbl,cx+t.sx*scale,cy-t.sy*scale);}
   }
+  // Existing outbuildings
   drawBox(-20,9,5,3.5,2.5,'#aaa098','#948c84','#857d75','Store');
   drawBox(-15,3,3.5,3,2,'#aaa098','#948c84','#857d75','Shed');
   drawBox(-17,-9,5.5,4,3,'#aaa098','#948c84','#857d75','Office');
-  const trees=[{x:-8,z:-20,r:4.5},{x:-13,z:-15,r:3.5},{x:-5,z:-25,r:5.5},{x:3,z:-20,r:4},{x:11,z:-17,r:4.5},{x:17,z:-13,r:3.5},{x:19,z:-6,r:4},{x:17,z:3,r:3.5},{x:13,z:9,r:4.5},{x:7,z:15,r:4},{x:-1,z:17,r:4.5},{x:-9,z:13,r:3.5},{x:-19,z:5,r:5},{x:-21,z:-2,r:3.5},{x:-17,z:-20,r:4.5},{x:1,z:23,r:4},{x:-5,z:21,r:3.5},{x:9,z:19,r:4.5},{x:21,z:9,r:4}];
-  trees.forEach(t=>{
+  // Retained trees (green)
+  const retainedTrees=[{x:-8,z:-20,r:4.5},{x:-13,z:-15,r:3.5},{x:-5,z:-25,r:5.5},{x:3,z:-20,r:4},{x:11,z:-17,r:4.5},{x:17,z:-13,r:3.5},{x:19,z:-6,r:4},{x:17,z:3,r:3.5},{x:13,z:9,r:4.5},{x:7,z:15,r:4},{x:-1,z:17,r:4.5},{x:-9,z:13,r:3.5},{x:-19,z:5,r:5},{x:-21,z:-2,r:3.5},{x:-17,z:-20,r:4.5},{x:1,z:23,r:4},{x:-5,z:21,r:3.5},{x:9,z:19,r:4.5},{x:21,z:9,r:4}];
+  retainedTrees.forEach(t=>{
     const base=project3D(t.x,0,t.z),top=project3D(t.x,t.r*2.2,t.z);
     ctx.beginPath();ctx.moveTo(cx+base.sx*scale,cy-base.sy*scale);ctx.lineTo(cx+top.sx*scale,cy-top.sy*scale);ctx.strokeStyle='#7B5B14';ctx.lineWidth=1.5;ctx.stroke();
-    ctx.beginPath();ctx.arc(cx+top.sx*scale,cy-top.sy*scale,t.r*scale*0.85,0,Math.PI*2);ctx.fillStyle='rgba(95,125,78,0.7)';ctx.fill();
+    ctx.beginPath();ctx.arc(cx+top.sx*scale,cy-top.sy*scale,t.r*scale*0.85,0,Math.PI*2);ctx.fillStyle='rgba(82,112,64,0.72)';ctx.fill();
   });
+  // Trees for removal (T1,T2,T3,T10 — orange/red with X)
   [{x:7,z:-9,r:3.2,label:'T1'},{x:9,z:-4,r:3.8,label:'T2'},{x:11,z:-2,r:2.8,label:'T3'},{x:13,z:4,r:3.2,label:'T10'}].forEach(t=>{
     const base=project3D(t.x,0,t.z),top=project3D(t.x,t.r*1.6,t.z);
     ctx.beginPath();ctx.moveTo(cx+base.sx*scale,cy-base.sy*scale);ctx.lineTo(cx+top.sx*scale,cy-top.sy*scale);ctx.strokeStyle='#7B5B14';ctx.lineWidth=1.2;ctx.stroke();
     const tr=t.r*scale*0.82,tx=cx+top.sx*scale,ty=cy-top.sy*scale;
-    ctx.beginPath();ctx.arc(tx,ty,tr,0,Math.PI*2);ctx.fillStyle='rgba(212,112,74,0.55)';ctx.fill();
+    ctx.beginPath();ctx.arc(tx,ty,tr,0,Math.PI*2);ctx.fillStyle='rgba(196,90,48,0.5)';ctx.fill();
     const xr=tr*0.5;ctx.beginPath();ctx.moveTo(tx-xr,ty-xr);ctx.lineTo(tx+xr,ty+xr);ctx.moveTo(tx+xr,ty-xr);ctx.lineTo(tx-xr,ty+xr);ctx.strokeStyle='rgba(255,255,255,0.9)';ctx.lineWidth=2;ctx.stroke();
-    ctx.fillStyle='#d4704a';ctx.font=`bold ${Math.max(8,9*plotZoom)}px DM Mono,monospace`;ctx.textAlign='center';ctx.fillText(t.label,tx,ty-tr-3);
+    ctx.fillStyle='#c45a30';ctx.font=`bold ${Math.max(7,8*plotZoom)}px IBM Plex Mono,monospace`;ctx.textAlign='center';ctx.fillText(t.label,tx,ty-tr-3);
   });
-  drawBox(-2,0,-4,22,11,6,'#d4976a','#c4875a','#b07848','Proposed Dwelling (394m²)');
-  drawBox(22,-1,0,3,2,1.2,'#8ab0c3','#6b8fa3','#5a7a8c','ASHP');
+  // Proposed dwelling — 3-storey (lower ground, ground, first)
+  // Lower ground (garage, partially below grade)
+  drawBox(-2,-1,-4,22,3.5,'#b08868','#a07858','#906848','');
+  // Ground floor
+  drawBox(-2,0,-4,22,3.5,'#c49878','#b48868','#a47858','');
+  // First floor
+  drawBox(-2,3.5,-4,22,3,'#c8a888','#b89878','#a88868','Proposed Dwelling\n4 bed · 394m²');
+  // Flat roof indication
+  drawBox(-2,6.5,-4,22,0.3,'#888480','#7a7670','#6e6a60','');
+  // Terrace / balcony on SE side
+  drawBox(20,3.5,5,14,0.2,'#888480','#7a7670','#6e6a60','Terrace');
+  // ASHP — east side
+  drawBox(25,0.5,3.5,2.5,1.5,'#6a8ca0','#5a7a8c','#4a6a7c','ASHP');
+  // Compass rose
   const compX=W-52,compY=52;
-  ctx.beginPath();ctx.arc(compX,compY,20,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,0.88)';ctx.fill();
-  ctx.fillStyle='#c4875a';ctx.font='bold 13px DM Sans,sans-serif';ctx.textAlign='center';ctx.fillText('N',compX,compY-4);
-  ctx.fillStyle='#8a8880';ctx.font='11px DM Sans,sans-serif';ctx.fillText('S',compX,compY+14);
+  ctx.beginPath();ctx.arc(compX,compY,20,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,0.9)';ctx.fill();
+  ctx.fillStyle='#b87348';ctx.font='bold 13px IBM Plex Sans,sans-serif';ctx.textAlign='center';ctx.fillText('N',compX,compY-4);
+  ctx.fillStyle='#8a8880';ctx.font='11px IBM Plex Sans,sans-serif';ctx.fillText('S',compX,compY+14);
+  // Scale note
+  ctx.fillStyle='rgba(26,26,24,0.4)';ctx.font='10px IBM Plex Mono,monospace';ctx.textAlign='left';
+  ctx.fillText('Corydon · Roman Road · Winterbourne Steepleton · Schematic only',14,H-12);
 }
 function setView(mode,btn){
   if(mode==='top'){plotRotX=-1.55;plotRotY=0;}else if(mode==='south'){plotRotX=-0.15;plotRotY=3.14;}else{plotRotX=-0.4;plotRotY=0.5;}
@@ -1949,24 +1597,24 @@ window.addEventListener('resize',()=>{
   if(document.getElementById('budget').classList.contains('active'))drawBudgetChart();
 });
 
-// ── GOOGLE CALENDAR ──────────────────────────
+// GCAL
 function openGcalModal(e){
   e.preventDefault();
   const sorted=[...state.events].sort((a,b)=>new Date(a.date)-new Date(b.date));
   document.getElementById('gcalList').innerHTML=sorted.map(ev=>{
     const s=ev.date.replace(/-/g,'');
     const url=`https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent('Corydon Build: '+ev.title)}&dates=${s}/${s}&details=${encodeURIComponent((ev.desc||'')+'\n\nRef: P-FUL-2025-05327\nRoman Road, Winterbourne Steepleton DT2 9DX')}&location=${encodeURIComponent('Roman Road, Winterbourne Steepleton, Dorset DT2 9DX')}`;
-    return`<a href="${url}" target="_blank" style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--cream);border-radius:4px;text-decoration:none;color:var(--ink);font-size:14px;">
+    return`<a href="${url}" target="_blank" style="display:flex;align-items:center;gap:9px;padding:9px 11px;background:var(--cream);border-radius:3px;text-decoration:none;color:var(--ink);font-size:13px">
       <span class="tag ${ev.cat}">${ev.cat}</span>
       <span style="flex:1">${ev.title}</span>
-      <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted)">${new Date(ev.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit'})}</span>
-      <span style="font-size:11px;color:#4285f4;font-family:'DM Mono',monospace">＋ Add</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted)">${new Date(ev.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit'})}</span>
+      <span style="font-size:10px;color:#4285f4;font-family:'IBM Plex Mono',monospace">＋</span>
     </a>`;
   }).join('');
   openModal('gcalModal');
 }
 
-// ── MODALS ───────────────────────────────────
+// MODALS
 function openModal(id){document.getElementById(id).classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 let confirmCallback=null;
@@ -1974,23 +1622,15 @@ function confirmDelete(msg,cb){document.getElementById('confirmMsg').textContent
 document.getElementById('confirmYes').onclick=()=>{if(confirmCallback)confirmCallback();closeModal('confirmModal');confirmCallback=null;};
 document.querySelectorAll('.modal-overlay').forEach(overlay=>{overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.classList.remove('open');});});
 
-// ── SESSION ──────────────────────────────────
+// SESSION
 function logout(){sessionStorage.clear();window.location.href='index.html';}
 (function(){
-  const user=window._corydonUser||'Guest';
-  const access=window._corydonAccess||'readonly';
-  const bar=document.getElementById('roBar');
-  const label=document.getElementById('roUserLabel');
-  const tag=document.getElementById('roTag');
-  if(bar&&label&&tag){
-    label.textContent='Signed in as '+user;
-    tag.textContent=access==='readonly'?'View Only':'Full Access';
-    bar.classList.remove('hidden');
-    if(access==='readonly')document.body.classList.add('readonly');
-  }
+  const user=window._cu||'Guest',access=window._ca||'readonly';
+  const bar=document.getElementById('roBar'),label=document.getElementById('roUserLabel'),tag=document.getElementById('roTag');
+  if(bar&&label&&tag){label.textContent='Signed in as '+user;tag.textContent=access==='readonly'?'View Only':'Full Access';bar.classList.remove('hidden');if(access==='readonly')document.body.classList.add('readonly');}
 })();
 
-// ── INIT ─────────────────────────────────────
+// INIT
 renderDashboard();
 renderCalendar();
 renderTasks();
@@ -1999,64 +1639,9 @@ renderSchedule();
 renderContacts();
 renderGantt();
 renderMaterials();
+renderDrawings();
 renderVat();
 setTimeout(()=>renderBudget(),100);
 </script>
-
-<div class="modal-overlay" id="ganttModal">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('ganttModal')">×</button>
-    <h3 id="ganttModalTitle">Add programme bar</h3>
-    <div class="modal-meta">GANTT CHART · BUILD PROGRAMME</div>
-    <div class="form-grid">
-      <div class="form-row"><label>Phase / activity name *</label><input id="gmLabel" placeholder="e.g. Demolition"></div>
-      <div class="form-row"><label>Description</label><input id="gmSub" placeholder="e.g. Existing dwelling removed"></div>
-      <div class="form-row-two">
-        <div class="form-row"><label>Start date *</label><input type="date" id="gmStart"></div>
-        <div class="form-row"><label>End date *</label><input type="date" id="gmEnd"></div>
-      </div>
-
-      <div class="form-row">
-        <label>Bar colour — pick from palette or choose custom</label>
-
-        <!-- Colour swatches -->
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;" id="gmSwatches">
-          <div class="gm-swatch" data-color="#c4875a" title="Clay — planning" style="background:#c4875a"></div>
-          <div class="gm-swatch" data-color="#d4704a" title="Amber — urgent" style="background:#d4704a"></div>
-          <div class="gm-swatch" data-color="#6b8fa3" title="Blue — contractor" style="background:#6b8fa3"></div>
-          <div class="gm-swatch" data-color="#7a8c6e" title="Sage — groundworks" style="background:#7a8c6e"></div>
-          <div class="gm-swatch" data-color="#8a7a6e" title="Stone — structure" style="background:#8a7a6e"></div>
-          <div class="gm-swatch" data-color="#8a6e7a" title="Plum — M&E" style="background:#8a6e7a"></div>
-          <div class="gm-swatch" data-color="#5a8c6e" title="Green — milestone" style="background:#5a8c6e"></div>
-          <div class="gm-swatch" data-color="#6e7a8a" title="Steel — utilities" style="background:#6e7a8a"></div>
-          <div class="gm-swatch" data-color="#a07848" title="Tan — materials" style="background:#a07848"></div>
-          <div class="gm-swatch" data-color="#8a4a4a" title="Red — risk" style="background:#8a4a4a"></div>
-          <div class="gm-swatch" data-color="#4a6e8a" title="Navy — design" style="background:#4a6e8a"></div>
-          <div class="gm-swatch" data-color="#6a8a5a" title="Moss — ecology" style="background:#6a8a5a"></div>
-        </div>
-
-        <!-- Selected colour preview + custom picker -->
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div id="gmColorPreview" style="width:36px;height:36px;border-radius:5px;border:2px solid rgba(26,26,24,0.2);background:#c4875a;flex-shrink:0;"></div>
-          <div style="flex:1;">
-            <div style="font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:4px;">Custom colour</div>
-            <div style="display:flex;align-items:center;gap:8px;">
-              <input type="color" id="gmColorPicker" value="#c4875a" oninput="ganttColorFromPicker(this.value)" style="width:44px;height:32px;border:1px solid var(--border);border-radius:4px;cursor:pointer;padding:2px;">
-              <input type="text" id="gmColorHex" value="#c4875a" placeholder="#rrggbb" maxlength="7" oninput="ganttColorFromHex(this.value)" style="width:90px;font-family:'DM Mono',monospace;font-size:13px;border:1px solid var(--border);border-radius:4px;padding:6px 8px;background:var(--paper);">
-            </div>
-          </div>
-        </div>
-
-        <!-- Hidden actual value field -->
-        <input type="hidden" id="gmColor" value="#c4875a">
-      </div>
-
-      <div class="form-actions">
-        <button class="btn btn-save" onclick="saveGantt()">Save bar</button>
-        <button class="btn btn-cancel" onclick="closeModal('ganttModal')">Cancel</button>
-      </div>
-    </div>
-  </div>
-</div>
 </body>
 </html>
