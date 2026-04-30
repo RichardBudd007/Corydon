@@ -412,11 +412,11 @@ body.readonly .task-check{pointer-events:none;opacity:0.5;}
     <span class="tab-icon">🏠</span>
     <div><div class="tab-title">Dashboard</div><div class="tab-sub">Project overview · Corydon, Roman Road, Winterbourne Steepleton DT2 9DX</div><div class="tab-accent" style="background:var(--t-dash)"></div></div>
   </div>
-  <div class="alert-banner">
-    <span class="alert-icon">⚠️</span>
-    <div class="alert-text">
-      <div class="alert-title">Action required before demolition</div>
-      Asbestos survey CAS 3044 (Feb 2026) identified 3 items: cavity closer Bedroom 2/G08, panel + debris in undercroft/B103. Must be removed before demolition. Call Complete Asbestos Solutions: <strong>01202 099 906</strong>
+  <div class="alert-banner" style="background:#e8f5ee;border:1px solid #4a7a5e;">
+    <span class="alert-icon">🎉</span>
+    <div class="alert-text" style="color:#1a4a2a;">
+      <div class="alert-title">Planning permission granted — P/FUL/2025/05327 — 29 April 2026</div>
+      Bats relocated ✓ · Asbestos removal in progress (Louis) · <strong>Next: independent clearance certificate before demolition</strong> · Instruct Redstone Ecology EPSL · Appoint SAP assessor · Roger Locke structural drawings awaited by Brindley James
     </div>
   </div>
   <div class="overall-progress">
@@ -466,7 +466,7 @@ body.readonly .task-check{pointer-events:none;opacity:0.5;}
 
 <!-- BUDGET -->
 <div id="budget" class="panel">
-  <div class="tab-header"><span class="tab-icon">💷</span><div><div class="tab-title">Budget Tracker</div><div class="tab-sub">Jewsons estimate 2505-0915-5056 · 394m² · £619,611 ex-VAT · Type figures in table to update</div><div class="tab-accent" style="background:var(--t-budget)"></div></div></div>
+  <div class="tab-header"><span class="tab-icon">💷</span><div><div class="tab-title">Budget Tracker</div><div class="tab-sub">Brindley James CORYDON02 · Main works £447,640 · Total project ~£920-950k fully fitted · Forest Marble confirmed · Klargester vs GRAF drainage TBC</div><div class="tab-accent" style="background:var(--t-budget)"></div></div></div>
   <div style="background:#e8f0ff;border:1px solid #8aaecc;border-radius:4px;padding:13px 17px;margin-bottom:16px;font-size:13px;color:#1a3a5a;line-height:1.6;">
     💡 <strong>VAT tip:</strong> Brindley James quote (£380–430k) is structural shell only — ~60% of full build. New build is <strong>zero-rated</strong> — reclaim VAT on materials you buy yourself. Track in the <strong>🧾 VAT tab</strong>.
   </div>
@@ -1156,7 +1156,7 @@ body.readonly .task-check{pointer-events:none;opacity:0.5;}
 // ═══════════════════════════════
 // STATE & DEFAULTS
 // ═══════════════════════════════
-const STORE='corydon_v9';
+const STORE='corydon_v13';
 const today=new Date();today.setHours(0,0,0,0);
 let currentMonth=today.getMonth(),currentYear=today.getFullYear();
 let activeTaskFilter='all';
@@ -1168,9 +1168,9 @@ let ganttViewMode='month',ganttViewStart=null,ganttViewEnd=null;
 
 const DEFAULTS={
   phases:[
-    {id:1,name:'Planning & Design',pct:85,color:'#b87348'},
-    {id:2,name:'Arboricultural Works',pct:20,color:'#6a7d60'},
-    {id:3,name:'Asbestos Removal',pct:0,color:'#c45a30'},
+    {id:1,name:'Planning & Design',pct:95,color:'#b87348'},
+    {id:2,name:'Arboricultural Works',pct:40,color:'#6a7d60'},
+    {id:3,name:'Asbestos Removal',pct:50,color:'#c45a30'},
     {id:4,name:'Demolition',pct:0,color:'#7a6e8a'},
     {id:5,name:'Groundworks',pct:0,color:'#6a7d60'},
     {id:6,name:'Foundations',pct:0,color:'#5a7a8c'},
@@ -1198,6 +1198,13 @@ const DEFAULTS={
     {id:16,date:'2026-03-19',title:'Stroma Building Control — Part Payment',cat:'planning',desc:'Building Control part payment of £1,500 total. Invoice £540 inc VAT £90.'},
     {id:17,date:'2026-03-21',title:'Plywood Purchased — MKM',cat:'builder',desc:'Plywood purchased by R.Budd via First Direct. £459 inc VAT £76.50. VAT reclaimable.'},
     {id:18,date:'2026-04-15',title:'Mains Water Pipe & Fittings',cat:'builder',desc:'John Davidson (Pipes) Ltd. Mains water pipe and fittings. £66.32 inc VAT £11.05. Ref C003002. VAT reclaimable.'},
+    {id:19,date:'2026-04-26',title:'Roger Locke — Retaining Wall Drawing Issued',cat:'builder',desc:'Roger Locke Consulting (Civil & Structural Engineers, 01305 766556). Drawing 4808/001/01 Sheet D01, Engineer JMH. Typical retaining wall section 1:20. 175mm RC cavity A393 mesh C28/35. 150mm ground bearing slab. 600mm wide strip footing min 900mm below ground. Max height 2450mm.'},
+    {id:20,date:'2026-04-28',title:'Spec Change — Forest Marble Stone & Email to Neil Williams',cat:'planning',desc:'Email sent to Neil Williams flagging 3 spec changes vs planning submission: (1) Roof Quarry Grey → Anthracite; (2) Cladding Siberian Larch → British Western Red Cedar Ebony stained; (3) Stone Portland → Forest Marble full height all 3 storeys. Also flagged overall palette now significantly darker than planning visuals. Neil to advise on NMA/S73 requirement.'},
+    {id:21,date:'2026-04-29',title:'PLANNING PERMISSION GRANTED — P/FUL/2025/05327',cat:'milestone',desc:'Dorset Council letter dated 29 April 2026. Officer: Steve Tapscott, Western & Southern Team. 01305 838336. steve.tapscott@dorsetcouncil.gov.uk. Condition 3 (Construction Method Statement dated 11 March 2026) discharged. Signed by Mike Garrity, Corporate Director Planning Place. Permission: demolish existing dwelling and erect new four bedroom dwelling with off-road parking.'},
+    {id:22,date:'2026-04-29',title:'Condition 3 Discharged — Construction Method Statement',cat:'planning',desc:'CMS dated 11 March 2026 accepted by Dorset Council. Development must be undertaken in accordance with this approved document. Forwarded by Neil Williams.'},
+    {id:23,date:'2026-04-30',title:'Bats Successfully Removed — Redstone Ecology',cat:'milestone',desc:'Sophie Higgins (Redstone Ecology) successfully relocated all bats under European Protected Species Licence. Toolbox talk given to demolition crew. 3 temporary bat boxes in woodland to remain throughout build. Permanent integrated bat boxes required on southern and south-western elevations of new dwelling — licence condition.'},
+    {id:24,date:'2026-04-30',title:'Asbestos Removal in Progress — Louis',cat:'builder',desc:'Louis (demolition contractor) removing 3 ACM items from CAS 3044. Items: cavity closer Bedroom 2/G08, panel + debris Undercroft/B103. Independent UKAS-accredited clearance certificate required before demolition can proceed. Waste transfer note to be retained permanently.'},
+    {id:25,date:'2026-04-28',title:'Brindley James CORYDON02 Estimate Received',cat:'builder',desc:'Estimate dated 28 April 2026. Main subtotal £447,640. Provisional sums: scaffolding £17-20k, metal roof £55-60k, balcony/roof steelwork £38-45k, electrics £30k. Total indicative project cost £850-900k fully fitted. Key issues: drainage spec shows Klargester not GRAF One2Clean — clarify. Structural drawings from Roger Locke still awaited. SAP not yet done. Wood burner compliance flagged. External steps alongside garage wall to be resolved.'},
   ],
   tasks:[
     {id:1,title:'Commission asbestos removal — 3 ACM items',cat:'urgent',due:'2026-04-30',prio:'high',done:false,notes:'CAS 3044. Items: cavity closer Bedroom 2/G08, panel + debris in undercroft/B103. MUST be done before demolition. Complete Asbestos Solutions: 01202 099 906.'},
@@ -1206,13 +1213,24 @@ const DEFAULTS={
     {id:4,title:'Disconnect water supply before demolition',cat:'builder',due:'2026-04-30',prio:'high',done:false,notes:'Gas and electricity already disconnected. Water still to do. New mains water pipe and fittings purchased (John Davidson, Apr 2026).'},
     {id:5,title:'Confirm tree protection fencing — TPP-1A',cat:'builder',due:'2026-05-01',prio:'high',done:false,notes:'Heras fencing installed by Events Crew. Check positions match arboricultural plan TPP-1A by NB Tree Management, dated 19.11.2025.'},
     {id:6,title:'Arrange T1, T2, T3, T10 & Hedge H3 removal',cat:'builder',due:'2026-05-10',prio:'high',done:false,notes:'Per arboricultural drawings TR-1A & TPP-1A by NB Tree Management. These are within the build footprint or obstruct access.'},
-    {id:7,title:'Await planning decision — P-FUL-2025-05327',cat:'planning',due:'2026-06-01',prio:'high',done:false,notes:'Dorset Council. Chase if no decision by June 2026.'},
-    {id:8,title:'Request updated quotes from Paul Reynolds (Evergreen)',cat:'builder',due:'2026-06-01',prio:'med',done:false,notes:'Both PL-8739 (heating £14,422) and PL-8772 (hot water loop £1,550) have expired. Contact Paul Reynolds: 01297 443209. evergreenrenwable.co.uk — also ask about solar.'},
+    {id:7,title:'Planning permission granted — P/FUL/2025/05327',cat:'milestone',due:'2026-04-29',prio:'high',done:true,notes:'GRANTED 29 April 2026. Dorset Council. Officer: Steve Tapscott. Condition 3 (CMS) discharged. Mike Garrity signed.'},
+    {id:8,title:'Request updated quotes from Paul Reynolds (Evergreen)',cat:'builder',due:'2026-06-01',prio:'med',done:false,notes:'Both PL-8739 (heating £14,422) and PL-8772 (hot water loop £1,550) have expired. Contact Paul Reynolds: 01297 443209. evergreenrenwable.co.uk — also ask about solar. Also co-ordinate with metal roofing contractor for PV.'},
+    {id:18,title:'Obtain asbestos clearance certificate',cat:'urgent',due:'2026-05-10',prio:'high',done:false,notes:'Louis is removing the 3 ACM items. Independent UKAS-accredited analyst must carry out four-stage clearance procedure after removal — Louis cannot certify his own work. Clearance certificate required before demolition starts.'},
+    {id:19,title:'Instruct Redstone Ecology — EPSL application to Natural England',cat:'planning',due:'2026-05-10',prio:'high',done:false,notes:'Planning now granted. John Polley (07980 255952) can now submit European Protected Species Licence application to Natural England. Estimated 6-8 weeks determination. NE fee ~£500. Redstone fee £1,200 (EPSL application) + £500 (ECoW day rate). Bat removal already completed by Sophie.'},
+    {id:20,title:'Confirm permanent bat boxes on new dwelling',cat:'builder',due:'2026-08-01',prio:'med',done:false,notes:'Licence condition — integrated eco bat boxes on southern and south-western elevations. Must be specified into build drawings before contractor starts. Neil Williams to incorporate into CORY drawings.'},
+    {id:21,title:'Site welfare — portable hand wash station with hot water',cat:'urgent',due:'2026-05-05',prio:'high',done:false,notes:'CDM Regulations 2015 require hot/warm running water adjacent to site loo. Hire portable hand wash station from Kennards Hire or Sunbelt Rentals Dorchester. Alternatively install Ariston Andris Lux 10L 2kW undersink heater connected to temporary site consumer unit. ~£15-25/week hire or ~£150-200 to buy and install.'},
+    {id:22,title:'Reply to Brindley James CORYDON02 — resolve open issues',cat:'builder',due:'2026-05-10',prio:'high',done:false,notes:'Forest Marble NOW CONFIRMED in estimate ✓. Tanking/cavity drain for garage walls NOW INCLUDED ✓. Issues still to resolve: (1) CRITICAL — drainage spec Klargester BioDisc vs GRAF One2Clean 7PE on BC drawings — must align before contract; (2) Roger Locke structural drawings still awaited; (3) SAP assessor to be appointed; (4) Cladding profile and orientation for BW Red Cedar Ebony; (5) HETAS installer for wood burner — appoint early; (6) External steps alongside garage wall — masonry or otherwise; (7) Are you using your cabinet maker for second fix carpentry?'},
+    {id:23,title:'Appoint main contractor — issue tender',cat:'builder',due:'2026-06-01',prio:'high',done:false,notes:'Brindley James CORYDON02 estimate £447,640 main works + £140-155k provisional sums. Total project indicatively £850-900k. Issue formal tender pack once Roger Locke structural drawings and SAP report available.'},
+    {id:24,title:'Staircase design — confirm spec to cabinet maker',cat:'builder',due:'2026-06-01',prio:'med',done:false,notes:'Ground to first floor: 15 risers, 1000mm wide, straight run. Douglas Fir open treads, twin side stringers. Left side (overlooking hallway) — tube steel handrail. Right side — panelled infill with under-stair storage cupboards. Confirm run direction and corridor relationship with Neil Williams before instructing cabinet maker.'},
     {id:9,title:'Submit HMRC VAT431NB reclaim after completion',cat:'milestone',due:'2027-12-01',prio:'high',done:false,notes:'Must submit within 3 months of practical completion. All reclaimable receipts tracked in VAT tab.'},
     {id:10,title:'Confirm 0% VAT eligibility with HMRC',cat:'planning',due:'2026-05-01',prio:'high',done:false,notes:'New build is zero-rated. Register for VAT431NB reclaim. Keep all receipts for self-supply materials.'},
     {id:11,title:'Site investigation before foundation excavation',cat:'builder',due:'2026-06-01',prio:'high',done:false,notes:'Required per building regs section 1.0.1 — establish nature and depth of existing foundations before excavating. If piles found, instruct structural engineer.'},
     {id:12,title:'Percolation test for soakaways',cat:'builder',due:'2026-07-01',prio:'med',done:false,notes:'Site percolation test to BS 6297-1983 required before soakaway design. Results to be issued to Building Control. Two soakaways required (RWP1/2 and RWP3).'},
     {id:13,title:'GRAF One2Clean PTP — Environment Agency notification',cat:'planning',due:'2026-06-01',prio:'med',done:false,notes:'Package treatment plant (7PE, 4800L) to be installed in front grounds. Check General Binding Rules compliance re: 30m from public sewer and 500m from SAC/SSSI.'},
+    {id:14,title:'Await Neil Williams — planning amendment advice',cat:'planning',due:'2026-05-10',prio:'high',done:false,notes:'Email sent re 3 spec changes: Anthracite roof, Ebony cedar cladding, Forest Marble stone full height. Also flagged overall palette now much darker than planning visuals. Neil to advise on NMA or S73 requirement and timing.'},
+    {id:15,title:'Instruct Roger Locke — full structural scope',cat:'planning',due:'2026-05-15',prio:'high',done:false,notes:'Roger Locke Consulting, 01305 766556, office@rogerlocke.co.uk. Retaining wall drawing 4808/001/01 already issued. Full scope needed: retaining wall, ground floor slab, garage steelwork (203×203×52 UC), roof steelwork (USB 254×146×43), terrace PFC, foundation design. Brindley James waiting for structural drawings.'},
+    {id:16,title:'Confirm Forest Marble source and cost',cat:'builder',due:'2026-05-20',prio:'med',done:false,notes:'Forest Marble is a local Dorset grey limestone. Applied as facing over dense concrete block (CORY 2026 11). Confirm with stonemason — full height all 3 storeys on garage/SE elevation. Get supply and fix price before tender.'},
+    {id:17,title:'Appoint SAP assessor',cat:'urgent',due:'2026-05-15',prio:'high',done:false,notes:'Required for building regs compliance. Brindley James needs SAP to confirm 168mm Metdeck achieves U=0.140 W/m²K. Ask Neil Williams or Stroma to recommend one.'},
   ],
   budget:[
     {id:1,cat:'Professional Fees',budget:45000,actual:9785,color:'#b87348'},
@@ -1233,7 +1251,27 @@ const DEFAULTS={
     {id:16,cat:'Decorating',budget:21900,actual:0,color:'#6a7d60'},
     {id:17,cat:'Finishes & Tiling',budget:7400,actual:0,color:'#b87348'},
     {id:18,cat:'Guttering & Drainage',budget:8100,actual:0,color:'#7a6e8a'},
-    {id:19,cat:'Contingency (10%)',budget:62000,actual:0,color:'#8a8880'},
+    {id:19,cat:'Contingency (10%)',budget:80000,actual:0,color:'#8a8880'},
+    {id:20,cat:'BJ CORYDON02 — Groundworks & lower masonry',budget:171890,actual:0,color:'#6a7d60'},
+    {id:21,cat:'BJ CORYDON02 — Main structure (Forest Marble, walls, roof timber)',budget:207030,actual:0,color:'#5a7a8c'},
+    {id:22,cat:'BJ CORYDON02 — Roof timber works (posi-joists, ply deck)',budget:68720,actual:0,color:'#8a7a6e'},
+    {id:23,cat:'Metal Roof — Greencoat PLX Anthracite (provisional)',budget:57500,actual:0,color:'#3a3a38'},
+    {id:24,cat:'Balcony & Roof Steelwork (provisional)',budget:41500,actual:0,color:'#6e7a8a'},
+    {id:25,cat:'Scaffolding (provisional)',budget:18500,actual:0,color:'#8a7a6e'},
+    {id:26,cat:'External Cladding — BW Red Cedar Ebony stained',budget:45000,actual:0,color:'#1e1e1c'},
+    {id:27,cat:'Windows & External Doors — Anthracite aluminium',budget:62600,actual:0,color:'#4a4a48'},
+    {id:28,cat:'Staircase & Internal Carpentry',budget:25000,actual:0,color:'#b87348'},
+    {id:29,cat:'Electrics (NIC EIC)',budget:30000,actual:0,color:'#5a7a8c'},
+    {id:30,cat:'Plastering & Render (K-Rend Causeway)',budget:40500,actual:0,color:'#d4c4a0'},
+    {id:31,cat:'Plumbing — Evergreen (ASHP, UFH, rads, DHW)',budget:16000,actual:0,color:'#6a7d60'},
+    {id:32,cat:'Kitchen, Sanitaryware & Tiling',budget:40000,actual:0,color:'#7a6e8a'},
+    {id:33,cat:'Floor Finishes & Decoration',budget:25000,actual:0,color:'#b87348'},
+    {id:34,cat:'Wood Burning Stove — HETAS install',budget:8000,actual:0,color:'#c45a30'},
+    {id:35,cat:'Fire Sprinkler System BS 9251:2021',budget:12000,actual:0,color:'#c45a30'},
+    {id:36,cat:'PV Panels — Evergreen (co-ordinate with metal roof)',budget:15000,actual:0,color:'#4a7a5e'},
+    {id:37,cat:'External Paving, Steps & Landscaping',budget:20000,actual:0,color:'#6a7d60'},
+    {id:38,cat:'Waste Skips (billed separately)',budget:8000,actual:0,color:'#8a8880'},
+    {id:39,cat:'Contingency (10%)',budget:93000,actual:0,color:'#8a8880'},
   ],
   vat:[
     {id:1,date:'2025-11-18',desc:'Cutting existing power supply',supplier:'SSE Network',type:'contractor',net:256.33,vatRate:20,vat:51.27,total:307.60,reclaim:'no',ref:'Inv-1'},
@@ -1265,49 +1303,64 @@ const DEFAULTS={
     {id:5,date:'Jan 2026',title:'Building Regulations Submitted',status:'done',desc:'Full building regs notes compiled by NA Williams (26.01.2026, amended 16.03.2026). Drawings CROY 2026 09, 10, 13. Stroma Building Control appointed.',cat:'planning'},
     {id:6,date:'Feb 2026',title:'Asbestos Demolition Survey — CAS 3044',status:'done',desc:'Complete Asbestos Solutions. 3 low-risk chrysotile ACM items identified. All must be removed before demolition.',cat:'milestone'},
     {id:7,date:'Mar 2026',title:'Site Protection Works',status:'done',desc:'Heras fencing installed by Events Crew. Plywood, pipes and materials purchased. Ground pins for tree protection installed.',cat:'builder'},
-    {id:8,date:'Apr–May 2026',title:'Asbestos Removal',status:'active',desc:'3 ACM items to be removed by licensed contractor. Obtain completion certificate before demolition.',cat:'builder'},
-    {id:9,date:'2026',title:'Planning Decision Awaited',status:'',desc:'Awaiting Dorset Council decision on P-FUL-2025-05327.',cat:'planning'},
+    {id:8,date:'Apr–May 2026',title:'Asbestos Removal & Bat Relocation',status:'active',desc:'Bats successfully relocated by Sophie Higgins (Redstone Ecology) under EPS Licence. Louis removing 3 ACM items (CAS 3044). Independent clearance certificate required before demolition.',cat:'builder'},
+    {id:9,date:'29 Apr 2026',title:'PLANNING PERMISSION GRANTED',status:'done',desc:'P/FUL/2025/05327 granted. Condition 3 (Construction Method Statement) discharged. Officer: Steve Tapscott, Dorset Council. Signed by Mike Garrity, Corporate Director Planning Place.',cat:'milestone'},
     {id:10,date:'Mid 2026',title:'Tender & Appoint Contractor',status:'',desc:'Issue tender pack. Brindley James already quoted. Appoint main contractor and structural engineer.',cat:'builder'},
     {id:11,date:'Late 2026',title:'Demolition & Groundworks',status:'',desc:'Demolish existing dwelling. Foundation excavation, trench fill foundations, beam & block floor. ASHP position prepared.',cat:'builder'},
     {id:12,date:'2026–2027',title:'Structure, Roof & Services',status:'',desc:'External walls (cavity with Celotex PIR), Greencoat PLX flat roof, timber frame, glazing (Catnic lintels). 1st fix services including UFH, ASHP, SVP stacks.',cat:'builder'},
   ],
   gantt:[
-    {id:1,label:'Planning & Surveys',sub:'Application, estimates, surveys',startDate:'2025-04-01',endDate:'2026-03-31',color:'#b87348'},
-    {id:2,label:'Services Disconnection',sub:'Electricity, gas, water',startDate:'2025-11-01',endDate:'2026-04-30',color:'#6e7a8a'},
-    {id:3,label:'Asbestos Removal',sub:'CAS 3044 — 3 ACM items',startDate:'2026-04-01',endDate:'2026-05-31',color:'#c45a30'},
-    {id:4,label:'Building Regs & Tender',sub:'NA Williams, contractor selection',startDate:'2026-01-01',endDate:'2026-09-30',color:'#5a7a8c'},
+    {id:1,label:'Planning & Surveys',sub:'GRANTED 29 Apr 2026',startDate:'2025-04-01',endDate:'2026-04-30',color:'#b87348'},
+    {id:2,label:'Services Disconnection',sub:'Electricity ✓ Gas ✓ Water TBC',startDate:'2025-11-01',endDate:'2026-05-15',color:'#6e7a8a'},
+    {id:3,label:'Asbestos Removal',sub:'CAS 3044 — Louis — in progress',startDate:'2026-04-01',endDate:'2026-05-31',color:'#c45a30'},
+    {id:4,label:'Building Regs & Tender',sub:'NA Williams, Roger Locke, SAP, contractor',startDate:'2026-01-01',endDate:'2026-09-30',color:'#5a7a8c'},
+    {id:5,label:'Bat Relocation',sub:'Sophie Higgins — COMPLETE',startDate:'2026-04-15',endDate:'2026-04-30',color:'#4a7a5e'},
+    {id:6,label:'Demolition',sub:'After asbestos clearance certificate',startDate:'2026-06-01',endDate:'2026-08-31',color:'#7a6e8a'},
+    {id:7,label:'Groundworks & Foundations',sub:'Roger Locke design — trench fill',startDate:'2026-08-01',endDate:'2026-11-30',color:'#6a7d60'},
+    {id:8,label:'Structure & Roof',sub:'Brindley James — posi-joists, walls',startDate:'2026-10-01',endDate:'2027-06-30',color:'#5a7a8c'},
+    {id:9,label:'Services & Fit-out',sub:'Evergreen, electrics, finishes',startDate:'2027-04-01',endDate:'2027-10-31',color:'#b87348'},
   ],
   contacts:[
     {id:1,initials:'RB',name:'Richard Budd',role:'Client / Self Builder',firm:'',phone:'07767895205',mobile:'07767895205',email:'richard@richardbudd.co.uk',web:'richardbudd.co.uk'},
     {id:2,initials:'LB',name:'Laura Budd',role:'Client / Owner',firm:'',phone:'',mobile:'',email:'',web:''},
     {id:3,initials:'NAW',name:'N.A. Williams',role:'Building Consultant',firm:'NA Williams Building Consultancy Ltd',phone:'01305 269283',mobile:'07717 682937',email:'nawilliams@gmx.com',web:'nawilliamsbuildingconsultancy.co.uk'},
     {id:4,initials:'NB',name:'Nick Baxter',role:'Arboricultural Consultant',firm:'NB Tree Management',phone:'',mobile:'',email:'nick@nbtreemanagement.co.uk',web:''},
-    {id:5,initials:'BJ',name:'Brindley James Ltd',role:'Builder — Quoted CORYDON01',firm:'Brindley James Ltd',phone:'01308 459300',mobile:'07971 899542',email:'build@brindleyjames.com',web:'brindleyjames.com'},
+    {id:5,initials:'BJ',name:'Brindley James Ltd',role:'Builder — CORYDON02 £447,640 main works',firm:'Brindley James Ltd',phone:'01308 459300',mobile:'07971 899542',email:'build@brindleyjames.com',web:'brindleyjames.com'},
     {id:6,initials:'CAS',name:'Complete Asbestos Solutions',role:'Asbestos Surveyor — CAS 3044',firm:'Complete Asbestos Solutions Ltd',phone:'01202 099 906',mobile:'',email:'info@completeasbestos.uk',web:''},
     {id:7,initials:'DC',name:'Dorset Council Planning',role:'Planning Authority',firm:'Dorset Council',phone:'01305 221000',mobile:'',email:'planning@dorsetcouncil.gov.uk',web:'dorsetcouncil.gov.uk'},
     {id:8,initials:'GM',name:'Graeme Matthews',role:'Senior Building Control Surveyor',firm:'Dorset Council Building Control',phone:'01305 252254',mobile:'',email:'buildingcontrol@dorsetcouncil.gov.uk',web:''},
     {id:9,initials:'PR',name:'Paul Reynolds',role:'Heating, Plumbing & Solar',firm:'Evergreen Renewable Energy Ltd',phone:'01297 443209',mobile:'',email:'',web:'evergreensw.co.uk'},
-    {id:10,initials:'RE',name:'Redstone Ecology',role:'Bat Licence & Ecology',firm:'Redstone Ecology Ltd',phone:'',mobile:'',email:'',web:''},
+    {id:10,initials:'RE',name:'Redstone Ecology (John Polley)',role:'Bat Licence & Ecology',firm:'Redstone Ecology Ltd',phone:'07980 255952',mobile:'07980 255952',email:'john@redstoneecology.co.uk',web:'redstoneecology.co.uk'},
     {id:11,initials:'ST',name:'Stroma Building Control',role:'Building Control Inspector',firm:'Stroma Certification',phone:'',mobile:'',email:'',web:'stroma.com'},
-    {id:12,initials:'SE',name:'Structural Engineer',role:'To be appointed',firm:'',phone:'',mobile:'',email:'',web:''},
-    {id:13,initials:'MC',name:'Main Contractor',role:'To be tendered',firm:'',phone:'',mobile:'',email:'',web:''},
+    {id:12,initials:'RL',name:'Roger Locke Consulting',role:'Structural / Civil Engineer',firm:'Roger Locke Consulting',phone:'01305 766556',mobile:'',email:'office@rogerlocke.co.uk',web:'rogerlocke.co.uk'},
+    {id:13,initials:'SAP',name:'SAP Assessor',role:'To be appointed — energy compliance',firm:'',phone:'',mobile:'',email:'',web:''},
+    {id:14,initials:'MC',name:'Main Contractor',role:'To be tendered',firm:'',phone:'',mobile:'',email:'',web:''},
   ]
 };
 
 const materials=[
-  {element:'Roofs',spec:'Greencoat PLX standing seam coated steel. Colour grey (SSAB Swedish Steel Ltd)',color:'#888480'},
-  {element:'Eaves — fascia / bargeboards',spec:'Aluminium seamless cladding. Black',color:'#1a1a18'},
-  {element:'Roofs — soffit / canopies',spec:'Siberian larch cladding — left to weather to silvery grey',color:'#c8b88a'},
-  {element:'Rainwater downpipes',spec:'Aluminium circular flush joint. Black',color:'#1a1a18'},
-  {element:'Walls — 1st floor',spec:'Timber 145mm face width cladding. Black (British Western Red Cedar, Sikkens Cetol Ebony C20)',color:'#1a1a18'},
-  {element:'Balconies — 1st floor',spec:'Canadian Western Red Cedar 145mm cladding — maintained at orangey-brown colour',color:'#b87348'},
-  {element:'Walls — ground floor',spec:'K-Rend through-colour render. Colour: Causeway',color:'#d4c4a0'},
-  {element:'Walls — plinth',spec:'Natural stone — Knapped field flint (St Catherine Flint Products)',color:'#9a8870'},
-  {element:'Wall — SE elevation',spec:'Random course Portland stone with natural stone dressed openings, quoins & stone sub cills',color:'#e8e0d0'},
-  {element:'Chimney stack',spec:'Render / through colour K-Rend Causeway. Schiedel DM36 pumice block flue system',color:'#d4c4a0'},
-  {element:'Balcony soffit',spec:'Siberian larch cladding — left to weather to silvery grey',color:'#c8b88a'},
-  {element:'Columns',spec:'Painted steel. Black',color:'#1a1a18'},
-  {element:'Roof window',spec:'Velux solar powered, electronically operated flat glass (ISU 2093 150150 / CVU 0520Q)',color:'#6e8a9a'},
+  {element:'Roofs',spec:'Greencoat PLX Pro BT standing seam coated steel — Anthracite (regular or matt finish). CORY 2026 15. Note: planning submission CROY 2025 07 showed Quarry Grey — amendment pending.',color:'#3a3a38'},
+  {element:'Eaves — fascia / bargeboards',spec:'Aluminium seamless cladding. Black powder coated.',color:'#1a1a18'},
+  {element:'Roofs — soffit / canopies',spec:'British Western Red Cedar 145mm face width cladding stained Ebony. CORY 2026 15. Note: planning showed Siberian larch weathering grey — amendment pending.',color:'#1e1e1c'},
+  {element:'Rainwater downpipes',spec:'Aluminium circular flush joint. Black.',color:'#1a1a18'},
+  {element:'Walls & guarding — 1st floor',spec:'British Western Red Cedar 145mm face width cladding stained Ebony. CORY 2026 15. Note: planning showed black Siberian Larch — amendment pending.',color:'#1e1e1c'},
+  {element:'Balconies — 1st floor',spec:'British Western Red Cedar 145mm cladding stained Ebony (same as walls). CORY 2026 15. Note: planning showed Canadian Western Red Cedar orangey-brown — amendment pending.',color:'#1e1e1c'},
+  {element:'Walls — ground floor',spec:'K-Rend through-colour render. Colour: Causeway.',color:'#d4c4a0'},
+  {element:'Walls — plinth',spec:'Natural stone. Knapped field flint.',color:'#9a8870'},
+  {element:'Wall — SE elevation & lower ground (garage)',spec:'CONFIRMED in BJ CORYDON02: Forest Marble — local Dorset grey limestone — full height from lower ground through all 3 storeys. 150mm nominal on outer leaf over concrete block inner leaf. Applied as facing over dense concrete block structure (CORY 2026 11). Note: planning submission showed Portland stone — amendment to Dorset Council required (email sent to Neil Williams).',color:'#8a9090'},
+  {element:'Garage walls — structural',spec:'Dense concrete block (CORY 2026 11). 203×203×52 UC steel columns. Forest Marble stone facing applied externally.',color:'#888480'},
+  {element:'Chimney stack',spec:'Render / through colour K-Rend Causeway. Schiedel DM36 pumice block flue system.',color:'#d4c4a0'},
+  {element:'Columns',spec:'Painted steel. Black. SHS 178mm square hollow section. 100×100×5.0 SHS at garage door.',color:'#1a1a18'},
+  {element:'Roof window',spec:'Velux 1500mm square solar powered electronically operated flat glass. ISU 2093 150150 / CVU 0520Q. Anthracite.',color:'#4a4a48'},
+  {element:'Windows & doors',spec:'Double glazed aluminium frame — powder coated Anthracite. U-value 1.40. Argon filled, low-E.',color:'#4a4a48'},
+  {element:'Garage door',spec:'Garador Gararoll electronically operated roller shutter. Anthracite RAL 7016. 6590mm finished width.',color:'#4a4a48'},
+  {element:'Air Source Heat Pump',spec:'12kW Samsung GEN7 R290. East side. UFH ground floor (individually zoned), aluminium rads first floor (HIVE, no TRVs).',color:'#5a7a8c'},
+  {element:'Roof construction (CORY 2026 16)',spec:'25mm Greencoat PLX Anthracite / ISO-Mat breather membrane / 25mm structural hardwood ply deck / 45mm timber packer / 373mm Posi-Joists (RJ1 8663mm o/a, RJ2 9215mm o/a, overall length 22,220mm) / 168mm Metdeck / VCL / 15mm plasterboard + skim. Target U-value 0.140 W/m²K.',color:'#888480'},
+  {element:'Box gutters',spec:'18mm OSB3 GRP lined. Firrings 50mm × 7760mm (97mm to nil = 1:80 fall). 250mm square catch pits to 68mm dia RWP.',color:'#7a7870'},
+  {element:'Retaining wall (Roger Locke 4808/001/01)',spec:'175mm reinforced concrete cavity, A393 mesh 50mm cover, C28/35. 150mm ground bearing slab A142 mesh. 600mm wide strip footing 500mm concrete. Min 900mm below ground.',color:'#8a8a88'},
+  {element:'External terrace decking',spec:'Cladco recycled plastic 27mm boards grey on 50mm plastic joists on marine ply deck.',color:'#888480'},
+  {element:'Terrace guarding',spec:'50×50mm steel balusters at 600mm centres black powder coated / site welded to PFC. Iroko hardwood handrail stained Ebony. Min 1.1m height.',color:'#2a2a28'},
+];
   {element:'Windows & doors',spec:'Double glazed aluminium frame — powder coated anthracite. U-value 1.40. Argon filled, low-E',color:'#6e7a8a'},
   {element:'Garage door',spec:'Garador Gararoll electronically operated roller shutter. Anthracite RAL 7016. 5000mm × 2100mm',color:'#6e7a8a'},
   {element:'Air Source Heat Pump',spec:'12kW Samsung GEN7 R290 — east side of dwelling. UFH ground floor, aluminium rads first floor',color:'#5a7a8c'},
@@ -1316,17 +1369,22 @@ const materials=[
 ];
 
 const drawings=[
-  {ref:'CROY 2025 01',title:'Existing Site Plan',desc:'Survey site plan at 1:500 (@A3). Shows existing dwelling "Corydon", 0.91m RH boundary, Wessex Water network, ward boundary. Drawn BH, 12.03.25.',date:'12.03.25',scale:'1:500',type:'Survey',icon:'🗺️'},
-  {ref:'CROY 2025 02',title:'Existing Floor Plans',desc:'Survey floor plans at 1:50 (@A2). Ground floor: Kitchen, Utility, Hall, WC, Bathroom, Living, En-suite, 3 Bedrooms, Conservatory. Lower ground: Photography Studio, Store, WC. First floor shown.',date:'12.03.25',scale:'1:50',type:'Survey',icon:'📋'},
-  {ref:'CROY 2025 03',title:'Survey Elevations',desc:'Existing elevations at 1:100 (@A3). Front/NW, Rear/SE, Flank/SW, Flank/NE. Existing materials: fibre cement slates, GRP flat roof, stained timber soffits, facing brick, PVC windows/doors.',date:'12.03.25',scale:'1:100',type:'Survey',icon:'📐'},
-  {ref:'CROY 2025 04',title:'Proposed Site Plan',desc:'Planning site plan at 1:500 (@A3). Shows proposed dwelling position, tree survey (CYP, PIN, HAZ, YEW etc), root protection areas, notional sun path 21st June, contours, 0.91m RH boundary.',date:'22.04.25',scale:'1:500',type:'Planning',icon:'🗺️'},
-  {ref:'CROY 2025 07B',title:'Proposed Elevations',desc:'Planning elevations at 1:100 (@A2). All 4 elevations shown with materials schedule. Front/SE: Portland stone plinth, render, timber cladding, large glazing, terrace. Rear/NW, Flanks NE & SW.',date:'22.04.25',scale:'1:100',type:'Planning',icon:'🏠'},
-  {ref:'CROY 2026 09',title:'Proposed Ground & Lower Ground Floor Plan',desc:'Building Control floor plans at 1:50 (@A2). Ground: Snug, Bedroom 3, Shower, Entrance Hall, Kitchen/Dining, Larder, Bedroom 4, Boot Rm, Photography Studio, Shower. Lower Ground: Garage. ASHP position shown.',date:'28.01.26',scale:'1:50',type:'Building Control',icon:'📏'},
-  {ref:'CROY 2026 10',title:'Proposed First Floor Plan',desc:'Building Control first floor at 1:50 (@A2). Lounge, Kitchenette, Landing, Bedroom 2, En-suite, Dining, Study, Dressing Rm, Bathroom, Bedroom 1, two Balconies. Window refs W8-W17, expansion joints marked.',date:'28.01.26',scale:'1:50',type:'Building Control',icon:'📏'},
-  {ref:'CROY 2026 13',title:'Proposed Cross Section AA',desc:'Building Control section at 1:50/1:20 (@A2). Shows all 3 levels: Lower Ground (127.870 T/o screed), Ground, First. 13° pitch rear roof, 5° pitch front roof. Ridge 135.700m. Flat roof construction detail.',date:'26.01.26',scale:'1:50 / 1:20',type:'Building Control',icon:'✂️'},
-  {ref:'CROY 2025 05A',title:'Proposed Ground Floor — Sleeper Walls',desc:'Referenced in building regs notes section 2.0.2. Shows sleeper wall locations for beam & block floor support.',date:'2026',scale:'TBC',type:'Building Control',icon:'📐'},
-  {ref:'CORY 2026 14',title:'Box Gutter Detail',desc:'Referenced in building regs notes section 6.0.4. Box gutter construction details.',date:'2026',scale:'TBC',type:'Building Control',icon:'📐'},
-  {ref:'Location Plan',title:'Location Plan',desc:'OS MasterMap 1:1250 scale. Centre: 363138 E, 90951 N. Shows site location, Roman Road access, surrounding properties. Crown Copyright OS Licence AC0000849896.',date:'Sep 2025',scale:'1:1250',type:'Planning',icon:'📍'},
+  {ref:'CROY 2025 01',title:'Existing Site Plan',desc:'Survey 1:500. Existing dwelling, 0.91m RH boundary, Wessex Water network.',date:'12.03.25',scale:'1:500',type:'Survey',icon:'🗺️'},
+  {ref:'CROY 2025 02',title:'Existing Floor Plans',desc:'Survey 1:50. Ground, first and lower ground floor existing layouts. Photography Studio, Store, WC lower ground.',date:'12.03.25',scale:'1:50',type:'Survey',icon:'📋'},
+  {ref:'CROY 2025 03',title:'Survey Elevations',desc:'Existing elevations 1:100. All four elevations. Facing brick, fibre cement slates, PVC windows.',date:'12.03.25',scale:'1:100',type:'Survey',icon:'📐'},
+  {ref:'CROY 2025 04B',title:'Proposed Site Plan',desc:'Planning 1:500. Tree survey, sun path, root protection areas, T1/T2/T3/T10/H3 removals. NB Tree Management TR-1A & TPP-1A 19.11.2025.',date:'25.11.25',scale:'1:500',type:'Planning',icon:'🗺️'},
+  {ref:'CROY 2025 05B',title:'Proposed Ground & Lower Ground (Planning)',desc:'Planning 1:50. All ground floor rooms. ASHP east side. 178mm SHS steel columns. Garage FL125.14.',date:'13.10.25',scale:'1:50',type:'Planning',icon:'📏'},
+  {ref:'CROY 2025 06',title:'Proposed First Floor Plan (Planning)',desc:'Planning 1:50. Lounge, Kitchenette, Bed2, En-suite, Dining, Study, Dressing, Bathroom, Bed1, two Balconies. Sun path shown.',date:'22.04.25',scale:'1:50',type:'Planning',icon:'📏'},
+  {ref:'CROY 2025 07B',title:'Proposed Elevations (Planning)',desc:'Planning 1:100. All 4 elevations. PLANNING SPEC: Quarry Grey roof, Siberian Larch black 1st floor, Canadian Cedar balconies orange, Portland stone lower ground. SUPERSEDED by CORY 2026 15 for BC — amendment to planning pending.',date:'13.10.25',scale:'1:100',type:'Planning',icon:'🏠'},
+  {ref:'CORY 2026 09',title:'Proposed Ground & Lower Ground Floor Plan (BC)',desc:'Building Control 1:50. Full dimensions, window refs W1-W7, door refs D1-D5/D9, steel beam positions A-F, SVP1/SVP2, RWP positions. 20,350mm o/a render.',date:'28.01.26',scale:'1:50',type:'Building Control',icon:'📏'},
+  {ref:'CORY 2026 10',title:'Proposed First Floor Plan (BC)',desc:'Building Control 1:50. Lounge, Kitchenette, Bed2, En-suite, Dining, Study, Dressing, Bathroom, Bed1, two Balconies. Window refs W8-W17. GRP box gutter 250mm. Velux roof window. Expansion joints.',date:'28.01.26',scale:'1:50',type:'Building Control',icon:'📏'},
+  {ref:'CORY 2026 11',title:'Proposed Lower Ground Floor Plan (BC)',desc:'Building Control 1:50 (@A3). Garage FL125.14. Dense concrete block walls. 203×203×52 UC steel columns. Garage door 6590mm FIN. 100×100×5.0 SHS posts. 250×150×10 RHS beam galvanised. 1500×350 RC base. 600mm wide strip footing 1000mm below ground. RWP3 to 110mm PVC soakaway 1. Expansion joints marked.',date:'28.01.26',scale:'1:50',type:'Building Control',icon:'🏗'},
+  {ref:'CORY 2026 13',title:'Proposed Cross Section AA (original)',desc:'Building Control 1:50/1:20. Three levels. 13° rear pitch, 5° front pitch. Ridge 135.700m AOD. GFL 127.87.',date:'26.01.26',scale:'1:50/1:20',type:'Building Control',icon:'✂️'},
+  {ref:'CORY 2026 14',title:'Proposed Roof Plan',desc:'Building Control 1:50. Posi-Joists RJ1 8663mm o/a and RJ2 9215mm o/a. Box gutters with firrings 1:80 fall. Catch pits to 68mm RWPs. Velux over Dining. Overall length 22,220mm.',date:'28.01.26',scale:'1:50',type:'Building Control',icon:'🏗'},
+  {ref:'CORY 2026 15',title:'Proposed Elevations (BC) — UPDATED SPEC',desc:'Building Control 1:100. UPDATED: Greencoat PLX Anthracite roof (not Quarry Grey). British Western Red Cedar Ebony stained walls/soffits/balconies (not Siberian Larch/Canadian Cedar). Amendment to planning required. All four elevations.',date:'28.01.26',scale:'1:100',type:'Building Control',icon:'🏠'},
+  {ref:'CORY 2026 16',title:'Proposed Cross Section AA (updated)',desc:'Building Control 1:50/1:20. Full roof makeup: 25mm PLX / ISO-Mat / 25mm hardwood ply / 45mm packer / 373mm Posi-Joists / 168mm Metdeck / VCL / 15mm pb+skim. USB 254×146×43 steel. Terrace detail. Box gutter GRP 1:80.',date:'26.01.26',scale:'1:50/1:20',type:'Building Control',icon:'✂️'},
+  {ref:'Roger Locke 4808/001/01',title:'Retaining Wall — Typical Section',desc:'Roger Locke Consulting, Civil & Structural Engineers. 01305 766556. Sheet D01, Engineer JMH, dated 04/26. Retaining wall 1:20: 175mm RC cavity A393 mesh C28/35, 150mm ground bearing slab A142 mesh, 600mm wide strip footing 500mm concrete min 900mm below ground. Max height 2450mm.',date:'04/26',scale:'1:20',type:'Structural',icon:'🏗'},
+  {ref:'Location Plan',title:'Location Plan',desc:'OS MasterMap 1:1250. Centre 363138E, 90951N. Crown Copyright OS Licence AC0000849896.',date:'Sep 2025',scale:'1:1250',type:'Planning',icon:'📍'},
 ];
 
 let state;
