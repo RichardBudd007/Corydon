@@ -4,633 +4,196 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Corydon — Project Access</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400;500&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+
 :root{
-  --ink:#1a1a18;
-  --paper:#f5f2eb;
-  --clay:#c4875a;
-  --sage:#7a8c6e;
-  --sky:#6b8fa3;
-  --cream:#ede9de;
-  --muted:#6a6866;
-  --warn:#d4704a;
-  --border:rgba(26,26,24,0.15);
-  --panel:rgba(255,255,255,0.92);
+  --ink:#1a1714;
+  --ink2:#4a4540;
+  --ink3:#8a8278;
+  --paper:#f8f5f0;
+  --paper2:#f0ece5;
+  --paper3:#e8e2d8;
+  --rule:#d0c8bc;
+  --accent:#2a5a8a;
+  --accent2:#4a78a0;
+  --success:#3a6a3a;
+  --danger:#8a2a2a;
+  --warning:#8a6020;
 }
 
-html,body{height:100%;min-height:100vh;}
-body{
-  font-family:'DM Sans',sans-serif;
-  background:var(--cream);
-  min-height:100vh;
-  position:relative;
-  overflow-x:hidden;
-}
+html,body{height:100%;background:var(--paper);font-family:'DM Mono',monospace;color:var(--ink)}
 
-/* ── BACKGROUND — subtle grid only ── */
-.bg-grid{
-  position:fixed;inset:0;pointer-events:none;
-  background-image:
-    linear-gradient(rgba(196,135,90,0.12) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(196,135,90,0.12) 1px,transparent 1px);
-  background-size:48px 48px;
-  z-index:0;
-}
+.page{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden}
 
-/* ── BUDGET BUBBLE SVG — fixed behind everything ── */
-.bg-bubbles{
-  position:fixed;inset:0;
-  pointer-events:none;
-  z-index:1;
-  overflow:hidden;
-}
+/* Background texture */
+.page::before{content:'';position:fixed;inset:0;background:
+  repeating-linear-gradient(0deg,transparent,transparent 39px,var(--rule) 39px,var(--rule) 40px),
+  repeating-linear-gradient(90deg,transparent,transparent 39px,var(--rule) 39px,var(--rule) 40px);
+  opacity:0.18;pointer-events:none}
 
-/* ═══════════════════════════════════════
-   PAGE LAYOUT
-═══════════════════════════════════════ */
-.page-layout{
-  min-height:100vh;
-  display:flex;
-  align-items:stretch;
-  position:relative;
-  z-index:10;
-}
+.card{background:white;border:1px solid var(--rule);max-width:480px;width:100%;padding:48px 40px 40px;position:relative;z-index:1;box-shadow:0 2px 24px rgba(0,0,0,0.06)}
 
-/* ── LEFT SIDE ── */
-.info-side{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  gap:16px;
-  padding:40px 40px 40px 56px;
-}
+.eyebrow{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
 
-/* ── SOLID WHITE PANELS ── */
-.info-panel{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:8px;
-  padding:20px 24px;
-  box-shadow:0 2px 8px rgba(26,26,24,0.06);
-}
+h1{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2.8rem;line-height:1;color:var(--ink);margin-bottom:4px}
 
-.info-panel.hero{
-  background:var(--ink);
-  color:var(--paper);
-  border-color:var(--clay);
-  border-width:2px;
-}
+.subtitle{font-size:9px;color:var(--ink3);letter-spacing:0.1em;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--rule)}
 
-.info-kicker{
-  font-family:'DM Mono',monospace;font-size:9px;
-  letter-spacing:0.18em;text-transform:uppercase;
-  color:var(--clay);margin-bottom:8px;
-}
-.info-title{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(40px,5vw,72px);
-  color:var(--paper);
-  line-height:0.95;margin-bottom:6px;
-}
-.info-addr{
-  font-family:'DM Mono',monospace;font-size:10px;
-  color:rgba(245,242,235,0.5);letter-spacing:0.06em;
-}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);margin-bottom:32px;border:1px solid var(--rule)}
+.stat{background:var(--paper);padding:12px 8px;text-align:center}
+.stat-val{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:var(--ink);display:block}
+.stat-lbl{font-size:7px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink3);display:block;margin-top:2px}
 
-/* stats grid */
-.info-stats{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-}
-.info-stat-num{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(24px,3vw,36px);
-  color:var(--ink);
-  line-height:1;margin-bottom:3px;
-}
-.info-stat-lbl{
-  font-family:'DM Mono',monospace;font-size:9px;
-  letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--clay);
-}
+.profiles-label{font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:12px}
 
-/* phase rings panel */
-.panel-label{
-  font-family:'DM Mono',monospace;font-size:9px;
-  letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--muted);margin-bottom:12px;
-}
-.rings-row{
-  display:flex;gap:12px;flex-wrap:wrap;
-}
-.ring-item{
-  display:flex;flex-direction:column;
-  align-items:center;gap:4px;
-}
-.ring-lbl{
-  font-family:'DM Mono',monospace;font-size:8px;
-  letter-spacing:0.03em;text-transform:uppercase;
-  color:var(--muted);text-align:center;max-width:52px;
-}
+.profiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px}
 
-/* timeline panel */
-.tl-svg-wrap{width:100%;}
+.profile-btn{background:var(--paper);border:1px solid var(--rule);padding:16px;cursor:pointer;text-align:left;transition:all 0.15s;display:flex;align-items:center;gap:12px}
+.profile-btn:hover{background:var(--paper2);border-color:var(--accent2)}
 
-/* materials panel */
-.mats-list{
-  display:flex;flex-direction:column;gap:6px;
-}
-.mat-item{
-  display:flex;align-items:center;gap:10px;
-  font-size:13px;color:var(--ink);line-height:1.4;
-}
-.mat-swatch{
-  width:10px;height:10px;border-radius:2px;
-  flex-shrink:0;
-}
+.avatar{width:36px;height:36px;border-radius:50%;background:var(--ink);color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0}
+.avatar.owner{background:var(--accent)}
+.avatar.contractor{background:var(--ink2)}
+.avatar.consultant{background:var(--success)}
 
-/* ref bar */
-.info-ref{
-  font-family:'DM Mono',monospace;font-size:9px;
-  letter-spacing:0.08em;text-transform:uppercase;
-  color:var(--muted);text-align:center;
-  padding:8px 0;
-}
+.profile-name{font-size:11px;font-weight:500;color:var(--ink);display:block}
+.profile-role{font-size:8px;color:var(--ink3);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-top:2px}
+.profile-arrow{margin-left:auto;color:var(--ink3);font-size:14px}
 
-/* ── RIGHT SIDE — login card ── */
-.login-side{
-  width:460px;
-  flex-shrink:0;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  padding:40px 40px 40px 16px;
-}
+/* Password modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;z-index:100;opacity:0;pointer-events:none;transition:opacity 0.2s}
+.modal-overlay.active{opacity:1;pointer-events:all}
+.modal{background:white;border:1px solid var(--rule);padding:32px;width:320px;position:relative}
+.modal h3{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.4rem;margin-bottom:4px}
+.modal-sub{font-size:8px;color:var(--ink3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:20px}
+.pw-wrap{position:relative;margin-bottom:8px}
+.pw-input{width:100%;border:1px solid var(--rule);background:var(--paper);padding:10px 40px 10px 12px;font-family:'DM Mono',monospace;font-size:13px;color:var(--ink);outline:none}
+.pw-input:focus{border-color:var(--accent2)}
+.pw-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--ink3);font-size:14px;padding:4px}
+.pw-error{font-size:9px;color:var(--danger);letter-spacing:0.08em;min-height:14px;margin-bottom:12px}
+.btn-enter{width:100%;background:var(--ink);color:white;border:none;padding:12px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:background 0.15s}
+.btn-enter:hover{background:var(--accent)}
+.btn-cancel{width:100%;background:none;border:1px solid var(--rule);color:var(--ink3);padding:10px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;cursor:pointer;margin-top:8px;transition:all 0.15s}
+.btn-cancel:hover{border-color:var(--ink3);color:var(--ink)}
 
-.login-card{
-  background:white;
-  border-radius:8px;
-  overflow:hidden;
-  border:1px solid var(--border);
-  box-shadow:
-    0 4px 12px rgba(26,26,24,0.08),
-    0 20px 50px rgba(26,26,24,0.12);
-  animation:fadeUp 0.6s cubic-bezier(.22,.68,0,1.2) both;
-}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(20px);}
-  to{opacity:1;transform:translateY(0);}
-}
+.footer-note{font-size:8px;color:var(--ink3);text-align:center;padding-top:20px;border-top:1px solid var(--rule);letter-spacing:0.06em}
 
-/* card header */
-.card-header{
-  background:var(--ink);
-  padding:24px 28px 20px;
-  border-bottom:3px solid var(--clay);
-}
-.project-label{
-  font-family:'DM Mono',monospace;font-size:9px;
-  letter-spacing:0.18em;text-transform:uppercase;
-  color:var(--clay);margin-bottom:7px;
-}
-.project-name{
-  font-family:'Playfair Display',serif;font-size:26px;
-  color:#f5f2eb;line-height:1;margin-bottom:4px;
-}
-.project-sub{
-  font-family:'DM Mono',monospace;font-size:10px;
-  color:rgba(245,242,235,0.45);letter-spacing:0.06em;
-}
-.header-stats{
-  display:flex;margin-top:14px;padding-top:13px;
-  border-top:1px solid rgba(196,135,90,0.2);
-}
-.hstat{flex:1;padding-right:12px;}
-.hstat+.hstat{padding-left:12px;padding-right:0;border-left:1px solid rgba(255,255,255,0.1);}
-.hstat-num{font-family:'Playfair Display',serif;font-size:17px;color:#f5f2eb;line-height:1;margin-bottom:2px;}
-.hstat-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(245,242,235,0.4);}
-
-.phase-dots{display:flex;gap:3px;flex-wrap:wrap;margin-top:11px;padding-top:11px;border-top:1px solid rgba(196,135,90,0.15);}
-.pdot{display:flex;align-items:center;gap:3px;}
-.pdot-lbl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:0.04em;text-transform:uppercase;color:rgba(245,242,235,0.35);}
-
-.mini-timeline{margin-top:11px;padding-top:11px;border-top:1px solid rgba(196,135,90,0.12);}
-.mt-label{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,242,235,0.35);margin-bottom:6px;}
-.mt-track{position:relative;height:28px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:visible;}
-.mt-bar{position:absolute;height:8px;border-radius:2px;display:flex;align-items:center;padding:0 4px;}
-.mt-bar-lbl{font-family:'DM Mono',monospace;font-size:6px;color:rgba(245,242,235,0.85);white-space:nowrap;}
-.mt-today{position:absolute;top:-2px;bottom:-2px;width:2px;background:var(--warn);border-radius:1px;}
-.mt-today-lbl{position:absolute;top:-13px;font-family:'DM Mono',monospace;font-size:6px;color:var(--warn);transform:translateX(-50%);white-space:nowrap;}
-
-/* warn strip */
-.warn-strip{
-  padding:10px 28px;
-  background:#fff5f0;
-  border-bottom:1px solid rgba(212,112,74,0.25);
-  display:flex;gap:8px;align-items:flex-start;
-}
-.warn-dot{width:6px;height:6px;border-radius:50%;background:var(--warn);flex-shrink:0;margin-top:4px;}
-.warn-text{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.04em;color:#b04a20;line-height:1.6;}
-
-/* card body */
-.card-body{padding:22px 28px;}
-.select-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:block;}
-.user-list{display:flex;flex-direction:column;gap:8px;}
-.user-btn{
-  display:flex;align-items:center;gap:12px;
-  padding:12px 14px;
-  background:var(--paper);
-  border:1px solid var(--border);
-  border-radius:6px;cursor:pointer;
-  transition:all 0.18s;text-align:left;width:100%;
-}
-.user-btn:hover{border-color:var(--clay);background:#fffaf6;transform:translateX(3px);box-shadow:0 2px 12px rgba(196,135,90,0.15);}
-.user-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:14px;font-weight:700;flex-shrink:0;}
-.user-info{flex:1;}
-.user-name{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:2px;}
-.user-role{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);}
-.user-arrow{color:var(--muted);font-size:14px;transition:all 0.18s;}
-.user-btn:hover .user-arrow{transform:translateX(4px);color:var(--clay);}
-
-.pass-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:block;}
-.pass-input-wrap{position:relative;}
-.pass-input{width:100%;padding:12px 42px 12px 14px;font-family:'DM Mono',monospace;font-size:14px;border:1.5px solid var(--border);border-radius:5px;background:var(--paper);color:var(--ink);outline:none;transition:border-color 0.2s;letter-spacing:0.1em;}
-.pass-input:focus{border-color:var(--clay);}
-.pass-input.error{border-color:var(--warn);animation:shake 0.3s ease;}
-@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-5px);}75%{transform:translateX(5px);}}}
-.pass-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--muted);font-size:15px;padding:4px;}
-.error-msg{font-family:'DM Mono',monospace;font-size:10px;color:var(--warn);margin-top:6px;display:none;}
-.error-msg.show{display:block;}
-.login-btn{width:100%;margin-top:12px;padding:13px;background:var(--ink);color:var(--paper);border:none;border-radius:5px;cursor:pointer;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;}
-.login-btn:hover{background:var(--clay);}
-.login-btn:active{transform:scale(0.98);}
-.login-btn .spinner{display:none;width:13px;height:13px;border:2px solid rgba(245,242,235,0.3);border-top-color:var(--paper);border-radius:50%;animation:spin 0.6s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg);}}
-.login-btn.loading .spinner{display:block;}
-.login-btn.loading .btn-text{display:none;}
-.back-btn{background:none;border:none;cursor:pointer;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);display:inline-flex;align-items:center;gap:4px;margin-bottom:14px;padding:0;transition:color 0.2s;}
-.back-btn:hover{color:var(--clay);}
-
-.card-footer{padding:11px 28px;border-top:1px solid var(--border);background:var(--cream);display:flex;align-items:center;justify-content:space-between;}
-.footer-ref{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.05em;}
-
-/* mobile */
-@media(max-width:900px){
-  .page-layout{align-items:center;justify-content:center;padding:20px;}
-  .info-side{display:none;}
-  .login-side{width:100%;max-width:420px;padding:0;}
-}
+.warning-bar{background:#fef9e7;border:1px solid #d4a820;padding:10px 14px;margin-bottom:20px;display:flex;align-items:flex-start;gap:8px}
+.warning-bar span{font-size:9px;color:#7a5a10;line-height:1.5}
 </style>
 </head>
 <body>
+<div class="page">
+  <div class="card">
+    <p class="eyebrow">Self Build · Dorset · 2025–2027</p>
+    <h1>Corydon</h1>
+    <p class="subtitle">Roman Road · Winterbourne Steepleton · DT2 9DX &nbsp;·&nbsp; P/FUL/2025/05327</p>
 
-<div class="bg-grid"></div>
-
-<!-- Budget bubbles in background — decorative only -->
-<svg class="bg-bubbles" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="120" cy="180" r="68" fill="#6b8fa3" opacity="0.07"/>
-  <circle cx="255" cy="140" r="54" fill="#c4875a" opacity="0.07"/>
-  <circle cx="110" cy="330" r="42" fill="#8a7a6e" opacity="0.07"/>
-  <circle cx="255" cy="305" r="40" fill="#8a8880" opacity="0.06"/>
-  <circle cx="65"  cy="450" r="36" fill="#8a6e7a" opacity="0.06"/>
-  <circle cx="195" cy="435" r="34" fill="#7a8c6e" opacity="0.07"/>
-  <circle cx="340" cy="200" r="30" fill="#c4875a" opacity="0.06"/>
-  <circle cx="315" cy="385" r="27" fill="#6b8fa3" opacity="0.06"/>
-  <circle cx="245" cy="55"  r="30" fill="#8a7a6e" opacity="0.06"/>
-  <circle cx="105" cy="60"  r="24" fill="#c4875a" opacity="0.06"/>
-  <circle cx="365" cy="75"  r="27" fill="#6e8a7a" opacity="0.06"/>
-  <circle cx="90"  cy="550" r="22" fill="#8a6e7a" opacity="0.05"/>
-  <circle cx="205" cy="535" r="19" fill="#6e7a8a" opacity="0.05"/>
-  <circle cx="325" cy="510" r="16" fill="#8a8880" opacity="0.05"/>
-</svg>
-
-<!-- PAGE -->
-<div class="page-layout">
-
-  <!-- ═══ LEFT — info panels ═══ -->
-  <div class="info-side">
-
-    <!-- HERO — project name -->
-    <div class="info-panel hero">
-      <div class="info-kicker">Self Build · Dorset · 2025–2027</div>
-      <div class="info-title">Corydon</div>
-      <div class="info-addr">Roman Road · Winterbourne Steepleton · DT2 9DX</div>
+    <div class="warning-bar">
+      <span>⚠</span>
+      <span><strong>Action required</strong> — Asbestos removal in progress (Louis) · Independent clearance certificate required before demolition can commence</span>
     </div>
 
-    <!-- STATS -->
-    <div class="info-panel">
-      <div class="panel-label">Project at a glance</div>
-      <div class="info-stats">
-        <div>
-          <div class="info-stat-num">£619,611</div>
-          <div class="info-stat-lbl">Full build ex-VAT</div>
-        </div>
-        <div>
-          <div class="info-stat-num">394 m²</div>
-          <div class="info-stat-lbl">Total floor area</div>
-        </div>
-        <div>
-          <div class="info-stat-num">68 weeks</div>
-          <div class="info-stat-lbl">To completion</div>
-        </div>
-        <div>
-          <div class="info-stat-num">£1,572</div>
-          <div class="info-stat-lbl">Cost per m²</div>
-        </div>
-      </div>
+    <div class="stats">
+      <div class="stat"><span class="stat-val">£620k</span><span class="stat-lbl">Build ex-VAT</span></div>
+      <div class="stat"><span class="stat-val">320m²</span><span class="stat-lbl">Floor area</span></div>
+      <div class="stat"><span class="stat-val">68wk</span><span class="stat-lbl">Programme</span></div>
+      <div class="stat"><span class="stat-val">£1,572</span><span class="stat-lbl">Cost/m²</span></div>
     </div>
 
-    <!-- PHASE RINGS -->
-    <div class="info-panel">
-      <div class="panel-label">Build phases — progress</div>
-      <div class="rings-row" id="infoRings"></div>
+    <p class="profiles-label">Select your profile to continue</p>
+
+    <div class="profiles">
+      <button class="profile-btn" onclick="selectProfile('rb','Richard Budd','owner')">
+        <div class="avatar owner">RB</div>
+        <div><span class="profile-name">Richard Budd</span><span class="profile-role">Owner · Full access</span></div>
+        <span class="profile-arrow">→</span>
+      </button>
+      <button class="profile-btn" onclick="selectProfile('lw','Laura','owner')">
+        <div class="avatar owner">LW</div>
+        <div><span class="profile-name">Laura</span><span class="profile-role">Owner · Full access</span></div>
+        <span class="profile-arrow">→</span>
+      </button>
+      <button class="profile-btn" onclick="selectProfile('mc','Brindley James','contractor')">
+        <div class="avatar contractor">BJ</div>
+        <div><span class="profile-name">Builder / Contractor</span><span class="profile-role">Contractor · View only</span></div>
+        <span class="profile-arrow">→</span>
+      </button>
+      <button class="profile-btn" onclick="selectProfile('co','Consultant','consultant')">
+        <div class="avatar consultant">CO</div>
+        <div><span class="profile-name">Consultant</span><span class="profile-role">Professional · View only</span></div>
+        <span class="profile-arrow">→</span>
+      </button>
     </div>
 
-    <!-- TIMELINE -->
-    <div class="info-panel">
-      <div class="panel-label">Build programme · Apr 2025 → Sep 2027</div>
-      <div class="tl-svg-wrap">
-        <svg width="100%" viewBox="0 0 500 62" xmlns="http://www.w3.org/2000/svg">
-          <!-- background track -->
-          <rect x="0" y="2" width="500" height="46" rx="4" fill="#f5f2eb"/>
-          <!-- grid lines -->
-          <line x1="167" y1="2" x2="167" y2="48" stroke="rgba(26,26,24,0.1)" stroke-width="0.5"/>
-          <line x1="333" y1="2" x2="333" y2="48" stroke="rgba(26,26,24,0.1)" stroke-width="0.5"/>
-          <!-- bars — row 1 (y=5) row 2 (y=18) row 3 (y=31) -->
-          <rect x="0"   y="5"  width="167" height="11" rx="2" fill="#c4875a" opacity="0.75"/>
-          <rect x="200" y="5"  width="22"  height="11" rx="2" fill="#d4704a" opacity="0.9"/>
-          <rect x="222" y="18" width="56"  height="11" rx="2" fill="#6b8fa3" opacity="0.7"/>
-          <rect x="278" y="31" width="56"  height="11" rx="2" fill="#7a8c6e" opacity="0.7"/>
-          <rect x="306" y="18" width="56"  height="11" rx="2" fill="#6b8fa3" opacity="0.6"/>
-          <rect x="390" y="31" width="56"  height="11" rx="2" fill="#8a6e7a" opacity="0.6"/>
-          <rect x="418" y="5"  width="56"  height="11" rx="2" fill="#c4875a" opacity="0.6"/>
-          <!-- PC line -->
-          <line x1="474" y1="2" x2="474" y2="50" stroke="#7a8c6e" stroke-width="1.2" stroke-dasharray="3,3"/>
-          <!-- today -->
-          <line x1="200" y1="0" x2="200" y2="52" stroke="#d4704a" stroke-width="2"/>
-          <!-- bar labels -->
-          <text font-family="'DM Mono',monospace" x="4"   y="14" font-size="7.5" fill="white">Planning</text>
-          <text font-family="'DM Mono',monospace" x="203" y="14" font-size="7.5" fill="white">ACM</text>
-          <text font-family="'DM Mono',monospace" x="226" y="27" font-size="7.5" fill="white">Tender</text>
-          <text font-family="'DM Mono',monospace" x="282" y="40" font-size="7.5" fill="white">Gndwks</text>
-          <text font-family="'DM Mono',monospace" x="309" y="27" font-size="7.5" fill="white">Structure</text>
-          <text font-family="'DM Mono',monospace" x="393" y="40" font-size="7.5" fill="white">1st fix</text>
-          <text font-family="'DM Mono',monospace" x="421" y="14" font-size="7.5" fill="white">2nd fix</text>
-          <!-- date labels -->
-          <text font-family="'DM Mono',monospace" x="2"   y="58" font-size="7" fill="#6a6866">Apr '25</text>
-          <text font-family="'DM Mono',monospace" x="169" y="58" font-size="7" fill="#6a6866">Jan '26</text>
-          <text font-family="'DM Mono',monospace" x="335" y="58" font-size="7" fill="#6a6866">Oct '26</text>
-          <text font-family="'DM Mono',monospace" x="197" y="58" font-size="7" fill="#d4704a">↑ Today</text>
-          <text font-family="'DM Mono',monospace" x="475" y="58" font-size="7" fill="#7a8c6e">PC</text>
-        </svg>
-      </div>
-    </div>
-
-    <!-- MATERIALS -->
-    <div class="info-panel">
-      <div class="panel-label">Specified materials · CROY 2025 07B</div>
-      <div class="mats-list">
-        <div class="mat-item"><div class="mat-swatch" style="background:#8a8880"></div>Greencoat PLX standing seam steel roof — grey</div>
-        <div class="mat-item"><div class="mat-swatch" style="background:#1a1a18"></div>Aluminium seamless cladding eaves &amp; downpipes — black</div>
-        <div class="mat-item"><div class="mat-swatch" style="background:#d4c4a8"></div>K-Rend Causeway render — ground floor walls &amp; chimney</div>
-        <div class="mat-item"><div class="mat-swatch" style="background:#9a8870"></div>Natural stone — knapped flint plinth</div>
-        <div class="mat-item"><div class="mat-swatch" style="background:#e8e0d0"></div>Portland stone — SE elevation dressed openings &amp; quoins</div>
-        <div class="mat-item"><div class="mat-swatch" style="background:#6e7a8a"></div>Anthracite aluminium windows &amp; doors — powder coated</div>
-        <div class="mat-item"><div class="mat-swatch" style="background:#c4875a"></div>Canadian Western Red Cedar — balcony cladding</div>
-        <div class="mat-item"><div class="mat-swatch" style="background:#c8b88a"></div>Siberian larch — soffit &amp; canopies, weathering to silver-grey</div>
-        <div class="mat-item"><div class="mat-swatch" style="background:#6b8fa3"></div>12kW Samsung GEN7 R290 ASHP — east elevation</div>
-        <div class="mat-item"><div class="mat-swatch" style="background:#6e7a8a"></div>Garador Gararoll garage door — anthracite</div>
-      </div>
-    </div>
-
-    <div class="info-ref">Ref: P-FUL-2025-05327 · NA Williams Building Consultancy Ltd · Corydon, DT2 9DX</div>
-
+    <p class="footer-note">Ref: P/FUL/2025/05327 &nbsp;·&nbsp; N.A. Williams Building Consultancy Ltd &nbsp;·&nbsp; Corydon, DT2 9DX</p>
   </div>
+</div>
 
-  <!-- ═══ RIGHT — login card ═══ -->
-  <div class="login-side">
-    <div class="login-card">
-
-      <div class="card-header">
-        <div class="project-label">Self Build Project</div>
-        <div class="project-name">Corydon</div>
-        <div class="project-sub">Roman Road · Winterbourne Steepleton · DT2 9DX</div>
-        <div class="header-stats">
-          <div class="hstat"><div class="hstat-num">£619k</div><div class="hstat-lbl">Build cost ex-VAT</div></div>
-          <div class="hstat"><div class="hstat-num">394m²</div><div class="hstat-lbl">Floor area</div></div>
-          <div class="hstat"><div class="hstat-num">68 wks</div><div class="hstat-lbl">To completion</div></div>
-        </div>
-        <div class="phase-dots" id="phaseDots"></div>
-        <div class="mini-timeline">
-          <div class="mt-label">Build programme · Apr 2025 → Sep 2027</div>
-          <div class="mt-track" id="mtTrack"></div>
-        </div>
-      </div>
-
-      <div class="warn-strip">
-        <div class="warn-dot"></div>
-        <div class="warn-text">⚠ Action required — asbestos removal (CAS 3044) before demolition · 01202 099 906</div>
-      </div>
-
-      <div class="card-body">
-
-        <div id="stepUsers">
-          <span class="select-label">Select your profile to continue</span>
-          <div class="user-list">
-
-            <button class="user-btn" onclick="selectUser('richard')">
-              <div class="user-avatar" style="background:#f5ece0;color:#c4875a;">RB</div>
-              <div class="user-info"><div class="user-name">Richard Budd</div><div class="user-role">Owner · Full access</div></div>
-              <span class="user-arrow">→</span>
-            </button>
-
-            <button class="user-btn" onclick="selectUser('laura')">
-              <div class="user-avatar" style="background:#e8f0e8;color:#7a8c6e;">LB</div>
-              <div class="user-info"><div class="user-name">Laura</div><div class="user-role">Owner · Full access</div></div>
-              <span class="user-arrow">→</span>
-            </button>
-
-            <button class="user-btn" onclick="selectUser('builder')">
-              <div class="user-avatar" style="background:#e8eef5;color:#6b8fa3;">MC</div>
-              <div class="user-info"><div class="user-name">Builder / Contractor</div><div class="user-role">Contractor · View only</div></div>
-              <span class="user-arrow">→</span>
-            </button>
-
-            <button class="user-btn" onclick="selectUser('consultant')">
-              <div class="user-avatar" style="background:#f0ebe8;color:#8a7a6e;">CO</div>
-              <div class="user-info"><div class="user-name">Consultant</div><div class="user-role">Professional · View only</div></div>
-              <span class="user-arrow">→</span>
-            </button>
-
-          </div>
-        </div>
-
-        <div id="stepPassword" style="display:none">
-          <button class="back-btn" onclick="goBack()">← Back</button>
-          <span class="pass-label">Password for <span id="userNameDisplay" style="color:var(--clay)"></span></span>
-          <div class="pass-input-wrap">
-            <input class="pass-input" type="password" id="passInput"
-              placeholder="Enter password"
-              onkeydown="if(event.key==='Enter')tryLogin()">
-            <button class="pass-toggle" onclick="togglePass()" id="passToggle">👁</button>
-          </div>
-          <div class="error-msg" id="errorMsg">Incorrect password — please try again</div>
-          <button class="login-btn" id="loginBtn" onclick="tryLogin()">
-            <span class="btn-text">Enter Project</span>
-            <span class="spinner"></span>
-          </button>
-        </div>
-
-      </div>
-
-      <div class="card-footer">
-        <span class="footer-ref">Ref: P-FUL-2025-05327</span>
-        <span class="footer-ref">NA Williams Building Consultancy</span>
-      </div>
-
+<!-- Password Modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <h3 id="modalTitle">Enter password</h3>
+    <p class="modal-sub" id="modalSub">Owner access</p>
+    <div class="pw-wrap">
+      <input type="password" class="pw-input" id="pwInput" placeholder="Password" onkeydown="if(event.key==='Enter')checkPassword()">
+      <button class="pw-toggle" onclick="togglePw()" id="pwToggle">👁</button>
     </div>
+    <p class="pw-error" id="pwError"></p>
+    <button class="btn-enter" onclick="checkPassword()">Enter Project</button>
+    <button class="btn-cancel" onclick="closeModal()">← Back</button>
   </div>
-
 </div>
 
 <script>
-const USERS = {
-  richard:    { name:'Richard',    pass:'corydon2025',  access:'full'     },
-  laura:      { name:'Laura',      pass:'corydon2025',  access:'full'     },
-  builder:    { name:'Builder',    pass:'buildcorydon', access:'readonly' },
-  consultant: { name:'Consultant', pass:'buildcorydon', access:'readonly' },
+// Passwords — change these
+const PASSWORDS = {
+  rb: 'corydon2025',
+  lw: 'corydon2025',
+  mc: 'brindley',
+  co: 'consult'
 };
 
-let selectedUser = null;
+let currentProfile = null;
 
-function selectUser(key) {
-  selectedUser = key;
-  document.getElementById('stepUsers').style.display = 'none';
-  document.getElementById('stepPassword').style.display = 'block';
-  document.getElementById('userNameDisplay').textContent = USERS[key].name;
-  document.getElementById('passInput').value = '';
-  document.getElementById('errorMsg').classList.remove('show');
-  document.getElementById('passInput').classList.remove('error');
-  setTimeout(() => document.getElementById('passInput').focus(), 100);
-}
-function goBack() {
-  selectedUser = null;
-  document.getElementById('stepPassword').style.display = 'none';
-  document.getElementById('stepUsers').style.display = 'block';
-}
-function togglePass() {
-  const i = document.getElementById('passInput');
-  const t = document.getElementById('passToggle');
-  i.type = i.type === 'password' ? 'text' : 'password';
-  t.textContent = i.type === 'password' ? '👁' : '🙈';
-}
-function tryLogin() {
-  if (!selectedUser) return;
-  const input = document.getElementById('passInput');
-  const btn   = document.getElementById('loginBtn');
-  const err   = document.getElementById('errorMsg');
-  const user  = USERS[selectedUser];
-  btn.classList.add('loading');
-  err.classList.remove('show');
-  input.classList.remove('error');
-  setTimeout(() => {
-    btn.classList.remove('loading');
-    if (input.value === user.pass) {
-      sessionStorage.setItem('corydon_user',   user.name);
-      sessionStorage.setItem('corydon_access', user.access);
-      window.location.href = 'app.html';
-    } else {
-      input.classList.add('error');
-      err.classList.add('show');
-      input.value = '';
-      input.focus();
-      setTimeout(() => input.classList.remove('error'), 400);
-    }
-  }, 600);
+function selectProfile(id, name, type) {
+  currentProfile = {id, name, type};
+  document.getElementById('modalTitle').textContent = 'Password for ' + name;
+  document.getElementById('modalSub').textContent = type === 'owner' ? 'Owner · Full access' : type === 'contractor' ? 'Contractor · View only' : 'Consultant · View only';
+  document.getElementById('pwInput').value = '';
+  document.getElementById('pwError').textContent = '';
+  document.getElementById('modalOverlay').classList.add('active');
+  setTimeout(() => document.getElementById('pwInput').focus(), 100);
 }
 
-// Phase rings
-const phases = [
-  { name:'Planning',  pct:85, color:'#c4875a' },
-  { name:'Arboric.',  pct:20, color:'#7a8c6e' },
-  { name:'Asbestos',  pct:0,  color:'#d4704a' },
-  { name:'Demo',      pct:0,  color:'#7a6e8a' },
-  { name:'Gndwks',    pct:0,  color:'#6e8a7a' },
-  { name:'Found.',    pct:0,  color:'#6b8fa3' },
-  { name:'Structure', pct:0,  color:'#6e7a8a' },
-  { name:'Roof',      pct:0,  color:'#8a7a6e' },
-  { name:'M&E',       pct:0,  color:'#8a6e7a' },
-  { name:'Fit-out',   pct:0,  color:'#c4875a' },
-];
-
-function makeRing(p, size, trackColor) {
-  const R = size * 0.37, sw = size * 0.13;
-  const circ = 2 * Math.PI * R;
-  const filled = circ * (p.pct / 100);
-  const gap = circ - filled;
-  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
-    <circle cx="${size/2}" cy="${size/2}" r="${R}" fill="none" stroke="${trackColor}" stroke-width="${sw}"/>
-    <circle cx="${size/2}" cy="${size/2}" r="${R}" fill="none"
-      stroke="${p.color}" stroke-width="${sw}"
-      stroke-dasharray="${filled.toFixed(2)} ${gap.toFixed(2)}"
-      stroke-dashoffset="${(circ*0.25).toFixed(2)}"
-      stroke-linecap="round" opacity="${p.pct>0?0.9:0.3}"/>
-    <text x="${size/2}" y="${size/2+4}" text-anchor="middle"
-      font-family="'DM Mono',monospace"
-      font-size="${Math.round(size*0.22)}" font-weight="500"
-      fill="${p.pct>0?p.color:'#ccc'}">${p.pct}%</text>
-  </svg>`;
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('active');
+  currentProfile = null;
 }
 
-// Left side rings — dark track on white panel
-const infoRings = document.getElementById('infoRings');
-phases.forEach(p => {
-  const div = document.createElement('div');
-  div.className = 'ring-item';
-  div.innerHTML = makeRing(p, 54, 'rgba(26,26,24,0.12)') +
-    `<div class="ring-lbl">${p.name}</div>`;
-  infoRings.appendChild(div);
+function togglePw() {
+  const inp = document.getElementById('pwInput');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+}
+
+function checkPassword() {
+  const val = document.getElementById('pwInput').value;
+  if (val === PASSWORDS[currentProfile.id]) {
+    sessionStorage.setItem('corydon_user', JSON.stringify(currentProfile));
+    window.location.href = 'app.html';
+  } else {
+    document.getElementById('pwError').textContent = 'Incorrect password — please try again';
+    document.getElementById('pwInput').value = '';
+    document.getElementById('pwInput').focus();
+  }
+}
+
+document.getElementById('modalOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
 });
-
-// Card header rings — light track on dark bg
-const dotsEl = document.getElementById('phaseDots');
-phases.forEach(p => {
-  const div = document.createElement('div');
-  div.className = 'pdot';
-  div.innerHTML = makeRing(p, 20, 'rgba(255,255,255,0.12)') +
-    `<span class="pdot-lbl">${p.name}</span>`;
-  dotsEl.appendChild(div);
-});
-
-// Mini timeline bars in card header
-const tl = [
-  { label:'Planning', start:0,   end:33, color:'#c4875a', row:0 },
-  { label:'Trees',    start:6.6, end:11, color:'#7a8c6e', row:1 },
-  { label:'ACM',      start:40,  end:44, color:'#d4704a', row:0 },
-  { label:'Tender',   start:44,  end:55, color:'#6b8fa3', row:1 },
-  { label:'Gndwks',   start:55,  end:66, color:'#7a8c6e', row:0 },
-  { label:'Structure',start:61,  end:72, color:'#6b8fa3', row:1 },
-  { label:'Roof',     start:72,  end:77, color:'#8a7a6e', row:0 },
-  { label:'1st fix',  start:77,  end:88, color:'#8a6e7a', row:1 },
-  { label:'2nd fix',  start:83,  end:94, color:'#c4875a', row:0 },
-];
-const track = document.getElementById('mtTrack');
-tl.forEach(b => {
-  const el = document.createElement('div');
-  el.className = 'mt-bar';
-  el.style.cssText = `left:${b.start}%;width:${b.end-b.start}%;top:${b.row===0?3:14}px;background:${b.color};opacity:0.85;`;
-  if (b.end - b.start > 8) el.innerHTML = `<span class="mt-bar-lbl">${b.label}</span>`;
-  track.appendChild(el);
-});
-const todayEl = document.createElement('div');
-todayEl.className = 'mt-today';
-todayEl.style.left = '40%';
-todayEl.innerHTML = '<span class="mt-today-lbl">Today</span>';
-track.appendChild(todayEl);
 </script>
 </body>
 </html>
