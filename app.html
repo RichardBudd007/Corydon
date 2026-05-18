@@ -423,6 +423,7 @@ html,body{height:100%;background:var(--paper);font-family:'DM Mono',monospace;co
       </div>
 
       <div class="vat-tip">💡 <strong>VAT note:</strong> Brindley James quote (£380–430k) is structural shell only — approx 60% of full build. New build is <strong>zero-rated</strong> — reclaim VAT on materials you buy yourself. Total project ~£920–950k fully fitted. Forest Marble confirmed. Klargester vs GRAF drainage TBC.</div>
+      <div class="alert warning" style="margin-bottom:12px">⚠ <strong>Evergreen PL-8771A</strong> — 1st fix plumbing estimate £12,340 · Expires 13 June 2026 · Deposit £3,085 on order · Resolve: cylinder position, soil stack positions, heating scope before signing</div>
 
       <div class="stats-grid mb16">
         <div class="stat-box"><span class="stat-val" id="budgetTotal">£0</span><span class="stat-lbl">Total budget</span></div>
@@ -827,7 +828,7 @@ html,body{height:100%;background:var(--paper);font-family:'DM Mono',monospace;co
 
 <script>
 // ══ DATA STORE ══
-const STORE_KEY = 'corydon_v3';
+const STORE_KEY = 'corydon_v4';
 
 function loadData() {
   try {
@@ -869,10 +870,15 @@ function getDefaults() {
       {id:10, title:'Notify Dorset Council of CIL commencement date', due:'2026-07-01', priority:'high', cat:'urgent', notes:'Must notify BEFORE any work starts to avoid CIL penalties', done:false},
       {id:11, title:'Confirm water supply flow test at boundary — Wessex Water', due:'2026-07-01', priority:'medium', cat:'utility', notes:'Current flow: 41 L/min. Need boundary test for new dwelling connection and sprinkler assessment', done:false},
       {id:12, title:'Get self-build insurance quote — Self-Build Zone / Protek', due:'2026-06-15', priority:'medium', cat:'planning', notes:'Include 45,000L fire tank, woodland location, timber construction risk factors', done:false},
+      {id:13, title:'Confirm Evergreen plumbing quote — PL-8771A', due:'2026-06-13', priority:'high', cat:'urgent', notes:'Valid 30 days from 14 May 2026 — expires 13 June 2026. Resolve: cylinder position, soil stack count, heating scope. Deposit £3,085 on order. Paul Reynolds — Evergreen.', done:false},
+      {id:14, title:'Confirm cylinder position with Neil Williams before Evergreen start', due:'2026-06-13', priority:'high', cat:'builder', notes:'Evergreen estimate says boot room TBC — must be resolved before 1st fix pipework starts', done:false},
+      {id:15, title:'Order sanitary ware before Evergreen 1st fix', due:'2026-07-01', priority:'medium', cat:'builder', notes:'Evergreen request all sanitary ware on site for 1st fix. Freestanding baths x2 — allow 8–16 week lead time', done:false},
     ],
     events: [
       {id:1, title:'Planning permission granted', date:'2026-03-09', cat:'milestone', desc:'P/FUL/2025/05327 — Dorset Council — Case officer Steve Tapscott'},
       {id:2, title:'Contract signed — Brindley James', date:'2026-05-15', cat:'builder', desc:'CORYDON02 — Brindley James Ltd, Tenterden, Broad Lane, Bridport DT6 5JY'},
+      {id:3, title:'Evergreen plumbing estimate issued', date:'2026-05-14', cat:'builder', desc:'PL-8771A — 1st fix plumbing £12,340 · Valid 30 days · Expires 13 June 2026'},
+      {id:4, title:'Evergreen quote expires', date:'2026-06-13', cat:'urgent', desc:'PL-8771A — confirm or renegotiate before this date'},
     ],
     contacts: [
       {id:1, name:'Neil Williams', initials:'NW', role:'Architect / Building Consultant', company:'N.A. Williams Building Consultancy Ltd', phone:'01305 269283', mobile:'07717 682937', email:'nawilliams@gmx.com'},
@@ -882,8 +888,11 @@ function getDefaults() {
       {id:5, name:'Louis', initials:'LO', role:'Asbestos Removal', company:'', phone:'01202 099906', mobile:'', email:''},
       {id:6, name:'Lewis Faulkner', initials:'LF', role:'Dry Lining / Plasterer', company:'', phone:'', mobile:'', email:''},
       {id:7, name:'NB Tree Management', initials:'NB', role:'Arboricultural Consultant', company:'NB Tree Management', phone:'', mobile:'', email:''},
+      {id:8, name:'Paul Reynolds', initials:'PR', role:'Plumber — 1st Fix', company:'Evergreen', phone:'', mobile:'', email:''},
     ],
-    budget: [],
+    budget: [
+      {id:1, item:'Evergreen — 1st Fix Plumbing (PL-8771A)', budget:12340, actual:0},
+    ],
     vat: [],
     calMonth: new Date().getMonth(),
     calYear: new Date().getFullYear(),
@@ -939,16 +948,20 @@ function renderDashboard() {
   const ph = document.getElementById('dashPhases');
   if (!state.phases.length) { ph.innerHTML = '<div class="empty-state"><div class="empty-icon">📅</div>No phases added</div>'; }
   else {
-    ph.innerHTML = state.phases.slice(0,5).map(p => `
-      <div class="phase-item">
-        <div class="phase-status ${p.status}"></div>
+    ph.innerHTML = state.phases.slice(0,5).map(p => {
+      const status = p.status||'upcoming'; const pct = p.pct||0;
+      const startStr = p.start ? fmtDate(p.start) : '—';
+      const endStr = p.end ? fmtDate(p.end) : '—';
+      return `<div class="phase-item">
+        <div class="phase-status ${status}"></div>
         <div class="phase-info">
-          <div class="phase-name">${p.title}</div>
-          <div class="phase-date">${fmtDate(p.start)} → ${fmtDate(p.end)}</div>
-          <div class="progress-wrap"><div class="progress-bar ${p.pct>=100?'done':''}" style="width:${p.pct}%"></div></div>
+          <div class="phase-name">${p.title||'(untitled)'}</div>
+          <div class="phase-date">${startStr} → ${endStr}</div>
+          <div class="progress-wrap"><div class="progress-bar ${pct>=100?'done':''}" style="width:${pct}%"></div></div>
         </div>
-        <div class="phase-pct">${p.pct}%</div>
-      </div>`).join('');
+        <div class="phase-pct">${pct}%</div>
+      </div>`;
+    }).join('');
   }
 
   // Tasks
@@ -978,21 +991,29 @@ function renderProgramme() {
   if (!state.phases.length) {
     list.innerHTML = '<div class="empty-state"><div class="empty-icon">📅</div>No phases yet — add your first phase</div>';
   } else {
-    list.innerHTML = state.phases.map(p => `
+    list.innerHTML = state.phases.map(p => {
+      const status = p.status || 'upcoming';
+      const pct = p.pct || 0;
+      const cat = p.cat || 'builder';
+      const title = p.title || '(untitled)';
+      const startStr = p.start ? fmtDate(p.start) : '—';
+      const endStr = p.end ? fmtDate(p.end) : '—';
+      return `
       <div class="phase-item">
-        <div class="phase-status ${p.status}"></div>
+        <div class="phase-status ${status}"></div>
         <div class="phase-info">
-          <div class="phase-name">${p.title}</div>
-          <div class="phase-date">${fmtDate(p.start)} — ${fmtDate(p.end)} · <span class="tag tag-${p.cat}">${p.cat}</span></div>
+          <div class="phase-name">${title}</div>
+          <div class="phase-date">${startStr} — ${endStr} · <span class="tag tag-${cat}">${cat}</span></div>
           ${p.notes ? `<div class="phase-date" style="margin-top:2px;color:var(--ink3)">${p.notes}</div>` : ''}
-          <div class="progress-wrap" style="margin-top:4px"><div class="progress-bar ${p.pct>=100?'done':''}" style="width:${p.pct}%"></div></div>
+          <div class="progress-wrap" style="margin-top:4px"><div class="progress-bar ${pct>=100?'done':''}" style="width:${pct}%"></div></div>
         </div>
         <div style="display:flex;align-items:center;gap:8px">
-          <div class="phase-pct">${p.pct}%</div>
+          <div class="phase-pct">${pct}%</div>
           <button class="btn btn-secondary btn-sm" onclick="openEditPhase(${p.id})">Edit</button>
           <button class="task-del" onclick="deleteItem('phase',${p.id})">×</button>
         </div>
-      </div>`).join('');
+      </div>`;
+    }).join('');
   }
 
   // Simple gantt
@@ -1004,8 +1025,10 @@ function renderGantt() {
   if (!state.phases.length) { container.innerHTML = ''; return; }
 
   // Find date range
-  const starts = state.phases.map(p => new Date(p.start));
-  const ends = state.phases.map(p => new Date(p.end));
+  const validPhases = state.phases.filter(p => p.start && p.end && !isNaN(new Date(p.start)) && !isNaN(new Date(p.end)));
+  if (!validPhases.length) { container.innerHTML = '<div class="empty-state">No phases with dates yet</div>'; return; }
+  const starts = validPhases.map(p => new Date(p.start));
+  const ends = validPhases.map(p => new Date(p.end));
   const minDate = new Date(Math.min(...starts));
   const maxDate = new Date(Math.max(...ends));
   minDate.setDate(1);
@@ -1032,7 +1055,7 @@ function renderGantt() {
   const todayPct = Math.max(0,Math.min(100,((new Date()-minDate)/86400000/totalDays)*100));
 
   // Rows
-  state.phases.forEach(p => {
+  validPhases.forEach(p => {
     const ps = new Date(p.start), pe = new Date(p.end);
     const leftPct = Math.max(0,((ps-minDate)/86400000/totalDays)*100);
     const widthPct = Math.min(100-leftPct,((pe-ps)/86400000/totalDays)*100);
