@@ -312,6 +312,7 @@ html,body{height:100%;background:var(--paper);font-family:'DM Mono',monospace;co
     <div class="tab-panel active" id="tab-dashboard">
       <div class="alert success">✓ Planning permission granted — P/FUL/2025/05327 — 9 March 2026</div>
       <div class="alert warning">⚠ Asbestos removal in progress (Louis) · Independent clearance certificate required before demolition · Instruct Redstone Ecology EPSL · Appoint SAP assessor · Roger Locke structural drawings awaited by Brindley James</div>
+      <div class="alert warning">⚠ Wessex Water — Apply for new connection including sprinkler supply before works commence · Minimum 32mm barrier pipe from boundary · Single check valve mandatory · Request boundary flow and pressure test · supplyconnectionenquiries@wessexwater.co.uk</div>
       <div class="alert info">ℹ CDM F10 notification must be submitted to HSE before construction phase commences · <a href="#" onclick="switchTab('cdm');return false" style="color:var(--accent)">View CDM checklist →</a></div>
 
       <div class="stats-grid">
@@ -860,7 +861,7 @@ function getDefaults() {
     tasks: [
       {id:1, title:'Submit F10 notification to HSE', due:'2026-06-01', priority:'high', cat:'urgent', notes:'hse.gov.uk/forms/notification/f10.htm — must be before construction phase starts', done:false},
       {id:2, title:'Formally appoint Neil Williams as Principal Designer (CDM)', due:'2026-06-01', priority:'high', cat:'urgent', notes:'Written appointment letter required — not just contract reference', done:false},
-      {id:3, title:'Obtain asbestos clearance certificate', due:'2026-06-15', priority:'high', cat:'urgent', notes:'Independent certificate required before demolition — contact Louis', done:false},
+      {id:3, title:'Obtain asbestos clearance certificate', due:'2026-06-15', priority:'high', cat:'urgent', notes:'Hazardous waste consignment note HWCN01v112 received — EWC 170605 asbestos material removed by Bemacross (carrier ND 3MP 0017) to Valencia Waste Management Walpole Landfill Bridgwater TA6 4TF permit BK6785IE. Retain document minimum 3 years. Give copy to Neil Williams for H&S File. Confirm independent air clearance certificate also received.', done:true},
       {id:4, title:'Instruct Redstone Ecology — EPSL licence', due:'2026-06-01', priority:'high', cat:'planning', notes:'Bats relocated — EPSL (European Protected Species Licence) required', done:false},
       {id:5, title:'Appoint SAP assessor', due:'2026-07-01', priority:'medium', cat:'planning', notes:'Required for Building Regulations energy compliance', done:false},
       {id:6, title:'Receive Roger Locke structural drawings', due:'2026-06-15', priority:'high', cat:'builder', notes:'Julia Hutchings — drawings awaited by Brindley James. Must be incorporated into contract documents', done:false},
@@ -873,12 +874,28 @@ function getDefaults() {
       {id:13, title:'Confirm Evergreen plumbing quote — PL-8771A', due:'2026-06-13', priority:'high', cat:'urgent', notes:'Valid 30 days from 14 May 2026 — expires 13 June 2026. Resolve: cylinder position, soil stack count, heating scope. Deposit £3,085 on order. Paul Reynolds — Evergreen.', done:false},
       {id:14, title:'Confirm cylinder position with Neil Williams before Evergreen start', due:'2026-06-13', priority:'high', cat:'builder', notes:'Evergreen estimate says boot room TBC — must be resolved before 1st fix pipework starts', done:false},
       {id:15, title:'Order sanitary ware before Evergreen 1st fix', due:'2026-07-01', priority:'medium', cat:'builder', notes:'Evergreen request all sanitary ware on site for 1st fix. Freestanding baths x2 — allow 8–16 week lead time', done:false},
+      {id:16, title:'Apply to Wessex Water — new connection including sprinkler supply', due:'2026-06-30', priority:'high', cat:'utility', notes:'Apply at same time as standard domestic connection. Use online dashboard — select other water connection. Email: supplyconnectionenquiries@wessexwater.co.uk. Request flow and pressure reading at boundary for new connection (not existing house test).', done:false},
+      {id:17, title:'Request boundary flow and pressure reading — Wessex Water', due:'2026-06-30', priority:'high', cat:'utility', notes:'Existing house test = 41 L/min. Need confirmed boundary figure for new connection. Minimum pipe 32mm external bore barrier pipe from boundary. Confirm shared supply route (domestic + sprinkler on same 32mm pipe).', done:false},
+      {id:18, title:'Appoint sprinkler system designer — BS 9251:2021', due:'2026-07-15', priority:'medium', cat:'planning', notes:'Wessex Water cannot design the system. Must be suitably qualified individual. Contact BAFSA for referral: 01353 659187 / info@bafsa.org.uk. System must comply with BS 9251:2021 for domestic dwellings.', done:false},
+      {id:19, title:'Install single check valve on fire supply at property boundary', due:'2026-08-01', priority:'medium', cat:'builder', notes:'Wessex Water requirement — mandatory backflow prevention. Must be fitted as close as reasonably practical to the property boundary. Protected from frost. Accessible for maintenance.', done:false},
+      {id:20, title:'Appoint HETAS installer — chimney system design', due:'2026-07-01', priority:'high', cat:'urgent', notes:'Both Stuv 21 inserts need dedicated external combustion air supply ducts through NW wall. Must be designed before blockwork starts. Flue 1 (150mm Isokern) snug GF, Flue 2 (200mm Isokern) lounge FF. Schiedel DM36 twin flue stack.', done:false},
+      {id:21, title:'Confirm Brindley Schedule 3 payment schedule in writing', due:'2026-06-10', priority:'high', cat:'builder', notes:'Payment schedule: £60k x6 monthly Jun-Nov 2026, then £40k x2 Dec 2026 and Jan 2027. Total £440,000. Balance £31,020 to be agreed on practical completion. Brindley email confirmation required. Add signed addendum to contract.', done:false},
     ],
     events: [
       {id:1, title:'Planning permission granted', date:'2026-03-09', cat:'milestone', desc:'P/FUL/2025/05327 — Dorset Council — Case officer Steve Tapscott'},
       {id:2, title:'Contract signed — Brindley James', date:'2026-05-15', cat:'builder', desc:'CORYDON02 — Brindley James Ltd, Tenterden, Broad Lane, Bridport DT6 5JY'},
       {id:3, title:'Evergreen plumbing estimate issued', date:'2026-05-14', cat:'builder', desc:'PL-8771A — 1st fix plumbing £12,340 · Valid 30 days · Expires 13 June 2026'},
       {id:4, title:'Evergreen quote expires', date:'2026-06-13', cat:'urgent', desc:'PL-8771A — confirm or renegotiate before this date'},
+      {id:5, title:'Apply to Wessex Water — new connection', date:'2026-06-30', cat:'utility', desc:'Apply for standard domestic + sprinkler supply simultaneously. supplyconnectionenquiries@wessexwater.co.uk'},
+      {id:6, title:'BAFSA sprinkler designer appointment', date:'2026-07-15', cat:'planning', desc:'BS 9251:2021 compliant design required before Building Regs submission. Contact BAFSA: 01353 659187'},
+      {id:7,  title:'Brindley Payment 1', date:'2026-06-01', cat:'payment', desc:'Phase 1 payment — £60,000. Ensure funds in place. Invoice from Brindley James Ltd.'},
+      {id:8,  title:'Brindley Payment 2', date:'2026-07-01', cat:'payment', desc:'Phase 1 payment — £60,000. Ensure funds in place. Invoice from Brindley James Ltd.'},
+      {id:9,  title:'Brindley Payment 3', date:'2026-08-01', cat:'payment', desc:'Phase 1 payment — £60,000. Ensure funds in place. Invoice from Brindley James Ltd.'},
+      {id:10, title:'Brindley Payment 4', date:'2026-09-01', cat:'payment', desc:'Phase 1 payment — £60,000. Ensure funds in place. Invoice from Brindley James Ltd.'},
+      {id:11, title:'Brindley Payment 5', date:'2026-10-01', cat:'payment', desc:'Phase 1 payment — £60,000. Ensure funds in place. Invoice from Brindley James Ltd.'},
+      {id:12, title:'Brindley Payment 6', date:'2026-11-01', cat:'payment', desc:'Phase 1 payment — £60,000. Ensure funds in place. Invoice from Brindley James Ltd.'},
+      {id:13, title:'Brindley Payment 7', date:'2026-12-01', cat:'payment', desc:'Phase 1 payment — £40,000. Ensure funds in place. Invoice from Brindley James Ltd.'},
+      {id:14, title:'Brindley Payment 8', date:'2027-01-01', cat:'payment', desc:'Phase 1 payment — £40,000. Ensure funds in place. Invoice from Brindley James Ltd. Balance of £31,020 to be agreed on practical completion.'},
     ],
     contacts: [
       {id:1, name:'Neil Williams', initials:'NW', role:'Architect / Building Consultant', company:'N.A. Williams Building Consultancy Ltd', phone:'01305 269283', mobile:'07717 682937', email:'nawilliams@gmx.com'},
@@ -889,9 +906,14 @@ function getDefaults() {
       {id:6, name:'Lewis Faulkner', initials:'LF', role:'Dry Lining / Plasterer', company:'', phone:'', mobile:'', email:''},
       {id:7, name:'NB Tree Management', initials:'NB', role:'Arboricultural Consultant', company:'NB Tree Management', phone:'', mobile:'', email:''},
       {id:8, name:'Paul Reynolds', initials:'PR', role:'Plumber — 1st Fix', company:'Evergreen', phone:'', mobile:'', email:''},
+      {id:9, name:'Wessex Water — New Connections', initials:'WW', role:'Water Supply & Fire Sprinkler Connection', company:'Wessex Water', phone:'0345 600 3600', mobile:'', email:'supplyconnectionenquiries@wessexwater.co.uk'},
+      {id:10, name:'BAFSA', initials:'BA', role:'Fire Sprinkler Designer Referral', company:'British Automatic Fire Sprinkler Association', phone:'01353 659187', mobile:'', email:'info@bafsa.org.uk'},
     ],
     budget: [
       {id:1, item:'Evergreen — 1st Fix Plumbing (PL-8771A)', budget:12340, actual:0},
+      {id:2, item:'Sprinkler system design and installation (BS 9251:2021)', budget:8000, actual:0},
+      {id:3, item:'Wessex Water new connection (domestic + sprinkler)', budget:3500, actual:0},
+      {id:4, item:'Chimney system — Schiedel DM36 + Stuv 21 inserts x2', budget:16000, actual:0},
     ],
     vat: [],
     calMonth: new Date().getMonth(),
